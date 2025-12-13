@@ -1,0 +1,67 @@
+═══════════════════════════════════════════════════════════════
+    دليل رفع الموقع إلى الخادم - خطوات سريعة
+═══════════════════════════════════════════════════════════════
+
+📋 الخطوات الأساسية:
+
+1️⃣ رفع الملفات
+   └─ ارفع جميع الملفات (عدا vendor و node_modules) إلى الخادم
+   └─ استخدم FTP مثل FileZilla أو cPanel File Manager
+
+2️⃣ قاعدة البيانات
+   └─ أنشئ قاعدة بيانات جديدة من cPanel
+   └─ أنشئ مستخدم MySQL وأعطه صلاحيات
+   └─ استورد ملف: database/dumps/jkhsfi.sql
+
+3️⃣ ملف .env
+   └─ أنشئ ملف .env في المجلد الرئيسي
+   └─ انسخ محتوى من .env.production.example
+   └─ عدّل:
+      • APP_URL = رابط موقعك
+      • DB_DATABASE = اسم قاعدة البيانات
+      • DB_USERNAME = اسم مستخدم MySQL
+      • DB_PASSWORD = كلمة مرور MySQL
+      • APP_DEBUG = false
+
+4️⃣ الأوامر (عبر SSH أو cPanel Terminal)
+   └─ composer install --no-dev --optimize-autoloader
+   └─ php artisan key:generate
+   └─ php artisan config:clear
+   └─ php artisan cache:clear
+   └─ php artisan storage:link
+   └─ php artisan migrate --force (إذا لم تستورد القاعدة)
+   └─ php artisan config:cache
+   └─ php artisan route:cache
+   └─ php artisan view:cache
+
+5️⃣ الصلاحيات
+   └─ chmod -R 755 storage bootstrap/cache public
+   └─ chmod 600 .env
+
+6️⃣ اختبار
+   └─ افتح رابط الموقع في المتصفح
+   └─ تأكد من عمل جميع الصفحات
+
+═══════════════════════════════════════════════════════════════
+    ملفات مهمة
+═══════════════════════════════════════════════════════════════
+
+📄 DEPLOYMENT.md        → دليل تفصيلي كامل
+📄 DEPLOYMENT_CHECKLIST.md → قائمة تحقق
+📄 database/dumps/jkhsfi.sql → قاعدة البيانات
+📄 .env.production.example → مثال لملف .env
+
+═══════════════════════════════════════════════════════════════
+    نصائح مهمة
+═══════════════════════════════════════════════════════════════
+
+⚠️ لا ترفع ملف .env من جهازك المحلي
+⚠️ تأكد أن APP_DEBUG=false في الإنتاج
+⚠️ فعل HTTPS من لوحة التحكم
+⚠️ احفظ نسخة احتياطية من قاعدة البيانات
+
+═══════════════════════════════════════════════════════════════
+
+
+
+

@@ -1,0 +1,519 @@
+/* ============================================
+   تحسينات بصرية رائعة للموقع
+   Visual Enhancements for Amazing UI/UX
+   ============================================ */
+
+/* ===== Animations & Transitions ===== */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -1000px 0;
+    }
+    100% {
+        background-position: 1000px 0;
+    }
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+/* ===== Gradient Backgrounds ===== */
+.gradient-primary {
+    background: linear-gradient(135deg, #2BB673 0%, #1ea05e 100%);
+}
+
+.gradient-accent {
+    background: linear-gradient(135deg, #FF6A3D 0%, #ff8c3d 100%);
+}
+
+.gradient-purple {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.gradient-blue {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+}
+
+.gradient-pink {
+    background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+}
+
+.gradient-dark {
+    background: linear-gradient(135deg, #232526 0%, #414345 100%);
+}
+
+/* ===== Enhanced Product Cards ===== */
+.product-card {
+    animation: fadeInUp 0.6s ease-out;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+}
+
+.product-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+    transition: left 0.5s;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.product-card:hover::before {
+    left: 100%;
+}
+
+.product-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(43, 182, 115, 0.2), 
+                0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.product-card img {
+    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.product-card:hover img {
+    transform: scale(1.1) rotate(2deg);
+}
+
+/* ===== Glowing Badges ===== */
+.badge-glow {
+    position: relative;
+    animation: pulse 2s infinite;
+    box-shadow: 0 0 15px rgba(43, 182, 115, 0.5);
+}
+
+.badge-new {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    color: white;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 15px rgba(245, 87, 108, 0.4);
+    animation: float 3s ease-in-out infinite;
+}
+
+.badge-sale {
+    background: linear-gradient(135deg, #FF6A3D 0%, #ff4500 100%);
+    color: white;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 15px rgba(255, 106, 61, 0.4);
+}
+
+.badge-hot {
+    background: linear-gradient(135deg, #f12711 0%, #f5af19 100%);
+    color: white;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    animation: pulse 1.5s infinite;
+}
+
+/* ===== Enhanced Buttons ===== */
+.btn-primary {
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+    z-index: -1;
+}
+
+.btn-primary:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.btn-gradient {
+    background: linear-gradient(135deg, #2BB673 0%, #1ea05e 100%);
+    border: none;
+    color: white;
+    font-weight: 600;
+    padding: 12px 24px;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(43, 182, 115, 0.3);
+}
+
+.btn-gradient:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(43, 182, 115, 0.4);
+}
+
+.btn-glow {
+    box-shadow: 0 0 20px rgba(43, 182, 115, 0.5),
+                0 0 40px rgba(43, 182, 115, 0.3),
+                0 0 60px rgba(43, 182, 115, 0.1);
+    animation: pulse 2s infinite;
+}
+
+/* ===== Category Cards Enhancement ===== */
+.category-card {
+    animation: fadeInScale 0.5s ease-out;
+    animation-fill-mode: both;
+}
+
+.category-card:nth-child(1) { animation-delay: 0.1s; }
+.category-card:nth-child(2) { animation-delay: 0.2s; }
+.category-card:nth-child(3) { animation-delay: 0.3s; }
+.category-card:nth-child(4) { animation-delay: 0.4s; }
+.category-card:nth-child(5) { animation-delay: 0.5s; }
+.category-card:nth-child(6) { animation-delay: 0.6s; }
+
+.category-card .card {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    border: 2px solid transparent;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.category-card .card:hover {
+    border-color: #2BB673;
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    transform: translateY(-8px) scale(1.05);
+    box-shadow: 0 15px 35px rgba(43, 182, 115, 0.2);
+}
+
+.category-card .card i {
+    transition: all 0.4s ease;
+    display: inline-block;
+}
+
+.category-card .card:hover i {
+    transform: scale(1.2) rotate(360deg);
+}
+
+/* ===== Price Tag Enhancement ===== */
+.price-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background: linear-gradient(135deg, #2BB673 0%, #1ea05e 100%);
+    color: white;
+    border-radius: 30px;
+    font-weight: 800;
+    font-size: 18px;
+    box-shadow: 0 4px 15px rgba(43, 182, 115, 0.3);
+    animation: pulse 2s infinite;
+}
+
+.price-old {
+    position: relative;
+    color: #999;
+    font-size: 14px;
+}
+
+.price-old::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: #ff4444;
+    transform: translateY(-50%);
+}
+
+/* ===== Search Bar Enhancement ===== */
+.search-input-wrapper {
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.search-input-wrapper:focus-within {
+    transform: scale(1.02);
+    box-shadow: 0 8px 25px rgba(43, 182, 115, 0.2);
+}
+
+.search-input {
+    transition: all 0.3s ease;
+}
+
+.search-input:focus {
+    background: linear-gradient(to right, #ffffff, #f8fffe);
+}
+
+/* ===== Filter Card Enhancement ===== */
+.card {
+    transition: all 0.3s ease;
+    background: white;
+}
+
+.card:hover {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: #2BB673;
+    box-shadow: 0 0 0 3px rgba(43, 182, 115, 0.1);
+    transform: scale(1.01);
+    transition: all 0.3s ease;
+}
+
+/* ===== Skeleton Loading ===== */
+.skeleton {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    border-radius: 8px;
+}
+
+/* ===== Icon Animations ===== */
+.icon-bounce {
+    animation: float 2s ease-in-out infinite;
+}
+
+.icon-spin:hover {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* ===== Tooltip Enhancement ===== */
+.tooltip-custom {
+    position: relative;
+}
+
+.tooltip-custom::before {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 125%;
+    left: 50%;
+    transform: translateX(-50%) scale(0);
+    background: linear-gradient(135deg, #2BB673 0%, #1ea05e 100%);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 12px;
+    white-space: nowrap;
+    opacity: 0;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(43, 182, 115, 0.3);
+}
+
+.tooltip-custom:hover::before {
+    transform: translateX(-50%) scale(1);
+    opacity: 1;
+}
+
+/* ===== Featured Section Enhancement ===== */
+.featured-section {
+    position: relative;
+    padding: 20px;
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    border-radius: 15px;
+    border: 2px solid #e9ecef;
+    margin-bottom: 24px;
+}
+
+.featured-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #2BB673 0%, #FF6A3D 100%);
+    border-radius: 15px 15px 0 0;
+}
+
+/* ===== Scroll Animations ===== */
+.fade-in-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.fade-in-on-scroll.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ===== Chip Enhancement ===== */
+.chip {
+    position: relative;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.chip:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(43, 182, 115, 0.2);
+}
+
+.chip.active {
+    background: linear-gradient(135deg, #2BB673 0%, #1ea05e 100%);
+    color: white;
+    box-shadow: 0 4px 15px rgba(43, 182, 115, 0.4);
+}
+
+/* ===== Glass Morphism Effect ===== */
+.glass-card {
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+/* ===== Neon Glow Effect ===== */
+.neon-text {
+    color: #2BB673;
+    text-shadow: 0 0 10px rgba(43, 182, 115, 0.8),
+                 0 0 20px rgba(43, 182, 115, 0.6),
+                 0 0 30px rgba(43, 182, 115, 0.4);
+    animation: pulse 2s infinite;
+}
+
+/* ===== Responsive Enhancements ===== */
+@media (max-width: 768px) {
+    .product-card:hover {
+        transform: translateY(-4px) scale(1.01);
+    }
+    
+    .category-card .card:hover {
+        transform: translateY(-4px) scale(1.02);
+    }
+}
+
+/* ===== Page Transitions ===== */
+.page-transition {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+/* ===== Loading Spinner ===== */
+.spinner-custom {
+    width: 50px;
+    height: 50px;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #2BB673;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 40px auto;
+}
+
+/* ===== Hover Scale Effect ===== */
+.hover-scale {
+    transition: transform 0.3s ease;
+}
+
+.hover-scale:hover {
+    transform: scale(1.05);
+}
+
+/* ===== Shadow Layers ===== */
+.shadow-soft {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05),
+                0 4px 16px rgba(0, 0, 0, 0.05);
+}
+
+.shadow-medium {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08),
+                0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.shadow-strong {
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12),
+                0 16px 40px rgba(0, 0, 0, 0.12);
+}
+
+/* ===== Border Gradient ===== */
+.border-gradient {
+    border: 2px solid transparent;
+    background-clip: padding-box;
+    position: relative;
+}
+
+.border-gradient::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: inherit;
+    padding: 2px;
+    background: linear-gradient(135deg, #2BB673 0%, #FF6A3D 100%);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    z-index: -1;
+}

@@ -1,0 +1,20 @@
+# robots.txt - Update Aden Store
+
+User-agent: *
+Allow: /
+
+# منع الوصول للصفحات الإدارية
+Disallow: /admin/
+Disallow: /dashboard/
+Disallow: /cart/
+Disallow: /checkout/
+Disallow: /orders/
+Disallow: /login
+Disallow: /register
+
+# منع أرشفة ملفات النظام
+Disallow: /vendor/
+Disallow: /storage/framework/
+
+# خريطة الموقع
+Sitemap: https://update-aden.com/sitemap.xml
