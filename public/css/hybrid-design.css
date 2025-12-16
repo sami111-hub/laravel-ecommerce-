@@ -56,9 +56,10 @@ section > div,
 
 /* ===== 1. Top Navigation Bar (من Bazzarry) ===== */
 .top-nav-bar {
-    background: #2c3e50;
+    background: linear-gradient(135deg, #1A1A1A 0%, #2A2A2A 100%);
     padding: 0;
     font-size: 14px;
+    border-bottom: 2px solid #5D4037;
 }
 
 .top-nav-links {
@@ -72,18 +73,19 @@ section > div,
 
 .top-nav-links li a {
     display: block;
-    padding: 12px 20px;
-    color: #ecf0f1;
+    padding: 12px 22px;
+    color: #e0e0e0;
     text-decoration: none;
     transition: all 0.3s ease;
     border-bottom: 3px solid transparent;
+    font-weight: 600;
 }
 
 .top-nav-links li a:hover,
 .top-nav-links li a.active {
-    background: rgba(255, 255, 255, 0.1);
-    border-bottom-color: #FF6B00;
-    color: white;
+    background: rgba(255, 107, 0, 0.15);
+    border-bottom-color: #5D4037;
+    color: #5D4037;
 }
 
 /* ===== 2. Delivery Bar (من Bazzarry) ===== */
@@ -115,13 +117,13 @@ section > div,
 
 .store-btn:hover,
 .location-btn:hover {
-    border-color: #FF6B00;
+    border-color: #5D4037;
     box-shadow: 0 2px 8px rgba(255, 107, 0, 0.1);
 }
 
 .store-btn strong,
 .location-btn strong {
-    color: #FF6B00;
+    color: #5D4037;
     font-weight: 700;
 }
 
@@ -164,7 +166,7 @@ section > div,
 .store-dropdown .dropdown-item:hover,
 .location-dropdown .dropdown-item:hover {
     background: #f8f9fa;
-    color: #FF6B00;
+    color: #5D4037;
 }
 
 .store-dropdown .dropdown-item:first-child,
@@ -319,7 +321,7 @@ section > div,
 }
 
 .product-name-hybrid a:hover {
-    color: #FF6B00;
+    color: #5D4037;
 }
 
 /* السعر */
@@ -337,7 +339,7 @@ section > div,
 .price-new-hybrid {
     font-size: 20px;
     font-weight: 900;
-    color: #FF6B00;
+    color: #5D4037;
 }
 
 .price-old-hybrid {
@@ -372,7 +374,7 @@ section > div,
 /* أزرار الإجراءات */
 .btn-add-cart-hybrid {
     width: 100%;
-    background: linear-gradient(135deg, #FF6B00 0%, #ff8533 100%);
+    background: linear-gradient(135deg, #5D4037 0%, #ff8533 100%);
     color: white;
     border: none;
     padding: 12px 16px;
@@ -454,7 +456,7 @@ section > div,
 
 .deal-title-group i {
     font-size: 32px;
-    color: #FF6B00;
+    color: #5D4037;
     animation: pulse 2s ease-in-out infinite;
 }
 
@@ -466,7 +468,7 @@ section > div,
 }
 
 .deal-subtitle {
-    background: linear-gradient(135deg, #FF6B00 0%, #ff8533 100%);
+    background: linear-gradient(135deg, #5D4037 0%, #ff8533 100%);
     color: white;
     padding: 4px 12px;
     border-radius: 20px;
@@ -516,7 +518,7 @@ section > div,
     display: flex;
     align-items: center;
     gap: 6px;
-    color: #FF6B00;
+    color: #5D4037;
     text-decoration: none;
     font-weight: 700;
     font-size: 15px;
@@ -540,7 +542,7 @@ section > div,
     scroll-behavior: smooth;
     padding: 10px 0;
     scrollbar-width: thin;
-    scrollbar-color: #FF6B00 #f1f1f1;
+    scrollbar-color: #5D4037 #f1f1f1;
 }
 
 .products-scroll-container::-webkit-scrollbar {
@@ -553,7 +555,7 @@ section > div,
 }
 
 .products-scroll-container::-webkit-scrollbar-thumb {
-    background: #FF6B00;
+    background: #5D4037;
     border-radius: 4px;
 }
 
@@ -585,7 +587,7 @@ section > div,
 }
 
 .scroll-btn:hover {
-    background: #FF6B00;
+    background: #5D4037;
     color: white;
     transform: translateY(-50%) scale(1.1);
 }
@@ -685,3 +687,8 @@ section > div,
         font-size: 18px;
     }
 }
+
+
+
+
+

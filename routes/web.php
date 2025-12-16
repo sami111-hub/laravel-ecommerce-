@@ -17,6 +17,10 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\OfferController as AdminOfferController;
 use App\Http\Controllers\OfferController;
 use App\Http\Controllers\Auth\GoogleController;
+use App\Http\Controllers\CouponController;
+use App\Http\Controllers\CompareController;
+use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\NotificationController;
 
 // صفحة auth التجريبية
 Route::get('/auth', function () {
@@ -47,6 +51,13 @@ Route::get('/products/search', [ProductController::class, 'search'])->name('prod
 Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.show');
 Route::get('/category/{category}', [ProductController::class, 'category'])->name('products.category');
 Route::get('/offers', [OfferController::class, 'index'])->name('offers');
+Route::get('/api/recommendations', [App\Http\Controllers\RecommendationController::class, 'getRecommendedProducts'])->name('api.recommendations');
+
+// Compare Routes
+Route::post('/compare/add/{product}', [CompareController::class, 'add'])->name('compare.add');
+Route::post('/compare/remove/{product}', [CompareController::class, 'remove'])->name('compare.remove');
+Route::get('/compare', [CompareController::class, 'index'])->name('compare.index');
+Route::post('/compare/clear', [CompareController::class, 'clear'])->name('compare.clear');
 
 // SEO Routes
 Route::get('/sitemap.xml', [App\Http\Controllers\SitemapController::class, 'index'])->name('sitemap');
@@ -69,6 +80,7 @@ Route::get('/categories', function () {
 Route::middleware('auth')->group(function () {
     // Cart Routes
     Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+    Route::get('/cart/count', [CartController::class, 'getCount'])->name('cart.count');
     Route::post('/cart/add/{product}', [CartController::class, 'add'])->name('cart.add');
     Route::put('/cart/{cart}', [CartController::class, 'update'])->name('cart.update');
     Route::delete('/cart/{cart}', [CartController::class, 'destroy'])->name('cart.destroy');
@@ -83,8 +95,19 @@ Route::middleware('auth')->group(function () {
     Route::post('/orders', [OrderController::class, 'store'])->name('orders.store');
     Route::get('/orders/{order}', [OrderController::class, 'show'])->name('orders.show');
     
+    // Coupon Routes
+    Route::post('/coupons/validate', [CouponController::class, 'validateCoupon'])->name('coupons.validate');
+    
     // Dashboard
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
+    
+    // Reviews
+    Route::post('/products/{product}/reviews', [ReviewController::class, 'store'])->name('reviews.store');
+    Route::put('/reviews/{review}', [ReviewController::class, 'update'])->name('reviews.update');
+    Route::delete('/reviews/{review}', [ReviewController::class, 'destroy'])->name('reviews.destroy');
+    
+    // Notifications
+    Route::post('/products/{product}/notify', [NotificationController::class, 'notifyWhenAvailable'])->name('products.notify');
 });
 
 // Admin Routes - Protected with Authentication & Permissions

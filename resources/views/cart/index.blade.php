@@ -52,7 +52,7 @@
             <hr>
             <div class="d-flex justify-content-between mb-3">
                 <span><strong>المجموع:</strong></span>
-                <span class="order-total">${{ number_format($total, 2) }}</span>
+                <span class="order-total">${{ number_format($subtotal, 2) }}</span>
             </div>
             <div class="d-flex flex-column align-items-center gap-2">
                 <a href="{{ route('orders.create') }}" class="btn btn-checkout">إتمام الطلب</a>

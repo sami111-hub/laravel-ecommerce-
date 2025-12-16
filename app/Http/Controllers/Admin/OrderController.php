@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class OrderController extends Controller
 {
@@ -20,9 +21,12 @@ class OrderController extends Controller
 
         // Search by user name or email
         if ($request->has('search') && $request->search) {
-            $query->whereHas('user', function($q) use ($request) {
-                $q->where('name', 'like', '%' . $request->search . '%')
-                  ->orWhere('email', 'like', '%' . $request->search . '%');
+            $searchTerm = '%' . $request->search . '%';
+            $query->whereHas('user', function($q) use ($searchTerm) {
+                $q->where(function($subQuery) use ($searchTerm) {
+                    $subQuery->where('name', 'like', $searchTerm)
+                             ->orWhere('email', 'like', $searchTerm);
+                });
             });
         }
 
@@ -61,8 +65,24 @@ class OrderController extends Controller
 
     public function destroy(Order $order)
     {
-        $order->items()->delete();
-        $order->delete();
-        return redirect()->route('admin.orders.index')->with('success', 'تم حذف الطلب بنجاح');
+        // استخدام transaction لضمان سلامة البيانات
+        DB::beginTransaction();
+        try {
+            // إرجاع المخزون للمنتجات
+            foreach ($order->items as $item) {
+                if ($item->product) {
+                    $item->product->increment('stock', $item->quantity);
+                }
+            }
+            
+            $order->items()->delete();
+            $order->delete();
+            
+            DB::commit();
+            return redirect()->route('admin.orders.index')->with('success', 'تم حذف الطلب بنجاح');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->with('error', 'حدث خطأ أثناء حذف الطلب');
+        }
     }
 }

@@ -59,6 +59,11 @@
                     <span>تسجيل الدخول</span>
                 </button>
             @endauth
+            <a href="{{ route('compare.index') }}" class="header-btn btn-compare">
+                <i class="bi bi-arrow-left-right"></i>
+                <span class="compare-badge">{{ count(session('compare', [])) }}</span>
+                <span class="d-none d-md-inline">المقارنة</span>
+            </a>
             <a href="/cart" class="header-btn btn-cart">
                 <i class="bi bi-cart3"></i>
                 <span class="cart-badge">{{ Auth::check() ? Auth::user()->carts()->sum('quantity') : 0 }}</span>

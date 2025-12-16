@@ -164,7 +164,7 @@
 
 .result-price {
     font-size: 13px;
-    color: #FF6B00;
+    color: #5D4037;
     font-weight: 700;
 }
 
@@ -315,6 +315,11 @@ html {
 button:focus,
 a:focus,
 input:focus {
-    outline: 2px solid #FF6B00;
+    outline: 2px solid #5D4037;
     outline-offset: 2px;
 }
+
+
+
+
+

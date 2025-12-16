@@ -1,0 +1,80 @@
+/* Rating Input Styles */
+.rating-input {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    gap: 5px;
+}
+
+.rating-input input[type="radio"] {
+    display: none;
+}
+
+.rating-input .star-label {
+    cursor: pointer;
+    font-size: 2rem;
+    color: #ddd;
+    transition: color 0.2s;
+}
+
+.rating-input input[type="radio"]:checked ~ .star-label,
+.rating-input .star-label:hover,
+.rating-input .star-label:hover ~ .star-label {
+    color: #ffc107;
+}
+
+.rating-input input[type="radio"]:checked ~ .star-label {
+    color: #ffc107;
+}
+
+/* Reviews List */
+.reviews-list {
+    max-height: 600px;
+    overflow-y: auto;
+}
+
+.reviews-list::-webkit-scrollbar {
+    width: 8px;
+}
+
+.reviews-list::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+.reviews-list::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+}
+
+.reviews-list::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* Compare Table */
+.compare-table {
+    font-size: 0.9rem;
+}
+
+.compare-table th {
+    vertical-align: middle;
+    text-align: center;
+}
+
+.compare-table td {
+    vertical-align: middle;
+    text-align: center;
+}
+
+/* Product Actions */
+.product-actions-compare {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.product-actions-compare .btn {
+    flex: 1;
+}
+
+

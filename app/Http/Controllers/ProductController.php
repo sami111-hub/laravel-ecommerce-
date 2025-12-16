@@ -13,10 +13,13 @@ class ProductController extends Controller
     {
         $query = Product::query();
 
-        // Search
+        // Search - إصلاح مشكلة orWhere
         if ($request->has('search') && $request->search) {
-            $query->where('name', 'like', '%' . $request->search . '%')
-                ->orWhere('description', 'like', '%' . $request->search . '%');
+            $searchTerm = '%' . $request->search . '%';
+            $query->where(function($q) use ($searchTerm) {
+                $q->where('name', 'like', $searchTerm)
+                  ->orWhere('description', 'like', $searchTerm);
+            });
         }
 
         // Filter by category
@@ -59,8 +62,24 @@ class ProductController extends Controller
 
     public function show(Product $product)
     {
-        $product->load('brand', 'reviews.user');
-        return view('products.show', compact('product'));
+        $product->load(['brand', 'categories', 'reviews' => function($query) {
+            $query->where('is_approved', true)
+                  ->with('user')
+                  ->latest()
+                  ->take(10);
+        }]);
+        
+        // منتجات مشابهة
+        $relatedProducts = Product::whereHas('categories', function($q) use ($product) {
+                $q->whereIn('categories.id', $product->categories->pluck('id'));
+            })
+            ->where('id', '!=', $product->id)
+            ->with('brand')
+            ->inRandomOrder()
+            ->take(4)
+            ->get();
+        
+        return view('products.show', compact('product', 'relatedProducts'));
     }
 
     public function category(Category $category)
@@ -81,8 +100,11 @@ class ProductController extends Controller
             return response()->json(['products' => []]);
         }
 
-        $products = Product::where('name', 'like', '%' . $query . '%')
-            ->orWhere('description', 'like', '%' . $query . '%')
+        $searchTerm = '%' . $query . '%';
+        $products = Product::where(function($q) use ($searchTerm) {
+                $q->where('name', 'like', $searchTerm)
+                  ->orWhere('description', 'like', $searchTerm);
+            })
             ->with('brand')
             ->take(8)
             ->get()

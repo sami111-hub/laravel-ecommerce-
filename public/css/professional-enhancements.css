@@ -8,7 +8,7 @@
     background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
     box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
     border-bottom: 3px solid transparent;
-    border-image: linear-gradient(90deg, #2BB673, #FF6A3D, #667eea) 1;
+    border-image: linear-gradient(90deg, #5D4037, #5D4037, #667eea) 1;
     transition: all 0.3s ease;
 }
 
@@ -26,7 +26,7 @@
 }
 
 .smart-logo .logo-brand {
-    background: linear-gradient(135deg, #2BB673, #1ea05e);
+    background: linear-gradient(135deg, #5D4037, #4E342E);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -59,7 +59,7 @@
 }
 
 .search-input-wrapper:focus-within {
-    border-color: #2BB673;
+    border-color: #5D4037;
     box-shadow: 0 0 0 4px rgba(43, 182, 115, 0.1),
                 0 4px 20px rgba(43, 182, 115, 0.2);
     transform: translateY(-2px);
@@ -93,7 +93,7 @@
     left: 4px;
     top: 50%;
     transform: translateY(-50%);
-    background: linear-gradient(135deg, #2BB673, #1ea05e);
+    background: linear-gradient(135deg, #5D4037, #4E342E);
     border: none;
     border-radius: 50%;
     width: 40px;
@@ -146,8 +146,8 @@
 }
 
 .header-btn:hover {
-    border-color: #2BB673;
-    color: #2BB673;
+    border-color: #5D4037;
+    color: #5D4037;
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(43, 182, 115, 0.2);
 }
@@ -165,7 +165,7 @@
 
 .btn-cart {
     position: relative;
-    background: linear-gradient(135deg, #2BB673, #1ea05e);
+    background: linear-gradient(135deg, #5D4037, #4E342E);
     border-color: transparent;
     color: white !important;
 }
@@ -179,7 +179,7 @@
     position: absolute;
     top: -8px;
     right: -8px;
-    background: #FF6A3D;
+    background: #5D4037;
     color: white;
     border-radius: 50%;
     width: 22px;
@@ -223,7 +223,7 @@
 
 .product-card-hybrid:hover {
     transform: translateY(-8px);
-    border-color: #2BB673;
+    border-color: #5D4037;
     box-shadow: 0 12px 40px rgba(43, 182, 115, 0.15),
                 0 4px 12px rgba(0, 0, 0, 0.1);
 }
@@ -264,7 +264,7 @@
     position: absolute;
     top: 16px;
     right: 16px;
-    background: linear-gradient(135deg, #FF6A3D, #ff4500);
+    background: linear-gradient(135deg, #5D4037, #ff4500);
     color: white;
     padding: 6px 14px;
     border-radius: 20px;
@@ -310,8 +310,8 @@
 }
 
 .wishlist-btn-hybrid:hover {
-    background: #FF6A3D;
-    border-color: #FF6A3D;
+    background: #5D4037;
+    border-color: #5D4037;
     transform: scale(1.15);
     box-shadow: 0 4px 15px rgba(255, 106, 61, 0.4);
 }
@@ -351,7 +351,7 @@
 }
 
 .product-name-hybrid a:hover {
-    color: #2BB673;
+    color: #5D4037;
 }
 
 /* Premium Pricing */
@@ -365,7 +365,7 @@
 .price-new-hybrid {
     font-size: 20px;
     font-weight: 800;
-    background: linear-gradient(135deg, #2BB673, #1ea05e);
+    background: linear-gradient(135deg, #5D4037, #4E342E);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -380,7 +380,7 @@
 .price-current-hybrid {
     font-size: 20px;
     font-weight: 800;
-    color: #2BB673;
+    color: #5D4037;
 }
 
 /* Delivery Info */
@@ -404,7 +404,7 @@
 .btn-add-cart-hybrid {
     width: 100%;
     padding: 12px;
-    background: linear-gradient(135deg, #2BB673, #1ea05e);
+    background: linear-gradient(135deg, #5D4037, #4E342E);
     color: white;
     border: none;
     border-radius: 10px;
@@ -526,7 +526,7 @@
 
 .category-card .card:hover {
     transform: translateY(-8px) scale(1.03);
-    border-color: #2BB673;
+    border-color: #5D4037;
     box-shadow: 0 12px 40px rgba(43, 182, 115, 0.2);
 }
 
@@ -560,7 +560,7 @@
     left: 0;
     right: 0;
     height: 4px;
-    background: linear-gradient(90deg, #2BB673, #FF6A3D, #667eea, #2BB673);
+    background: linear-gradient(90deg, #5D4037, #5D4037, #667eea, #5D4037);
     background-size: 200% 100%;
     animation: gradient-shift 5s ease infinite;
 }
@@ -608,7 +608,7 @@
 
 /* Professional Topbar */
 .topbar {
-    background: linear-gradient(135deg, #2BB673 0%, #1ea05e 100%);
+    background: linear-gradient(135deg, #5D4037 0%, #4E342E 100%);
     color: white;
     font-size: 13px;
     font-weight: 600;
@@ -658,7 +658,7 @@
 
 .trust-badge i {
     font-size: 24px;
-    color: #2BB673;
+    color: #5D4037;
 }
 
 .trust-badge-text {
@@ -676,3 +676,8 @@
     font-size: 12px;
     color: #6b7280;
 }
+
+
+
+
+

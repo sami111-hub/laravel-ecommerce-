@@ -81,7 +81,7 @@
     color: #1f2937;
     line-height: 1;
     letter-spacing: -0.5px;
-    background: linear-gradient(135deg, #2BB673 0%, #3b82f6 100%);
+    background: linear-gradient(135deg, #5D4037 0%, #8D6E63 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -118,7 +118,7 @@
 
 .search-input-wrapper:focus-within {
     background: white;
-    border-color: #2BB673;
+    border-color: #5D4037;
     box-shadow: 0 0 0 4px rgba(43, 182, 115, 0.1);
 }
 
@@ -143,7 +143,7 @@
 }
 
 .search-btn {
-    background: linear-gradient(135deg, #2BB673 0%, #249e60 100%);
+    background: linear-gradient(135deg, #5D4037 0%, #4E342E 100%);
     border: none;
     border-radius: 50px;
     padding: 12px 24px;
@@ -188,12 +188,12 @@
 
 .btn-user {
     background: #eafaf3;
-    color: #2BB673;
+    color: #5D4037;
     border-color: rgba(43, 182, 115, 0.2);
 }
 
 .btn-user:hover {
-    background: #2BB673;
+    background: #5D4037;
     color: white;
 }
 
@@ -231,7 +231,7 @@
 }
 
 .btn-login {
-    background: linear-gradient(135deg, #2BB673 0%, #249e60 100%);
+    background: linear-gradient(135deg, #5D4037 0%, #4E342E 100%);
     color: white;
 }
 
@@ -804,7 +804,7 @@
 
 .quick-action-btn:hover {
     transform: scale(1.15);
-    background: #2BB673;
+    background: #5D4037;
     color: white;
 }
 
@@ -833,7 +833,7 @@
 
 .product-brand {
     display: inline-block;
-    background: linear-gradient(135deg, #2BB673 0%, #249e60 100%);
+    background: linear-gradient(135deg, #5D4037 0%, #4E342E 100%);
     color: white;
     font-size: 12px;
     font-weight: 700;
@@ -858,7 +858,7 @@
 }
 
 .product-title a:hover {
-    color: #2BB673;
+    color: #5D4037;
 }
 
 .product-rating {
@@ -907,7 +907,7 @@
 .price-new {
     font-size: 24px;
     font-weight: 900;
-    color: #2BB673;
+    color: #5D4037;
 }
 
 .price-current {
@@ -956,7 +956,7 @@
 
 .btn-add-to-cart {
     width: 100%;
-    background: linear-gradient(135deg, #2BB673 0%, #249e60 100%);
+    background: linear-gradient(135deg, #5D4037 0%, #4E342E 100%);
     color: white;
     border: none;
     padding: 14px 20px;
@@ -1016,9 +1016,9 @@
 }
 
 .btn-login-to-buy:hover {
-    background: #2BB673;
+    background: #5D4037;
     color: white;
-    border-color: #2BB673;
+    border-color: #5D4037;
 }
 
 .btn-view-details {
@@ -1173,21 +1173,26 @@
 }
 
 ::-webkit-scrollbar-thumb {
-    background: linear-gradient(135deg, #2BB673 0%, #249e60 100%);
+    background: linear-gradient(135deg, #5D4037 0%, #4E342E 100%);
     border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: #249e60;
+    background: #4E342E;
 }
 
 /* Selection color */
 ::selection {
-    background: #2BB673;
+    background: #5D4037;
     color: white;
 }
 
 ::-moz-selection {
-    background: #2BB673;
+    background: #5D4037;
     color: white;
 }
+
+
+
+
+

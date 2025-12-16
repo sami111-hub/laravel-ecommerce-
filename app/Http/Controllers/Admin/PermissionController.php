@@ -11,7 +11,10 @@ class PermissionController extends Controller
 {
     public function index()
     {
-        $permissions = Permission::latest()->get()->groupBy('group');
+        $permissions = Permission::withCount('roles')
+            ->latest()
+            ->get()
+            ->groupBy('group');
         return view('admin.permissions.index', compact('permissions'));
     }
 

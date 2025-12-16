@@ -31,9 +31,28 @@
                 </div>
                 @endforeach
                 <hr>
-                <div class="d-flex justify-content-between">
-                    <strong>المجموع النهائي:</strong>
-                    <strong class="text-success fs-5">${{ number_format($order->total, 2) }}</strong>
+                <div class="order-summary-details">
+                    @if($order->subtotal)
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>المجموع الفرعي:</span>
+                            <span>${{ number_format($order->subtotal, 2) }}</span>
+                        </div>
+                    @endif
+                    @if($order->discount > 0)
+                        <div class="d-flex justify-content-between mb-2 text-success">
+                            <span>الخصم 
+                                @if($order->coupon_code)
+                                    ({{ $order->coupon_code }})
+                                @endif:
+                            </span>
+                            <span>-${{ number_format($order->discount, 2) }}</span>
+                        </div>
+                    @endif
+                    <hr>
+                    <div class="d-flex justify-content-between">
+                        <strong>المجموع النهائي:</strong>
+                        <strong class="text-success fs-5">${{ number_format($order->total, 2) }}</strong>
+                    </div>
                 </div>
             </div>
         </div>
@@ -56,6 +75,11 @@
                         <span class="badge bg-danger">ملغى</span>
                     @endif
                 </p>
+                @if($order->tracking_code)
+                    <p><strong>رمز التتبع:</strong> 
+                        <span class="badge bg-primary">{{ $order->tracking_code }}</span>
+                    </p>
+                @endif
                 <hr>
                 <p><strong>عنوان التوصيل:</strong><br>{{ $order->shipping_address }}</p>
                 <p><strong>رقم الهاتف:</strong> {{ $order->phone }}</p>

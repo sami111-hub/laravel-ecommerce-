@@ -44,7 +44,7 @@ body::before {
 
 /* ===== Gradient Text Effects ===== */
 .gradient-text {
-    background: linear-gradient(135deg, #2BB673, #FF6A3D, #667eea);
+    background: linear-gradient(135deg, #5D4037, #5D4037, #667eea);
     background-size: 200% 200%;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -67,7 +67,7 @@ body::before {
     background: white;
     border-radius: 15px;
     padding: 2px;
-    background: linear-gradient(60deg, #2BB673, #FF6A3D, #667eea, #2BB673);
+    background: linear-gradient(60deg, #5D4037, #5D4037, #667eea, #5D4037);
     background-size: 300% 300%;
     animation: gradient-border 6s ease infinite;
 }
@@ -345,7 +345,7 @@ body::before {
 
 .flip-card-back {
     transform: rotateY(180deg);
-    background: linear-gradient(135deg, #2BB673, #1ea05e);
+    background: linear-gradient(135deg, #5D4037, #4E342E);
     color: white;
     display: flex;
     align-items: center;
@@ -378,3 +378,8 @@ body::before {
         transition-duration: 0.01ms !important;
     }
 }
+
+
+
+
+
