@@ -8,7 +8,7 @@
     background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
     box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
     border-bottom: 3px solid transparent;
-    border-image: linear-gradient(90deg, #5D4037, #5D4037, #667eea) 1;
+    border-image: linear-gradient(90deg, #5D4037, #8D6E63, #6D4C41) 1;
     transition: all 0.3s ease;
 }
 
@@ -60,8 +60,8 @@
 
 .search-input-wrapper:focus-within {
     border-color: #5D4037;
-    box-shadow: 0 0 0 4px rgba(43, 182, 115, 0.1),
-                0 4px 20px rgba(43, 182, 115, 0.2);
+    box-shadow: 0 0 0 4px rgba(93, 64, 55, 0.1),
+                0 4px 20px rgba(93, 64, 55, 0.2);
     transform: translateY(-2px);
 }
 
@@ -104,12 +104,12 @@
     color: white;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 2px 10px rgba(43, 182, 115, 0.3);
+    box-shadow: 0 2px 10px rgba(93, 64, 55, 0.3);
 }
 
 .search-btn:hover {
     transform: translateY(-50%) scale(1.1);
-    box-shadow: 0 4px 15px rgba(43, 182, 115, 0.4);
+    box-shadow: 0 4px 15px rgba(93, 64, 55, 0.4);
 }
 
 /* Premium Header Buttons */
@@ -149,11 +149,11 @@
     border-color: #5D4037;
     color: #5D4037;
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(43, 182, 115, 0.2);
+    box-shadow: 0 4px 12px rgba(93, 64, 55, 0.2);
 }
 
 .btn-admin {
-    background: linear-gradient(135deg, #667eea, #764ba2);
+    background: linear-gradient(135deg, #8D6E63, #6D4C41);
     border-color: transparent;
     color: white !important;
 }
@@ -172,7 +172,7 @@
 
 .btn-cart:hover {
     transform: translateY(-2px) scale(1.05);
-    box-shadow: 0 6px 20px rgba(43, 182, 115, 0.4);
+    box-shadow: 0 6px 20px rgba(93, 64, 55, 0.4);
 }
 
 .cart-badge {
@@ -215,7 +215,7 @@
     right: 0;
     bottom: 0;
     border-radius: 16px;
-    background: linear-gradient(135deg, rgba(43, 182, 115, 0.1), rgba(255, 106, 61, 0.1));
+    background: linear-gradient(135deg, rgba(93, 64, 55, 0.1), rgba(141, 110, 99, 0.1));
     opacity: 0;
     transition: opacity 0.3s ease;
     pointer-events: none;
@@ -224,7 +224,7 @@
 .product-card-hybrid:hover {
     transform: translateY(-8px);
     border-color: #5D4037;
-    box-shadow: 0 12px 40px rgba(43, 182, 115, 0.15),
+    box-shadow: 0 12px 40px rgba(93, 64, 55, 0.15),
                 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
@@ -264,14 +264,14 @@
     position: absolute;
     top: 16px;
     right: 16px;
-    background: linear-gradient(135deg, #5D4037, #ff4500);
+    background: linear-gradient(135deg, #5D4037, #8D6E63);
     color: white;
     padding: 6px 14px;
     border-radius: 20px;
     font-weight: 700;
     font-size: 13px;
     z-index: 10;
-    box-shadow: 0 4px 15px rgba(255, 106, 61, 0.4);
+    box-shadow: 0 4px 15px rgba(93, 64, 55, 0.4);
     animation: pulse 2s infinite;
 }
 
@@ -279,14 +279,14 @@
     position: absolute;
     top: 16px;
     left: 16px;
-    background: linear-gradient(135deg, #f093fb, #f5576c);
+    background: linear-gradient(135deg, #8D6E63, #6D4C41);
     color: white;
     padding: 6px 14px;
     border-radius: 20px;
     font-weight: 700;
     font-size: 13px;
     z-index: 10;
-    box-shadow: 0 4px 15px rgba(245, 87, 108, 0.4);
+    box-shadow: 0 4px 15px rgba(93, 64, 55, 0.4);
     animation: float 3s ease-in-out infinite;
 }
 
@@ -418,7 +418,7 @@
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
-    box-shadow: 0 4px 15px rgba(43, 182, 115, 0.3);
+    box-shadow: 0 4px 15px rgba(93, 64, 55, 0.3);
     margin-top: auto;
 }
 
@@ -442,7 +442,7 @@
 
 .btn-add-cart-hybrid:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(43, 182, 115, 0.4);
+    box-shadow: 0 6px 20px rgba(93, 64, 55, 0.4);
 }
 
 .btn-add-cart-hybrid:active {
@@ -453,7 +453,7 @@
 .btn-login-hybrid {
     width: 100%;
     padding: 12px;
-    background: linear-gradient(135deg, #667eea, #764ba2);
+    background: linear-gradient(135deg, #8D6E63, #6D4C41);
     color: white;
     border: none;
     border-radius: 10px;
@@ -515,7 +515,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(135deg, rgba(43, 182, 115, 0.05), rgba(255, 106, 61, 0.05));
+    background: linear-gradient(135deg, rgba(93, 64, 55, 0.05), rgba(141, 110, 99, 0.05));
     opacity: 0;
     transition: opacity 0.3s ease;
 }
@@ -527,7 +527,7 @@
 .category-card .card:hover {
     transform: translateY(-8px) scale(1.03);
     border-color: #5D4037;
-    box-shadow: 0 12px 40px rgba(43, 182, 115, 0.2);
+    box-shadow: 0 12px 40px rgba(93, 64, 55, 0.2);
 }
 
 .category-card .card-body {
@@ -542,7 +542,7 @@
 
 .category-card:hover i {
     transform: scale(1.2) rotate(360deg);
-    filter: drop-shadow(0 4px 10px rgba(43, 182, 115, 0.3));
+    filter: drop-shadow(0 4px 10px rgba(93, 64, 55, 0.3));
 }
 
 /* Professional Footer */
@@ -560,7 +560,7 @@
     left: 0;
     right: 0;
     height: 4px;
-    background: linear-gradient(90deg, #5D4037, #5D4037, #667eea, #5D4037);
+    background: linear-gradient(90deg, #5D4037, #8D6E63, #6D4C41, #5D4037);
     background-size: 200% 100%;
     animation: gradient-shift 5s ease infinite;
 }
@@ -612,7 +612,7 @@
     color: white;
     font-size: 13px;
     font-weight: 600;
-    box-shadow: 0 2px 10px rgba(43, 182, 115, 0.3);
+    box-shadow: 0 2px 10px rgba(93, 64, 55, 0.3);
 }
 
 .topbar a {

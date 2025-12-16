@@ -4,7 +4,7 @@
 
 /* ===== 1. شريط الترويجات المتحرك ===== */
 .promo-bar {
-    background: linear-gradient(90deg, #3b82f6 0%, #2563eb 100%);
+    background: linear-gradient(90deg, #5D4037 0%, #4E342E 100%);
     color: white;
     padding: 10px 0;
     overflow: hidden;
@@ -119,7 +119,7 @@
 .search-input-wrapper:focus-within {
     background: white;
     border-color: #5D4037;
-    box-shadow: 0 0 0 4px rgba(43, 182, 115, 0.1);
+    box-shadow: 0 0 0 4px rgba(93, 64, 55, 0.1);
 }
 
 .search-icon {
@@ -158,7 +158,7 @@
 
 .search-btn:hover {
     transform: scale(1.05);
-    box-shadow: 0 4px 12px rgba(43, 182, 115, 0.3);
+    box-shadow: 0 4px 12px rgba(93, 64, 55, 0.3);
 }
 
 .header-btn {
@@ -189,7 +189,7 @@
 .btn-user {
     background: #eafaf3;
     color: #5D4037;
-    border-color: rgba(43, 182, 115, 0.2);
+    border-color: rgba(93, 64, 55, 0.2);
 }
 
 .btn-user:hover {
@@ -198,7 +198,7 @@
 }
 
 .btn-offers {
-    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    background: linear-gradient(135deg, #8D6E63 0%, #6D4C41 100%);
     color: white;
 }
 
@@ -237,12 +237,12 @@
 
 .btn-login:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(43, 182, 115, 0.3);
+    box-shadow: 0 4px 12px rgba(93, 64, 55, 0.3);
     color: white;
 }
 
 .btn-cart {
-    background: linear-gradient(135deg, #FF6A3D 0%, #f5576c 100%);
+    background: linear-gradient(135deg, #8D6E63 0%, #6D4C41 100%);
     color: white;
     position: relative;
 }
@@ -677,7 +677,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, rgba(43, 182, 115, 0.05) 0%, rgba(59, 130, 246, 0.05) 100%);
+    background: linear-gradient(135deg, rgba(93, 64, 55, 0.05) 0%, rgba(141, 110, 99, 0.05) 100%);
     opacity: 0;
     transition: opacity 0.3s ease;
 }
@@ -973,12 +973,12 @@
 
 .btn-add-to-cart:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(43, 182, 115, 0.3);
+    box-shadow: 0 8px 20px rgba(93, 64, 55, 0.3);
 }
 
 .btn-notify-me {
     width: 100%;
-    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    background: linear-gradient(135deg, #8D6E63 0%, #6D4C41 100%);
     color: white;
     border: none;
     padding: 14px 20px;

@@ -70,19 +70,19 @@
 }
 
 .gradient-accent {
-    background: linear-gradient(135deg, #5D4037 0%, #ff8c3d 100%);
+    background: linear-gradient(135deg, #5D4037 0%, #8D6E63 100%);
 }
 
 .gradient-purple {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #6D4C41 0%, #5D4037 100%);
 }
 
 .gradient-blue {
-    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    background: linear-gradient(135deg, #8D6E63 0%, #6D4C41 100%);
 }
 
 .gradient-pink {
-    background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+    background: linear-gradient(135deg, #A1887F 0%, #8D6E63 100%);
 }
 
 .gradient-dark {
@@ -116,7 +116,7 @@
 
 .product-card:hover {
     transform: translateY(-8px) scale(1.02);
-    box-shadow: 0 20px 40px rgba(43, 182, 115, 0.2), 
+    box-shadow: 0 20px 40px rgba(93, 64, 55, 0.2), 
                 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
@@ -132,11 +132,11 @@
 .badge-glow {
     position: relative;
     animation: pulse 2s infinite;
-    box-shadow: 0 0 15px rgba(43, 182, 115, 0.5);
+    box-shadow: 0 0 15px rgba(93, 64, 55, 0.5);
 }
 
 .badge-new {
-    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    background: linear-gradient(135deg, #8D6E63 0%, #6D4C41 100%);
     color: white;
     font-weight: 700;
     padding: 4px 12px;
@@ -144,12 +144,12 @@
     font-size: 11px;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    box-shadow: 0 4px 15px rgba(245, 87, 108, 0.4);
+    box-shadow: 0 4px 15px rgba(93, 64, 55, 0.4);
     animation: float 3s ease-in-out infinite;
 }
 
 .badge-sale {
-    background: linear-gradient(135deg, #5D4037 0%, #ff4500 100%);
+    background: linear-gradient(135deg, #5D4037 0%, #8D6E63 100%);
     color: white;
     font-weight: 700;
     padding: 4px 12px;
@@ -157,11 +157,11 @@
     font-size: 11px;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    box-shadow: 0 4px 15px rgba(255, 106, 61, 0.4);
+    box-shadow: 0 4px 15px rgba(93, 64, 55, 0.4);
 }
 
 .badge-hot {
-    background: linear-gradient(135deg, #f12711 0%, #f5af19 100%);
+    background: linear-gradient(135deg, #D84315 0%, #BF360C 100%);
     color: white;
     font-weight: 700;
     padding: 4px 12px;
@@ -206,18 +206,18 @@
     padding: 12px 24px;
     border-radius: 10px;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(43, 182, 115, 0.3);
+    box-shadow: 0 4px 15px rgba(93, 64, 55, 0.3);
 }
 
 .btn-gradient:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(43, 182, 115, 0.4);
+    box-shadow: 0 8px 25px rgba(93, 64, 55, 0.4);
 }
 
 .btn-glow {
-    box-shadow: 0 0 20px rgba(43, 182, 115, 0.5),
-                0 0 40px rgba(43, 182, 115, 0.3),
-                0 0 60px rgba(43, 182, 115, 0.1);
+    box-shadow: 0 0 20px rgba(93, 64, 55, 0.5),
+                0 0 40px rgba(93, 64, 55, 0.3),
+                0 0 60px rgba(93, 64, 55, 0.1);
     animation: pulse 2s infinite;
 }
 
@@ -244,7 +244,7 @@
     border-color: #5D4037;
     background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
     transform: translateY(-8px) scale(1.05);
-    box-shadow: 0 15px 35px rgba(43, 182, 115, 0.2);
+    box-shadow: 0 15px 35px rgba(93, 64, 55, 0.2);
 }
 
 .category-card .card i {
@@ -267,7 +267,7 @@
     border-radius: 30px;
     font-weight: 800;
     font-size: 18px;
-    box-shadow: 0 4px 15px rgba(43, 182, 115, 0.3);
+    box-shadow: 0 4px 15px rgba(93, 64, 55, 0.3);
     animation: pulse 2s infinite;
 }
 
@@ -296,7 +296,7 @@
 
 .search-input-wrapper:focus-within {
     transform: scale(1.02);
-    box-shadow: 0 8px 25px rgba(43, 182, 115, 0.2);
+    box-shadow: 0 8px 25px rgba(93, 64, 55, 0.2);
 }
 
 .search-input {
@@ -320,7 +320,7 @@
 .form-control:focus,
 .form-select:focus {
     border-color: #5D4037;
-    box-shadow: 0 0 0 3px rgba(43, 182, 115, 0.1);
+    box-shadow: 0 0 0 3px rgba(93, 64, 55, 0.1);
     transform: scale(1.01);
     transition: all 0.3s ease;
 }
@@ -366,7 +366,7 @@
     white-space: nowrap;
     opacity: 0;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(43, 182, 115, 0.3);
+    box-shadow: 0 4px 15px rgba(93, 64, 55, 0.3);
 }
 
 .tooltip-custom:hover::before {
@@ -415,13 +415,13 @@
 
 .chip:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(43, 182, 115, 0.2);
+    box-shadow: 0 4px 12px rgba(93, 64, 55, 0.2);
 }
 
 .chip.active {
     background: linear-gradient(135deg, #5D4037 0%, #4E342E 100%);
     color: white;
-    box-shadow: 0 4px 15px rgba(43, 182, 115, 0.4);
+    box-shadow: 0 4px 15px rgba(93, 64, 55, 0.4);
 }
 
 /* ===== Glass Morphism Effect ===== */
@@ -436,9 +436,9 @@
 /* ===== Neon Glow Effect ===== */
 .neon-text {
     color: #5D4037;
-    text-shadow: 0 0 10px rgba(43, 182, 115, 0.8),
-                 0 0 20px rgba(43, 182, 115, 0.6),
-                 0 0 30px rgba(43, 182, 115, 0.4);
+    text-shadow: 0 0 10px rgba(93, 64, 55, 0.8),
+                 0 0 20px rgba(93, 64, 55, 0.6),
+                 0 0 30px rgba(93, 64, 55, 0.4);
     animation: pulse 2s infinite;
 }
 

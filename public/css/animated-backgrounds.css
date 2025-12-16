@@ -23,9 +23,9 @@ body::before {
     width: 200%;
     height: 200%;
     background: 
-        radial-gradient(circle at 20% 50%, rgba(43, 182, 115, 0.08) 0%, transparent 50%),
-        radial-gradient(circle at 80% 80%, rgba(255, 106, 61, 0.08) 0%, transparent 50%),
-        radial-gradient(circle at 40% 90%, rgba(102, 126, 234, 0.08) 0%, transparent 50%);
+        radial-gradient(circle at 20% 50%, rgba(93, 64, 55, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(141, 110, 99, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 40% 90%, rgba(109, 76, 65, 0.08) 0%, transparent 50%);
     animation: float-background 20s ease-in-out infinite;
     z-index: -1;
 }
@@ -44,7 +44,7 @@ body::before {
 
 /* ===== Gradient Text Effects ===== */
 .gradient-text {
-    background: linear-gradient(135deg, #5D4037, #5D4037, #667eea);
+    background: linear-gradient(135deg, #5D4037, #8D6E63, #6D4C41);
     background-size: 200% 200%;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -67,7 +67,7 @@ body::before {
     background: white;
     border-radius: 15px;
     padding: 2px;
-    background: linear-gradient(60deg, #5D4037, #5D4037, #667eea, #5D4037);
+    background: linear-gradient(60deg, #5D4037, #8D6E63, #6D4C41, #5D4037);
     background-size: 300% 300%;
     animation: gradient-border 6s ease infinite;
 }
@@ -91,24 +91,24 @@ body::before {
 .card-glow {
     position: relative;
     box-shadow: 
-        0 0 20px rgba(43, 182, 115, 0.3),
-        0 0 40px rgba(43, 182, 115, 0.2),
-        0 0 60px rgba(43, 182, 115, 0.1);
+        0 0 20px rgba(93, 64, 55, 0.3),
+        0 0 40px rgba(93, 64, 55, 0.2),
+        0 0 60px rgba(93, 64, 55, 0.1);
     animation: glow-pulse 3s ease-in-out infinite;
 }
 
 @keyframes glow-pulse {
     0%, 100% {
         box-shadow: 
-            0 0 20px rgba(43, 182, 115, 0.3),
-            0 0 40px rgba(43, 182, 115, 0.2),
-            0 0 60px rgba(43, 182, 115, 0.1);
+            0 0 20px rgba(93, 64, 55, 0.3),
+            0 0 40px rgba(93, 64, 55, 0.2),
+            0 0 60px rgba(93, 64, 55, 0.1);
     }
     50% {
         box-shadow: 
-            0 0 30px rgba(43, 182, 115, 0.4),
-            0 0 60px rgba(43, 182, 115, 0.3),
-            0 0 90px rgba(43, 182, 115, 0.2);
+            0 0 30px rgba(93, 64, 55, 0.4),
+            0 0 60px rgba(93, 64, 55, 0.3),
+            0 0 90px rgba(93, 64, 55, 0.2);
     }
 }
 
@@ -127,7 +127,7 @@ body::before {
     position: absolute;
     width: 4px;
     height: 4px;
-    background: rgba(43, 182, 115, 0.3);
+    background: rgba(93, 64, 55, 0.3);
     border-radius: 50%;
     animation: float-particle 10s infinite ease-in-out;
 }
@@ -154,7 +154,7 @@ body::before {
     position: fixed;
     width: 300px;
     height: 300px;
-    background: linear-gradient(135deg, rgba(43, 182, 115, 0.1), rgba(255, 106, 61, 0.1));
+    background: linear-gradient(135deg, rgba(93, 64, 55, 0.1), rgba(141, 110, 99, 0.1));
     border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
     animation: morph 15s ease-in-out infinite;
     z-index: -1;
@@ -205,7 +205,7 @@ body::before {
     left: 0;
     width: 200%;
     height: 100%;
-    background: linear-gradient(to right, transparent, rgba(43, 182, 115, 0.1), transparent);
+    background: linear-gradient(to right, transparent, rgba(93, 64, 55, 0.1), transparent);
     animation: wave-animation 10s linear infinite;
 }
 
@@ -232,7 +232,7 @@ body::before {
     width: 600px;
     height: 600px;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(43, 182, 115, 0.15) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(93, 64, 55, 0.15) 0%, transparent 70%);
     pointer-events: none;
     z-index: -1;
     transition: transform 0.1s ease;
@@ -266,12 +266,12 @@ body::before {
 /* ===== Mesh Gradient Background ===== */
 .mesh-gradient {
     background: 
-        radial-gradient(at 40% 20%, rgba(43, 182, 115, 0.2) 0px, transparent 50%),
-        radial-gradient(at 80% 0%, rgba(255, 106, 61, 0.2) 0px, transparent 50%),
-        radial-gradient(at 0% 50%, rgba(102, 126, 234, 0.2) 0px, transparent 50%),
-        radial-gradient(at 80% 50%, rgba(245, 158, 11, 0.2) 0px, transparent 50%),
-        radial-gradient(at 0% 100%, rgba(16, 185, 129, 0.2) 0px, transparent 50%),
-        radial-gradient(at 80% 100%, rgba(239, 68, 68, 0.2) 0px, transparent 50%);
+        radial-gradient(at 40% 20%, rgba(93, 64, 55, 0.2) 0px, transparent 50%),
+        radial-gradient(at 80% 0%, rgba(141, 110, 99, 0.2) 0px, transparent 50%),
+        radial-gradient(at 0% 50%, rgba(109, 76, 65, 0.2) 0px, transparent 50%),
+        radial-gradient(at 80% 50%, rgba(78, 52, 46, 0.2) 0px, transparent 50%),
+        radial-gradient(at 0% 100%, rgba(62, 39, 35, 0.2) 0px, transparent 50%),
+        radial-gradient(at 80% 100%, rgba(121, 85, 72, 0.2) 0px, transparent 50%);
 }
 
 /* ===== Glassmorphism Container ===== */

@@ -46,7 +46,6 @@
     <link rel="stylesheet" href="{{ asset('css/animated-backgrounds.css') }}?v={{ time() }}">
     <link rel="stylesheet" href="{{ asset('css/professional-enhancements.css') }}?v={{ time() }}">
     <link rel="stylesheet" href="{{ asset('css/premium-features.css') }}?v={{ time() }}">
-    <link rel="stylesheet" href="{{ asset('css/update-theme.css') }}?v={{ time() }}">
 </head>
 <body>
     @include('partials.top-nav-bar')
