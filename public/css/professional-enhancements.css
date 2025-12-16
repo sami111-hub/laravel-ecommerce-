@@ -70,7 +70,7 @@
     padding: 14px 50px 14px 50px;
     width: 100%;
     font-size: 15px;
-    color: #1f2937;
+    color: #3E2723;
     background: transparent;
 }
 
@@ -338,7 +338,7 @@
 .product-name-hybrid {
     font-size: 15px;
     font-weight: 700;
-    color: #1f2937;
+    color: #3E2723;
     margin: 0;
     line-height: 1.4;
     min-height: 42px;
@@ -547,7 +547,7 @@
 
 /* Professional Footer */
 .support-footer {
-    background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+    background: linear-gradient(135deg, #5D4037 0%, #3E2723 100%);
     color: white;
     position: relative;
     overflow: hidden;
@@ -669,7 +669,7 @@
 .trust-badge-title {
     font-weight: 700;
     font-size: 14px;
-    color: #1f2937;
+    color: #3E2723;
 }
 
 .trust-badge-subtitle {

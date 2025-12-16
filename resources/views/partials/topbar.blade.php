@@ -1,4 +1,4 @@
-<div class="topbar text-white small py-2" style="background: linear-gradient(135deg, #1A1A1A 0%, #2A2A2A 100%);" dir="rtl">
+<div class="topbar text-white small py-2" style="background: linear-gradient(135deg, #5D4037 0%, #4E342E 100%);" dir="rtl">
     <div class="container d-flex justify-content-between align-items-center flex-wrap">
         <div class="d-flex align-items-center gap-2">
             <i class="bi bi-truck" style="color: #5D4037;"></i>

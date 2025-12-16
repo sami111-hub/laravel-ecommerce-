@@ -470,12 +470,12 @@ document.addEventListener('DOMContentLoaded', function() {
 }
 
 .accordion-body .btn-success {
-    background: #059669 !important;
-    border-color: #059669 !important;
+    background: #5D4037 !important;
+    border-color: #5D4037 !important;
 }
 
 .accordion-body .btn-success:hover {
-    background: #047857 !important;
+    background: #4E342E !important;
 }
 
 .accordion-body .btn-primary {

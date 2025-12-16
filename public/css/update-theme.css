@@ -14,7 +14,7 @@
     --update-text-dark: #3E2723;
     --update-text-muted: #757575;
     --update-accent: #8D6E63;
-    --update-success: #4CAF50;
+    --update-success: #5D4037;
     --update-warning: #FF9800;
     --update-danger: #F44336;
 }
@@ -250,7 +250,7 @@
 
 /* ===== Footer ===== */
 footer, .support-footer {
-    background: linear-gradient(135deg, #2A2A2A 0%, #1A1A1A 100%) !important;
+    background: linear-gradient(135deg, #5D4037 0%, #4E342E 100%) !important;
     border-top: 4px solid var(--update-brown-dark) !important;
 }
 

@@ -13,7 +13,7 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { 
             font-family: 'Cairo', sans-serif; 
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #5D4037 0%, #4E342E 100%);
             min-height: 100vh;
         }
         
@@ -24,7 +24,7 @@
             top: 0;
             width: 280px;
             height: 100vh;
-            background: linear-gradient(180deg, #2c3e50 0%, #34495e 100%);
+            background: linear-gradient(180deg, #5D4037 0%, #4E342E 100%);
             box-shadow: -4px 0 20px rgba(0,0,0,0.1);
             z-index: 1000;
             overflow-y: auto;
@@ -326,7 +326,7 @@
         }
         
         .stat-card.primary::before { background: #3498db; }
-        .stat-card.success::before { background: #27ae60; }
+        .stat-card.success::before { background: #5D4037; }
         .stat-card.warning::before { background: #f39c12; }
         .stat-card.danger::before { background: #e74c3c; }
         .stat-card.info::before { background: #9b59b6; }
@@ -356,7 +356,7 @@
         }
         
         .stat-card.primary .stat-icon { background: linear-gradient(135deg, #3498db 0%, #2980b9 100%); }
-        .stat-card.success .stat-icon { background: linear-gradient(135deg, #27ae60 0%, #229954 100%); }
+        .stat-card.success .stat-icon { background: linear-gradient(135deg, #5D4037 0%, #4E342E 100%); }
         .stat-card.warning .stat-icon { background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%); }
         .stat-card.danger .stat-icon { background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%); }
         .stat-card.info .stat-icon { background: linear-gradient(135deg, #9b59b6 0%, #8e44ad 100%); }
@@ -455,7 +455,7 @@
         }
         
         .modern-badge.primary { background: rgba(52, 152, 219, 0.15); color: #3498db; }
-        .modern-badge.success { background: rgba(39, 174, 96, 0.15); color: #27ae60; }
+        .modern-badge.success { background: rgba(93, 64, 55, 0.15); color: #5D4037; }
         .modern-badge.warning { background: rgba(243, 156, 18, 0.15); color: #f39c12; }
         .modern-badge.danger { background: rgba(231, 76, 60, 0.15); color: #e74c3c; }
         .modern-badge.info { background: rgba(155, 89, 182, 0.15); color: #9b59b6; }
@@ -584,6 +584,11 @@
             </a>
 
             <div class="nav-section-title">إعدادات</div>
+            
+            <a href="{{ route('admin.settings.promo-bar') }}" class="sidebar-nav-link {{ request()->routeIs('admin.settings.*') ? 'active' : '' }}">
+                <i class="bi bi-megaphone-fill"></i>
+                <span>الشريط الترويجي</span>
+            </a>
             
             <a href="{{ route('home') }}" class="sidebar-nav-link">
                 <i class="bi bi-house-door-fill"></i>

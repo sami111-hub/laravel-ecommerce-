@@ -66,9 +66,9 @@
     --gray-900: #212121;
 
     /* Status Colors - ألوان الحالة */
-    --success: #4CAF50;
-    --success-light: #81C784;
-    --success-dark: #388E3C;
+    --success: #5D4037;
+    --success-light: #8D6E63;
+    --success-dark: #4E342E;
     --warning: #FF9800;
     --warning-light: #FFB74D;
     --warning-dark: #F57C00;
@@ -437,9 +437,9 @@ body {
 }
 
 .badge-success-modern {
-    background: linear-gradient(135deg, #4CAF50, #388E3C);
+    background: linear-gradient(135deg, #5D4037, #4E342E);
     color: white;
-    box-shadow: 0 4px 15px rgba(76, 175, 80, 0.35);
+    box-shadow: 0 4px 15px rgba(93, 64, 55, 0.35);
 }
 
 .badge-warning-modern {

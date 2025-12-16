@@ -1,48 +1,29 @@
 {{-- شريط الترويجات المتحرك في أعلى الصفحة --}}
+@php
+    $promoText = \App\Models\SiteSetting::get('promo_bar_text', '🎉 عرض خاص اليوم! خصم 20% على جميع الهواتف | 📱 شحن مجاني للطلبات فوق 100$ | 🎁 هدية مع كل طلب');
+    $promoEnabled = \App\Models\SiteSetting::get('promo_bar_enabled', '1');
+@endphp
+
+@if($promoEnabled == '1')
 <div class="promo-bar">
     <div class="promo-bar-content">
         <div class="promo-text">
-            <span class="promo-item">
-                <i class="bi bi-gift-fill"></i>
-                عرض اليوم: شحن مجاني عند الشراء منتج أو أكثر! 
-            </span>
-            <span class="promo-separator">•</span>
-            <span class="promo-item">
-                <i class="bi bi-lightning-fill"></i>
-                خصومات تصل إلى 40% على الإلكترونيات الذكية
-            </span>
-            <span class="promo-separator">•</span>
-            <span class="promo-item">
-                <i class="bi bi-truck-fill"></i>
-                توصيل سريع خلال 24 ساعة
-            </span>
-            <span class="promo-separator">•</span>
-            <span class="promo-item">
-                <i class="bi bi-star-fill"></i>
-                عروض حصرية للعملاء الجدد - لا تفوت الفرصة!
-            </span>
+            @foreach(explode('|', $promoText) as $item)
+                <span class="promo-item">{{ trim($item) }}</span>
+                @if(!$loop->last)
+                    <span class="promo-separator">•</span>
+                @endif
+            @endforeach
         </div>
         {{-- تكرار النص للحركة المستمرة --}}
         <div class="promo-text" aria-hidden="true">
-            <span class="promo-item">
-                <i class="bi bi-gift-fill"></i>
-                عرض اليوم: شحن مجاني عند الشراء بقيمة 200 ريا أو أكثر! 
-            </span>
-            <span class="promo-separator">•</span>
-            <span class="promo-item">
-                <i class="bi bi-lightning-fill"></i>
-                خصومات تصل إلى 40% على الإلكترونيات الذكية
-            </span>
-            <span class="promo-separator">•</span>
-            <span class="promo-item">
-                <i class="bi bi-truck-fill"></i>
-                توصيل سريع خلال 24 ساعة
-            </span>
-            <span class="promo-separator">•</span>
-            <span class="promo-item">
-                <i class="bi bi-star-fill"></i>
-                عروض حصرية للعملاء الجدد - لا تفوت الفرصة!
-            </span>
+            @foreach(explode('|', $promoText) as $item)
+                <span class="promo-item">{{ trim($item) }}</span>
+                @if(!$loop->last)
+                    <span class="promo-separator">•</span>
+                @endif
+            @endforeach
         </div>
     </div>
 </div>
+@endif

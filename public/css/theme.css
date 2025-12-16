@@ -10,12 +10,12 @@
     --primary-800: #3E2723;
     --secondary-color: #fff8f3;
     --surface: #ffffff;
-    --text-dark: #1A1A1A;
-    --text-muted: #757575;
+    --text-dark: #3E2723;
+    --text-muted: #8D6E63;
     --accent-color: #8D6E63;
     --warning-color: #FF9800;
-    --success-color: #4CAF50;
-    --danger-color: #F44336;
+    --success-color: #5D4037;
+    --danger-color: #D84315;
     --hover-color: #4E342E;
     --radius-sm: 8px;
     --radius-md: 12px;
@@ -27,8 +27,8 @@
     --shadow-primary: 0 10px 40px rgba(93,64,55,0.25);
     --shadow-brown: 0 4px 15px rgba(93, 64, 55, 0.25);
     --shadow-brown-lg: 0 10px 30px rgba(93, 64, 55, 0.3);
-    --shadow-success: 0 4px 15px rgba(76, 175, 80, 0.25);
-    --shadow-danger: 0 4px 15px rgba(244, 67, 54, 0.25);
+    --shadow-success: 0 4px 15px rgba(93, 64, 55, 0.25);
+    --shadow-danger: 0 4px 15px rgba(216, 67, 21, 0.25);
     --ring: 0 0 0 4px rgba(93, 64, 55, 0.2);
 }
 
@@ -107,7 +107,7 @@ img {
 .topbar {
     font-size: 13px;
     font-weight: 500;
-    background: linear-gradient(135deg, #1A1A1A 0%, #2A2A2A 100%);
+    background: linear-gradient(135deg, #5D4037 0%, #4E342E 100%);
     color: white;
 }
 .topbar a {
@@ -415,7 +415,7 @@ img {
     justify-content: center; 
     gap: 8px; 
     width: 100%;
-    background: linear-gradient(135deg, #4CAF50 0%, #388E3C 100%);
+    background: linear-gradient(135deg, #5D4037 0%, #4E342E 100%);
     color: #fff; 
     border: none; 
     padding: 12px 14px; 
@@ -424,12 +424,12 @@ img {
     text-decoration: none; 
     font-weight: 700;
     font-size: 14px;
-    box-shadow: 0 4px 15px rgba(76,175,80,.25);
+    box-shadow: 0 4px 15px rgba(93,64,55,.25);
 }
 
 .btn-add-cart:hover { 
-    background: linear-gradient(135deg, #388E3C 0%, #2E7D32 100%);
-    box-shadow: 0 6px 20px rgba(76,175,80,.35); 
+    background: linear-gradient(135deg, #4E342E 0%, #3E2723 100%);
+    box-shadow: 0 6px 20px rgba(93,64,55,.35); 
     color: #fff;
     transform: translateY(-2px);
     transition-duration: 0.2s;
@@ -444,7 +444,7 @@ img {
 }
 
 .btn-add-cart:focus-visible {
-    outline: 3px solid #4CAF50;
+    outline: 3px solid #5D4037;
     outline-offset: 2px;
 }
 
@@ -514,15 +514,15 @@ img {
 
 /* Footer */
 footer { 
-    background: linear-gradient(135deg, #1A1A1A 0%, #2A2A2A 100%);
+    background: linear-gradient(135deg, #5D4037 0%, #4E342E 100%);
     color: white;
-    border-top: 4px solid #5D4037;
+    border-top: 4px solid #8D6E63;
 }
 
 /* Support footer styles */
 .support-footer { 
-    background: linear-gradient(135deg, #1A1A1A 0%, #2A2A2A 100%);
-    border-top: 4px solid #5D4037;
+    background: linear-gradient(135deg, #5D4037 0%, #4E342E 100%);
+    border-top: 4px solid #8D6E63;
     margin-top: auto;
     position: relative;
     color: white;
@@ -792,10 +792,10 @@ html { scroll-behavior: smooth; }
 
 /* Alert Messages */
 .alert-success {
-    background: linear-gradient(135deg, rgba(76,175,80,.1) 0%, rgba(56,142,60,.1) 100%);
-    border: 2px solid #4CAF50;
+    background: linear-gradient(135deg, rgba(93,64,55,.1) 0%, rgba(78,52,46,.1) 100%);
+    border: 2px solid #5D4037;
     border-radius: var(--radius-md);
-    color: #2E7D32;
+    color: #3E2723;
     font-weight: 600;
 }
 
@@ -968,4 +968,45 @@ html { scroll-behavior: smooth; }
     body {
         background: white;
     }
+}
+
+/* ===== تحويل جميع الأزرار والعناصر الخضراء إلى بني ===== */
+.btn-success,
+button.btn-success,
+a.btn-success {
+    background: linear-gradient(135deg, #5D4037 0%, #4E342E 100%) !important;
+    border-color: #5D4037 !important;
+    color: white !important;
+}
+
+.btn-success:hover,
+button.btn-success:hover,
+a.btn-success:hover {
+    background: linear-gradient(135deg, #4E342E 0%, #3E2723 100%) !important;
+    border-color: #4E342E !important;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(93, 64, 55, 0.4) !important;
+}
+
+.bg-success {
+    background-color: #5D4037 !important;
+}
+
+.text-success {
+    color: #5D4037 !important;
+}
+
+.badge.bg-success {
+    background: linear-gradient(135deg, #5D4037 0%, #4E342E 100%) !important;
+    color: white !important;
+}
+
+.border-success {
+    border-color: #5D4037 !important;
+}
+
+.alert-success {
+    background-color: #f5ebe8 !important;
+    border-color: #8D6E63 !important;
+    color: #3E2723 !important;
 }

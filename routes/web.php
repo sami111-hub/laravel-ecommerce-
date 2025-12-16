@@ -15,6 +15,7 @@ use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use App\Http\Controllers\Admin\OrderController as AdminOrderController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\OfferController as AdminOfferController;
+use App\Http\Controllers\Admin\SiteSettingsController;
 use App\Http\Controllers\OfferController;
 use App\Http\Controllers\Auth\GoogleController;
 use App\Http\Controllers\CouponController;
@@ -221,5 +222,13 @@ Route::prefix('admin')->middleware(['auth'])->name('admin.')->group(function () 
         Route::get('permissions/{permission}/edit', [PermissionController::class, 'edit'])->name('permissions.edit');
         Route::put('permissions/{permission}', [PermissionController::class, 'update'])->name('permissions.update');
         Route::delete('permissions/{permission}', [PermissionController::class, 'destroy'])->name('permissions.destroy');
+    });
+    
+    // Site Settings - إعدادات الموقع (للمدير العام فقط)
+    Route::middleware(['permission:view-permissions'])->group(function () {
+        Route::get('settings/promo-bar', [SiteSettingsController::class, 'promoBar'])->name('settings.promo-bar');
+        Route::put('settings/promo-bar', [SiteSettingsController::class, 'updatePromoBar'])->name('settings.promo-bar.update');
+        Route::get('settings', [SiteSettingsController::class, 'index'])->name('settings.index');
+        Route::put('settings', [SiteSettingsController::class, 'update'])->name('settings.update');
     });
 });

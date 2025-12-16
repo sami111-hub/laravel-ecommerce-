@@ -37,7 +37,7 @@
 .whatsapp-float .tooltip-text {
     position: absolute;
     right: 70px;
-    background: #1f2937;
+    background: #5D4037;
     color: white;
     padding: 8px 16px;
     border-radius: 8px;
@@ -93,7 +93,7 @@
 
 .stock-progress-bar {
     height: 100%;
-    background: linear-gradient(90deg, #ef4444, #f59e0b, #10b981);
+    background: linear-gradient(90deg, #5D4037, #8D6E63, #6D4C41);
     border-radius: 10px;
     transition: width 0.5s ease;
     position: relative;
@@ -125,7 +125,7 @@
 }
 
 .countdown-item {
-    background: linear-gradient(135deg, #1f2937, #374151);
+    background: linear-gradient(135deg, #5D4037, #4E342E);
     color: white;
     padding: 12px;
     border-radius: 12px;
@@ -169,7 +169,7 @@
     bottom: 0;
     left: 0;
     right: 0;
-    background: linear-gradient(135deg, #1f2937, #374151);
+    background: linear-gradient(135deg, #5D4037, #4E342E);
     color: white;
     padding: 15px 20px;
     box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.3);

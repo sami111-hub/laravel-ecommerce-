@@ -36,11 +36,11 @@
 
 /* Toast Types */
 .toast-success {
-    border-right-color: #27ae60;
+    border-right-color: #5D4037;
 }
 
 .toast-success .toast-icon {
-    color: #27ae60;
+    color: #5D4037;
 }
 
 .toast-error {
