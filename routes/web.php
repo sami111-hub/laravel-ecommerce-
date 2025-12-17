@@ -28,11 +28,11 @@ Route::get('/auth', function () {
     return view('auth');
 });
 
-// Home - Hybrid Design (Bazzarry + Smart)
+// Home - Jarir Style Design
 Route::get('/', function () {
     $categories = \App\Models\Category::all();
     $featuredProducts = \App\Models\Product::inRandomOrder()->take(8)->get();
-    return view('home-hybrid', compact('categories', 'featuredProducts'));
+    return view('home-jarir', compact('categories', 'featuredProducts'));
 })->name('home');
 
 // Authentication Routes
