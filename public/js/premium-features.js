@@ -7,7 +7,8 @@
 document.addEventListener('DOMContentLoaded', function() {
     initScrollProgress();
     initWhatsAppButton();
-    initSocialProof();
+    // تم تعطيل إشعارات الشراء الحية
+    // initSocialProof();
     initCountdownTimers();
     initProductComparison();
     initRecentlyViewed();
@@ -44,60 +45,8 @@ function initWhatsAppButton() {
     document.body.appendChild(whatsappBtn);
 }
 
-// ===== إشعارات الشراء الحية =====
-let socialProofTimer;
-const purchaseNames = ['أحمد', 'محمد', 'سارة', 'فاطمة', 'علي', 'نور', 'ياسر', 'مريم'];
-const purchaseProducts = [
-    'هاتف Samsung Galaxy',
-    'سماعات لاسلكية',
-    'ساعة ذكية',
-    'حقيبة ظهر',
-    'كاميرا رقمية',
-    'لابتوب Dell',
-    'ماوس لاسلكي',
-    'شاحن سريع'
-];
-
-function initSocialProof() {
-    showRandomPurchase();
-    // عرض إشعار كل 15 ثانية
-    socialProofTimer = setInterval(showRandomPurchase, 15000);
-}
-
-function showRandomPurchase() {
-    // إزالة الإشعار السابق إن وجد
-    const existingProof = document.querySelector('.social-proof');
-    if (existingProof) {
-        existingProof.remove();
-    }
-
-    const name = purchaseNames[Math.floor(Math.random() * purchaseNames.length)];
-    const product = purchaseProducts[Math.floor(Math.random() * purchaseProducts.length)];
-    const minutes = Math.floor(Math.random() * 30) + 1;
-
-    const proofDiv = document.createElement('div');
-    proofDiv.className = 'social-proof';
-    proofDiv.style.display = 'flex';
-    proofDiv.style.alignItems = 'center';
-    proofDiv.innerHTML = `
-        <div class="social-proof-avatar">
-            ${name.charAt(0)}
-        </div>
-        <div class="social-proof-text">
-            <div class="social-proof-name">${name}</div>
-            <div class="social-proof-action">اشترى ${product}</div>
-            <div class="social-proof-time">منذ ${minutes} دقيقة</div>
-        </div>
-    `;
-    document.body.appendChild(proofDiv);
-
-    // إزالة بعد 5 ثوان
-    setTimeout(() => {
-        if (proofDiv.parentNode) {
-            proofDiv.remove();
-        }
-    }, 5000);
-}
+// ===== إشعارات الشراء الحية - معطلة =====
+// تم تعطيل هذه الميزة بناءً على طلب المستخدم
 
 // ===== عداد تنازلي للعروض =====
 function initCountdownTimers() {
