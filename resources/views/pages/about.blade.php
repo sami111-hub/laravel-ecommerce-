@@ -52,8 +52,8 @@
                         <div class="col-md-6">
                             <div class="position-relative">
                                 <div class="ratio ratio-1x1 rounded-4 overflow-hidden shadow">
-                                    <img src="https://images.unsplash.com/photo-1531346878377-a5be20888e57?w=600&h=600&fit=crop" 
-                                         alt="Update Aden Store" 
+                                    <img src="https://images.unsplash.com/photo-1601524909162-ae8725290836?w=600&h=600&fit=crop&q=80" 
+                                         alt="Update Aden - متجر إلكترونيات وتقنية عدن" 
                                          class="object-fit-cover">
                                 </div>
                                 <div class="position-absolute top-0 end-0 m-3 bg-white rounded-3 shadow p-3">
@@ -85,8 +85,11 @@
                     <div class="card h-100 border-0 shadow-sm hover-lift">
                         <div class="card-body text-center p-4">
                             <div class="mb-3">
-                                <div class="bg-primary bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center" style="width: 80px; height: 80px;">
-                                    <i class="bi bi-shield-check text-primary" style="font-size: 2.5rem;"></i>
+                                <div class="rounded-3 overflow-hidden shadow-sm mb-2">
+                                    <img src="https://images.unsplash.com/photo-1556656793-08538906a9f8?w=400&h=250&fit=crop&q=80" 
+                                         alt="منتجات أصلية معتمدة" 
+                                         class="img-fluid" 
+                                         style="height: 180px; object-fit: cover; width: 100%;">
                                 </div>
                             </div>
                             <h4 class="fw-bold mb-3">الجودة والأصالة</h4>
@@ -98,8 +101,11 @@
                     <div class="card h-100 border-0 shadow-sm hover-lift">
                         <div class="card-body text-center p-4">
                             <div class="mb-3">
-                                <div class="bg-success bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center" style="width: 80px; height: 80px;">
-                                    <i class="bi bi-cash-coin text-success" style="font-size: 2.5rem;"></i>
+                                <div class="rounded-3 overflow-hidden shadow-sm mb-2">
+                                    <img src="https://images.unsplash.com/photo-1607082350899-7e105aa886ae?w=400&h=250&fit=crop&q=80" 
+                                         alt="أسعار تنافسية وعروض مميزة" 
+                                         class="img-fluid" 
+                                         style="height: 180px; object-fit: cover; width: 100%;">
                                 </div>
                             </div>
                             <h4 class="fw-bold mb-3">أسعار تنافسية</h4>
@@ -111,8 +117,11 @@
                     <div class="card h-100 border-0 shadow-sm hover-lift">
                         <div class="card-body text-center p-4">
                             <div class="mb-3">
-                                <div class="bg-info bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center" style="width: 80px; height: 80px;">
-                                    <i class="bi bi-headset text-info" style="font-size: 2.5rem;"></i>
+                                <div class="rounded-3 overflow-hidden shadow-sm mb-2">
+                                    <img src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=400&h=250&fit=crop&q=80" 
+                                         alt="دعم فني 24/7" 
+                                         class="img-fluid" 
+                                         style="height: 180px; object-fit: cover; width: 100%;">
                                 </div>
                             </div>
                             <h4 class="fw-bold mb-3">دعم فني ممتاز</h4>
@@ -131,10 +140,16 @@
                 <div class="card-body p-5">
                     <div class="row">
                         <div class="col-md-6 mb-4">
+                            <div class="mb-4 rounded-3 overflow-hidden shadow">
+                                <img src="https://images.unsplash.com/photo-1580910051074-3eb694886505?w=800&h=400&fit=crop&q=80" 
+                                     alt="مجموعة منتجاتنا التقنية" 
+                                     class="img-fluid" 
+                                     style="width: 100%; height: 250px; object-fit: cover;">
+                            </div>
                             <h3 class="fw-bold mb-4">
                                 <i class="bi bi-box-seam text-primary"></i> منتجاتنا
                             </h3>
-                            <p class="text-muted mb-4">نوفر مجموعة واسعة من أحدث المنتجات التقنية:</p>
+                            <p class="text-muted mb-4">نوفر مجموعة واسعة من أحدث المنتجات التقنية:</p></p>
                             <div class="row g-3">
                                 <div class="col-6">
                                     <div class="d-flex align-items-center gap-2">
@@ -175,6 +190,12 @@
                             </div>
                         </div>
                         <div class="col-md-6">
+                            <div class="mb-4 rounded-3 overflow-hidden shadow">
+                                <img src="https://images.unsplash.com/photo-1607252650355-f7fd0460ccdb?w=800&h=400&fit=crop&q=80" 
+                                     alt="أشهر العلامات التجارية العالمية" 
+                                     class="img-fluid" 
+                                     style="width: 100%; height: 250px; object-fit: cover;">
+                            </div>
                             <h3 class="fw-bold mb-4">
                                 <i class="bi bi-trophy text-warning"></i> العلامات التجارية
                             </h3>
@@ -203,36 +224,38 @@
     <!-- Why Choose Us -->
     <div class="row justify-content-center mb-5">
         <div class="col-lg-10">
-            <div class="card bg-gradient-primary text-white border-0 shadow-lg">
-                <div class="card-body p-5">
-                    <h2 class="fw-bold text-center mb-5">لماذا تختار Update Aden؟</h2>
-                    <div class="row g-4">
-                        <div class="col-md-3 col-6">
-                            <div class="text-center">
-                                <i class="bi bi-truck fs-1 mb-3"></i>
-                                <h5 class="fw-bold">التوصيل إلى جميع أنحاء عدن</h5>
-                                <p class="mb-0 opacity-75 small">داخل عدن خلال 24 ساعة</p>
+            <div class="card border-0 shadow-lg overflow-hidden" style="position: relative;">
+                <div class="position-relative" style="background: linear-gradient(135deg, rgba(43, 182, 115, 0.95) 0%, rgba(30, 160, 94, 0.95) 100%), url('https://images.unsplash.com/photo-1556656793-08538906a9f8?w=1200&h=600&fit=crop&q=80'); background-size: cover; background-position: center;">
+                    <div class="card-body p-5 text-white">
+                        <h2 class="fw-bold text-center mb-5">لماذا تختار Update Aden؟</h2>
+                        <div class="row g-4">
+                            <div class="col-md-3 col-6">
+                                <div class="text-center">
+                                    <i class="bi bi-truck fs-1 mb-3"></i>
+                                    <h5 class="fw-bold">التوصيل إلى جميع أنحاء عدن</h5>
+                                    <p class="mb-0 opacity-75 small">داخل عدن خلال 24 ساعة</p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-3 col-6">
-                            <div class="text-center">
-                                <i class="bi bi-shield-check fs-1 mb-3"></i>
-                                <h5 class="fw-bold">ضمان شامل</h5>
-                                <p class="mb-0 opacity-75 small">على جميع المنتجات</p>
+                            <div class="col-md-3 col-6">
+                                <div class="text-center">
+                                    <i class="bi bi-shield-check fs-1 mb-3"></i>
+                                    <h5 class="fw-bold">ضمان شامل</h5>
+                                    <p class="mb-0 opacity-75 small">على جميع المنتجات</p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-3 col-6">
-                            <div class="text-center">
-                                <i class="bi bi-arrow-left-right fs-1 mb-3"></i>
-                                <h5 class="fw-bold">استرجاع سهل</h5>
-                                <p class="mb-0 opacity-75 small">خلال 7 أيام</p>
+                            <div class="col-md-3 col-6">
+                                <div class="text-center">
+                                    <i class="bi bi-arrow-left-right fs-1 mb-3"></i>
+                                    <h5 class="fw-bold">استرجاع سهل</h5>
+                                    <p class="mb-0 opacity-75 small">خلال 7 أيام</p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-3 col-6">
-                            <div class="text-center">
-                                <i class="bi bi-cash-coin fs-1 mb-3"></i>
-                                <h5 class="fw-bold">دفع آمن</h5>
-                                <p class="mb-0 opacity-75 small">طرق دفع متعددة</p>
+                            <div class="col-md-3 col-6">
+                                <div class="text-center">
+                                    <i class="bi bi-cash-coin fs-1 mb-3"></i>
+                                    <h5 class="fw-bold">دفع آمن</h5>
+                                    <p class="mb-0 opacity-75 small">طرق دفع متعددة</p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -275,6 +298,12 @@
                             </p>
                         </div>
                         <div class="col-md-6">
+                            <div class="rounded-3 overflow-hidden shadow mb-3">
+                                <img src="https://images.unsplash.com/photo-1423666639041-f56000c27a9a?w=600&h=400&fit=crop&q=80" 
+                                     alt="تواصل معنا في Update Aden" 
+                                     class="img-fluid" 
+                                     style="width: 100%; height: 300px; object-fit: cover;">
+                            </div>
                             <h3 class="fw-bold mb-4">
                                 <i class="bi bi-envelope-fill text-primary"></i> تواصل معنا
                             </h3>

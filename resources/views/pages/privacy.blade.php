@@ -7,6 +7,12 @@
 <div class="container my-5">
     <div class="row">
         <div class="col-lg-8 mx-auto">
+            <div class="mb-4 rounded-4 overflow-hidden shadow-lg">
+                <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=1200&h=400&fit=crop&q=80" 
+                     alt="سياسة الخصوصية - Update Aden" 
+                     class="img-fluid" 
+                     style="width: 100%; height: 300px; object-fit: cover;">
+            </div>
             <div class="bg-white rounded-3 shadow-sm p-4 p-md-5">
                 <h1 class="display-6 fw-bold mb-4">سياسة الخصوصية</h1>
                 <p class="text-muted mb-4">آخر تحديث: {{ now()->format('Y-m-d') }}</p>

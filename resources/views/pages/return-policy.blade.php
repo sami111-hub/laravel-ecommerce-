@@ -9,6 +9,12 @@
         <div class="col-lg-10">
             <!-- Header -->
             <div class="text-center mb-5">
+                <div class="mb-4 rounded-4 overflow-hidden shadow-lg" style="max-width: 800px; margin: 0 auto;">
+                    <img src="https://images.unsplash.com/photo-1605236453806-6ff36851218e?w=1200&h=400&fit=crop&q=80" 
+                         alt="سياسة الإرجاع والاستبدال - Update Aden" 
+                         class="img-fluid" 
+                         style="width: 100%; height: 250px; object-fit: cover;">
+                </div>
                 <h1 class="display-5 fw-bold text-primary mb-3">
                     <i class="bi bi-arrow-left-right"></i> سياسة الإرجاع والاسترجاع
                 </h1>

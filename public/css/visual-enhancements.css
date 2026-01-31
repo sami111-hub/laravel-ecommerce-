@@ -518,6 +518,40 @@
     z-index: -1;
 }
 
+/* ===== Category Image Enhancements ===== */
+.category-image-wrapper {
+    overflow: hidden;
+    border-radius: 8px;
+    position: relative;
+}
+
+.category-image {
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    filter: brightness(1) saturate(1);
+}
+
+.category-card:hover .category-image {
+    transform: scale(1.1);
+    filter: brightness(1.1) saturate(1.2);
+}
+
+.category-image-wrapper::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(93, 64, 55, 0.1) 0%, transparent 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.category-card:hover .category-image-wrapper::after {
+    opacity: 1;
+}
+
 
 
 

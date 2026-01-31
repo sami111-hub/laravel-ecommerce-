@@ -12,7 +12,7 @@ class SitemapController extends Controller
     {
         // جلب جميع المنتجات النشطة
         $products = Product::where('is_active', true)
-            ->where('quantity', '>', 0)
+            ->where('stock', '>', 0)
             ->select('id', 'slug', 'name', 'image', 'updated_at')
             ->get();
 

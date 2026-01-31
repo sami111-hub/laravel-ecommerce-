@@ -15,8 +15,8 @@
             <div class="row g-4 mb-5">
                 <!-- واتساب -->
                 <div class="col-md-6">
-                    <div class="contact-method-card p-4 border rounded-3 h-100 text-center">
-                        <div class="icon-circle bg-success bg-opacity-10 rounded-circle mx-auto mb-3 d-flex align-items-center justify-content-center" style="width: 80px; height: 80px;">
+                    <div class="contact-method-card p-4 border rounded-3 h-100 text-center position-relative overflow-hidden" style="background: linear-gradient(rgba(37, 211, 102, 0.1), rgba(37, 211, 102, 0.05)), url('https://images.unsplash.com/photo-1611746872915-64382b5c76da?w=600&h=400&fit=crop&q=80'); background-size: cover; background-position: center;">
+                        <div class="icon-circle bg-success bg-opacity-10 rounded-circle mx-auto mb-3 d-flex align-items-center justify-content-center shadow" style="width: 80px; height: 80px; background-color: white !important;">
                             <i class="bi bi-whatsapp fs-1 text-success"></i>
                         </div>
                         <h4 class="fw-bold mb-2">واتساب</h4>
@@ -36,8 +36,8 @@
 
                 <!-- الهاتف -->
                 <div class="col-md-6">
-                    <div class="contact-method-card p-4 border rounded-3 h-100 text-center">
-                        <div class="icon-circle bg-primary bg-opacity-10 rounded-circle mx-auto mb-3 d-flex align-items-center justify-content-center" style="width: 80px; height: 80px;">
+                    <div class="contact-method-card p-4 border rounded-3 h-100 text-center position-relative overflow-hidden" style="background: linear-gradient(rgba(13, 110, 253, 0.1), rgba(13, 110, 253, 0.05)), url('https://images.unsplash.com/photo-1556656793-08538906a9f8?w=600&h=400&fit=crop&q=80'); background-size: cover; background-position: center;">
+                        <div class="icon-circle bg-primary bg-opacity-10 rounded-circle mx-auto mb-3 d-flex align-items-center justify-content-center shadow" style="width: 80px; height: 80px; background-color: white !important;">
                             <i class="bi bi-telephone fs-1 text-primary"></i>
                         </div>
                         <h4 class="fw-bold mb-2">الهاتف</h4>
@@ -50,8 +50,8 @@
 
                 <!-- البريد الإلكتروني -->
                 <div class="col-md-6">
-                    <div class="contact-method-card p-4 border rounded-3 h-100 text-center">
-                        <div class="icon-circle bg-danger bg-opacity-10 rounded-circle mx-auto mb-3 d-flex align-items-center justify-content-center" style="width: 80px; height: 80px;">
+                    <div class="contact-method-card p-4 border rounded-3 h-100 text-center position-relative overflow-hidden" style="background: linear-gradient(rgba(220, 53, 69, 0.1), rgba(220, 53, 69, 0.05)), url('https://images.unsplash.com/photo-1579275542618-a1dfed5f54ba?w=600&h=400&fit=crop&q=80'); background-size: cover; background-position: center;">
+                        <div class="icon-circle bg-danger bg-opacity-10 rounded-circle mx-auto mb-3 d-flex align-items-center justify-content-center shadow" style="width: 80px; height: 80px; background-color: white !important;">
                             <i class="bi bi-envelope fs-1 text-danger"></i>
                         </div>
                         <h4 class="fw-bold mb-2">البريد الإلكتروني</h4>
@@ -64,8 +64,8 @@
 
                 <!-- العنوان -->
                 <div class="col-md-6">
-                    <div class="contact-method-card p-4 border rounded-3 h-100 text-center">
-                        <div class="icon-circle bg-warning bg-opacity-10 rounded-circle mx-auto mb-3 d-flex align-items-center justify-content-center" style="width: 80px; height: 80px;">
+                    <div class="contact-method-card p-4 border rounded-3 h-100 text-center position-relative overflow-hidden" style="background: linear-gradient(rgba(255, 193, 7, 0.1), rgba(255, 193, 7, 0.05)), url('https://images.unsplash.com/photo-1518133835878-5a93cc3f89e5?w=600&h=400&fit=crop&q=80'); background-size: cover; background-position: center;">
+                        <div class="icon-circle bg-warning bg-opacity-10 rounded-circle mx-auto mb-3 d-flex align-items-center justify-content-center shadow" style="width: 80px; height: 80px; background-color: white !important;">
                             <i class="bi bi-geo-alt fs-1 text-warning"></i>
                         </div>
                         <h4 class="fw-bold mb-2">العنوان</h4>

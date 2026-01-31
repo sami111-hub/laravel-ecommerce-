@@ -1,0 +1,245 @@
+{
+    "date": "2026-01-31 19:12:11",
+    "passed": 58,
+    "failed": 1,
+    "percentage": 98.3,
+    "results": [
+        {
+            "name": "الاتصال بقاعدة البيانات",
+            "status": "passed"
+        },
+        {
+            "name": "جدول users موجود",
+            "status": "passed"
+        },
+        {
+            "name": "جدول products موجود",
+            "status": "passed"
+        },
+        {
+            "name": "جدول categories موجود",
+            "status": "passed"
+        },
+        {
+            "name": "جدول brands موجود",
+            "status": "passed"
+        },
+        {
+            "name": "جدول orders موجود",
+            "status": "passed"
+        },
+        {
+            "name": "جدول order_items موجود",
+            "status": "passed"
+        },
+        {
+            "name": "جدول carts موجود",
+            "status": "passed"
+        },
+        {
+            "name": "جدول wishlists موجود",
+            "status": "passed"
+        },
+        {
+            "name": "جدول reviews موجود",
+            "status": "passed"
+        },
+        {
+            "name": "جدول coupons موجود",
+            "status": "passed"
+        },
+        {
+            "name": "جدول roles موجود",
+            "status": "passed"
+        },
+        {
+            "name": "جدول permissions موجود",
+            "status": "passed"
+        },
+        {
+            "name": "جدول offers موجود",
+            "status": "passed"
+        },
+        {
+            "name": "جدول site_settings موجود",
+            "status": "passed"
+        },
+        {
+            "name": "جدول addresses موجود",
+            "status": "passed"
+        },
+        {
+            "name": "موديل User يعمل",
+            "status": "passed"
+        },
+        {
+            "name": "موديل Product يعمل",
+            "status": "passed"
+        },
+        {
+            "name": "موديل Category يعمل",
+            "status": "passed"
+        },
+        {
+            "name": "موديل Brand يعمل",
+            "status": "passed"
+        },
+        {
+            "name": "موديل Order يعمل",
+            "status": "passed"
+        },
+        {
+            "name": "موديل Role يعمل",
+            "status": "passed"
+        },
+        {
+            "name": "موديل Permission يعمل",
+            "status": "passed"
+        },
+        {
+            "name": "يوجد مستخدمين في قاعدة البيانات",
+            "status": "passed"
+        },
+        {
+            "name": "يوجد منتجات في قاعدة البيانات",
+            "status": "passed"
+        },
+        {
+            "name": "يوجد تصنيفات في قاعدة البيانات",
+            "status": "passed"
+        },
+        {
+            "name": "يوجد علامات تجارية في قاعدة البيانات",
+            "status": "passed"
+        },
+        {
+            "name": "علاقة Product -> Brand تعمل",
+            "status": "passed"
+        },
+        {
+            "name": "علاقة Product -> Categories تعمل",
+            "status": "passed"
+        },
+        {
+            "name": "علاقة Order -> User تعمل",
+            "status": "passed"
+        },
+        {
+            "name": "علاقة Order -> Items تعمل",
+            "status": "passed"
+        },
+        {
+            "name": "علاقة User -> Role تعمل",
+            "status": "passed"
+        },
+        {
+            "name": "علاقة Role -> Permissions تعمل",
+            "status": "passed"
+        },
+        {
+            "name": "يوجد أدوار في النظام",
+            "status": "passed"
+        },
+        {
+            "name": "يوجد صلاحيات في النظام",
+            "status": "passed"
+        },
+        {
+            "name": "يوجد مستخدم مدير (Super Admin)",
+            "status": "passed"
+        },
+        {
+            "name": "المنتجات لها أسعار صحيحة",
+            "status": "passed"
+        },
+        {
+            "name": "المنتجات النشطة موجودة",
+            "status": "failed",
+            "error": "SQLSTATE[42S22]: Column not found: 1054 Unknown column 'is_active' in 'where clause' (Connection: mysql, SQL: select count(*) as aggregate from `products` where `is_active` = 1)"
+        },
+        {
+            "name": "التصنيفات النشطة موجودة",
+            "status": "passed"
+        },
+        {
+            "name": "APP_KEY معرف",
+            "status": "passed"
+        },
+        {
+            "name": "قاعدة البيانات معرفة",
+            "status": "passed"
+        },
+        {
+            "name": "APP_URL معرف",
+            "status": "passed"
+        },
+        {
+            "name": "المسار home معرف",
+            "status": "passed"
+        },
+        {
+            "name": "المسار products.index معرف",
+            "status": "passed"
+        },
+        {
+            "name": "المسار login معرف",
+            "status": "passed"
+        },
+        {
+            "name": "المسار register معرف",
+            "status": "passed"
+        },
+        {
+            "name": "المسار offers معرف",
+            "status": "passed"
+        },
+        {
+            "name": "المسار categories.index معرف",
+            "status": "passed"
+        },
+        {
+            "name": "المسار faq معرف",
+            "status": "passed"
+        },
+        {
+            "name": "المسار about معرف",
+            "status": "passed"
+        },
+        {
+            "name": "المسار contact معرف",
+            "status": "passed"
+        },
+        {
+            "name": "واجهة home-jarir موجودة",
+            "status": "passed"
+        },
+        {
+            "name": "واجهة auth.login موجودة",
+            "status": "passed"
+        },
+        {
+            "name": "واجهة auth.register موجودة",
+            "status": "passed"
+        },
+        {
+            "name": "واجهة products.index موجودة",
+            "status": "passed"
+        },
+        {
+            "name": "واجهة products.show موجودة",
+            "status": "passed"
+        },
+        {
+            "name": "واجهة cart.index موجودة",
+            "status": "passed"
+        },
+        {
+            "name": "واجهة pages.about موجودة",
+            "status": "passed"
+        },
+        {
+            "name": "واجهة pages.contact موجودة",
+            "status": "passed"
+        }
+    ]
+}

@@ -122,8 +122,18 @@
         <div class="col-lg-2 col-md-3 col-4 category-card">
             <a href="{{ route('products.category', $category) }}" class="text-decoration-none">
                 <div class="card text-center h-100 shadow-soft border-gradient">
-                    <div class="card-body py-2">
-                        <i class="bi bi-{{ $category->icon ?? 'shop' }}" style="font-size: 2rem; color: var(--primary-color);"></i>
+                    <div class="card-body py-3">
+                        @if($category->image)
+                            <div class="category-image-wrapper mb-2">
+                                <img src="{{ $category->image }}" 
+                                     alt="{{ $category->name }}" 
+                                     class="category-image rounded-3"
+                                     style="width: 100%; height: 80px; object-fit: cover;"
+                                     loading="lazy">
+                            </div>
+                        @else
+                            <i class="bi bi-{{ $category->icon ?? 'shop' }}" style="font-size: 2rem; color: var(--primary-color);"></i>
+                        @endif
                         <p class="mb-0 mt-1 small fw-bold">{{ $category->name }}</p>
                     </div>
                 </div>

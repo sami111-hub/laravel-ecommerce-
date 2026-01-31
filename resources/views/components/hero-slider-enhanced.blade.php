@@ -46,8 +46,10 @@
                     </div>
                     <div class="col-lg-6 hero-image">
                         <div class="hero-product-showcase">
-                            <div class="showcase-placeholder" style="width: 100%; height: 400px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.1); border-radius: 20px; backdrop-filter: blur(10px);">
-                                <i class="bi bi-laptop" style="font-size: 150px; color: rgba(255,255,255,0.9);"></i>
+                            <div class="showcase-image" style="width: 100%; height: 450px; display: flex; align-items: center; justify-content: center; border-radius: 20px; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.3);">
+                                <img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=800&h=600&fit=crop&q=80" 
+                                     alt="لابتوبات وأجهزة تقنية متطورة" 
+                                     style="width: 100%; height: 100%; object-fit: cover;">
                             </div>
                             <div class="floating-badge badge-1">
                                 <div class="badge-content">
@@ -106,8 +108,10 @@
                     </div>
                     <div class="col-lg-6 hero-image">
                         <div class="hero-product-showcase">
-                            <div class="showcase-placeholder" style="width: 100%; height: 400px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.1); border-radius: 20px; backdrop-filter: blur(10px);">
-                                <i class="bi bi-phone" style="font-size: 150px; color: rgba(255,255,255,0.9);"></i>
+                            <div class="showcase-image" style="width: 100%; height: 450px; display: flex; align-items: center; justify-content: center; border-radius: 20px; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.3);">
+                                <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=800&h=600&fit=crop&q=80" 
+                                     alt="أحدث الهواتف الذكية 2025" 
+                                     style="width: 100%; height: 100%; object-fit: cover;">
                             </div>
                             <div class="floating-badge badge-2">
                                 <div class="badge-content">
@@ -167,8 +171,10 @@
                     </div>
                     <div class="col-lg-6 hero-image">
                         <div class="hero-product-showcase">
-                            <div class="showcase-placeholder" style="width: 100%; height: 400px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.1); border-radius: 20px; backdrop-filter: blur(10px);">
-                                <i class="bi bi-laptop" style="font-size: 150px; color: rgba(255,255,255,0.9);"></i>
+                            <div class="showcase-image" style="width: 100%; height: 450px; display: flex; align-items: center; justify-content: center; border-radius: 20px; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.3);">
+                                <img src="https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=800&h=600&fit=crop&q=80" 
+                                     alt="لابتوبات احترافية عالية الأداء" 
+                                     style="width: 100%; height: 100%; object-fit: cover;">
                             </div>
                             <div class="floating-badge badge-3">
                                 <div class="badge-content">

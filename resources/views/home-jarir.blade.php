@@ -66,7 +66,7 @@
                                         <a href="{{ route('products.index', ['category' => 'smartphones']) }}" class="slide-btn">تسوق الآن</a>
                                     </div>
                                     <div class="slide-image">
-                                        <img src="https://images.pexels.com/photos/788946/pexels-photo-788946.jpeg?auto=compress&cs=tinysrgb&w=400" alt="هواتف ذكية">
+                                        <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400&h=350&fit=crop&q=80" alt="هواتف ذكية">
                                     </div>
                                 </div>
                             </div>
@@ -79,7 +79,7 @@
                                         <a href="{{ route('products.index', ['category' => 'laptops']) }}" class="slide-btn">اكتشف المزيد</a>
                                     </div>
                                     <div class="slide-image">
-                                        <img src="https://images.pexels.com/photos/18105/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=400" alt="لابتوبات">
+                                        <img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=400&h=350&fit=crop&q=80" alt="لابتوبات">
                                     </div>
                                 </div>
                             </div>
@@ -92,7 +92,7 @@
                                         <a href="{{ route('products.index', ['category' => 'watches']) }}" class="slide-btn">تسوق الآن</a>
                                     </div>
                                     <div class="slide-image">
-                                        <img src="https://images.pexels.com/photos/437037/pexels-photo-437037.jpeg?auto=compress&cs=tinysrgb&w=400" alt="ساعات ذكية">
+                                        <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&h=350&fit=crop&q=80" alt="ساعات ذكية">
                                     </div>
                                 </div>
                             </div>
@@ -200,7 +200,7 @@
                             @endif
                         </div>
                         <a href="{{ route('products.show', $product) }}" class="product-image-jarir">
-                            <img src="{{ $product->image ?? 'https://via.placeholder.com/200' }}" alt="{{ $product->name }}">
+                            <img src="{{ $product->image ?? 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=200&h=200&fit=crop&q=80' }}" alt="{{ $product->name }}">
                         </a>
                         <div class="product-info-jarir">
                             <a href="{{ route('products.show', $product) }}" class="product-name-jarir">
@@ -213,9 +213,9 @@
                                 <span>({{ rand(10, 200) }})</span>
                             </div>
                             <div class="product-price-jarir">
-                                <span class="current-price">{{ number_format($product->price) }} ر.ي</span>
+                                <span class="current-price">${{ number_format($product->price, 2) }}</span>
                                 @if($product->old_price)
-                                    <span class="old-price">{{ number_format($product->old_price) }} ر.ي</span>
+                                    <span class="old-price">${{ number_format($product->old_price, 2) }}</span>
                                 @endif
                             </div>
                             <button class="add-to-cart-jarir" onclick="addToCart({{ $product->id }})">
@@ -245,24 +245,42 @@
             
             <div class="categories-grid-jarir">
                 @php
-                    $categoryCards = [
-                        ['name' => 'الهواتف الذكية', 'icon' => 'phone', 'slug' => 'smartphones', 'bg' => '#fff5f5', 'color' => '#e74c3c', 'img' => 'https://images.pexels.com/photos/788946/pexels-photo-788946.jpeg?auto=compress&cs=tinysrgb&w=150'],
-                        ['name' => 'اللابتوبات', 'icon' => 'laptop', 'slug' => 'laptops', 'bg' => '#f0f7ff', 'color' => '#3498db', 'img' => 'https://images.pexels.com/photos/18105/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=150'],
-                        ['name' => 'الساعات الذكية', 'icon' => 'smartwatch', 'slug' => 'watches', 'bg' => '#fff8f0', 'color' => '#e67e22', 'img' => 'https://images.pexels.com/photos/437037/pexels-photo-437037.jpeg?auto=compress&cs=tinysrgb&w=150'],
-                        ['name' => 'السماعات', 'icon' => 'headphones', 'slug' => 'headphones', 'bg' => '#f0fff4', 'color' => '#27ae60', 'img' => 'https://images.pexels.com/photos/3587478/pexels-photo-3587478.jpeg?auto=compress&cs=tinysrgb&w=150'],
-                        ['name' => 'الأجهزة اللوحية', 'icon' => 'tablet', 'slug' => 'tablets', 'bg' => '#f5f0ff', 'color' => '#9b59b6', 'img' => 'https://images.pexels.com/photos/1334597/pexels-photo-1334597.jpeg?auto=compress&cs=tinysrgb&w=150'],
-                        ['name' => 'الإكسسوارات', 'icon' => 'box-seam', 'slug' => 'accessories', 'bg' => '#f0f0f0', 'color' => '#34495e', 'img' => 'https://images.pexels.com/photos/3394650/pexels-photo-3394650.jpeg?auto=compress&cs=tinysrgb&w=150'],
+                    $dbCategories = \App\Models\Category::whereNull('parent_id')
+                        ->where('is_active', true)
+                        ->withCount('products')
+                        ->orderBy('order')
+                        ->take(6)
+                        ->get();
+                    
+                    $categoryBgs = [
+                        'smartphones' => ['bg' => '#fff5f5', 'color' => '#e74c3c'],
+                        'laptops' => ['bg' => '#f0f7ff', 'color' => '#3498db'],
+                        'watches' => ['bg' => '#fff8f0', 'color' => '#e67e22'],
+                        'headphones' => ['bg' => '#f0fff4', 'color' => '#27ae60'],
+                        'tablets' => ['bg' => '#f5f0ff', 'color' => '#9b59b6'],
+                        'accessories' => ['bg' => '#f0f0f0', 'color' => '#34495e'],
+                        'printers' => ['bg' => '#fff0f5', 'color' => '#8e44ad'],
+                        'mobiles' => ['bg' => '#fffaf0', 'color' => '#d35400'],
                     ];
                 @endphp
                 
-                @foreach($categoryCards as $cat)
-                    <a href="{{ route('products.index', ['category' => $cat['slug']]) }}" class="category-card-jarir" style="background: {{ $cat['bg'] }}">
+                @foreach($dbCategories as $cat)
+                    @php
+                        $colors = $categoryBgs[$cat->slug] ?? ['bg' => '#f8f9fa', 'color' => '#6c757d'];
+                    @endphp
+                    <a href="{{ route('products.index', ['category' => $cat->slug]) }}" class="category-card-jarir" style="background: {{ $colors['bg'] }}">
                         <div class="cat-content">
-                            <h4 style="color: {{ $cat['color'] }}">{{ $cat['name'] }}</h4>
-                            <span class="cat-count">{{ \App\Models\Product::whereHas('categories', fn($q) => $q->where('slug', $cat['slug']))->count() }} منتج</span>
-                            <span class="cat-link" style="color: {{ $cat['color'] }}">تسوق الآن <i class="bi bi-arrow-left"></i></span>
+                            <h4 style="color: {{ $colors['color'] }}">{{ $cat->name }}</h4>
+                            <span class="cat-count">{{ $cat->products_count }} منتج</span>
+                            <span class="cat-link" style="color: {{ $colors['color'] }}">تسوق الآن <i class="bi bi-arrow-left"></i></span>
                         </div>
-                        <img src="{{ $cat['img'] }}" alt="{{ $cat['name'] }}">
+                        @if($cat->image)
+                            <img src="{{ $cat->image }}" alt="{{ $cat->name }}" loading="lazy">
+                        @else
+                            <div class="cat-icon-placeholder" style="width: 100px; height: 100px; display: flex; align-items: center; justify-content: center;">
+                                <i class="bi bi-{{ $cat->icon ?? 'box' }}" style="font-size: 3rem; color: {{ $colors['color'] }};"></i>
+                            </div>
+                        @endif
                     </a>
                 @endforeach
             </div>
@@ -296,7 +314,7 @@
                             <span class="badge-bestseller"><i class="bi bi-fire"></i> الأكثر مبيعاً</span>
                         </div>
                         <a href="{{ route('products.show', $product) }}" class="product-image-jarir">
-                            <img src="{{ $product->image ?? 'https://via.placeholder.com/200' }}" alt="{{ $product->name }}">
+                            <img src="{{ $product->image ?? 'https://images.unsplash.com/photo-1583394838336-acd977736f90?w=200&h=200&fit=crop&q=80' }}" alt="{{ $product->name }}">
                         </a>
                         <div class="product-info-jarir">
                             <a href="{{ route('products.show', $product) }}" class="product-name-jarir">
@@ -309,7 +327,7 @@
                                 <span>({{ rand(50, 300) }})</span>
                             </div>
                             <div class="product-price-jarir">
-                                <span class="current-price">{{ number_format($product->price) }} ر.ي</span>
+                                <span class="current-price">${{ number_format($product->price, 2) }}</span>
                             </div>
                             <button class="add-to-cart-jarir" onclick="addToCart({{ $product->id }})">
                                 <i class="bi bi-cart-plus"></i>
@@ -349,7 +367,7 @@
                             <span class="badge-new">جديد</span>
                         </div>
                         <a href="{{ route('products.show', $product) }}" class="product-image-jarir">
-                            <img src="{{ $product->image ?? 'https://via.placeholder.com/200' }}" alt="{{ $product->name }}">
+                            <img src="{{ $product->image ?? 'https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=200&h=200&fit=crop&q=80' }}" alt="{{ $product->name }}">
                         </a>
                         <div class="product-info-jarir">
                             <a href="{{ route('products.show', $product) }}" class="product-name-jarir">
@@ -362,7 +380,7 @@
                                 <span>({{ rand(5, 50) }})</span>
                             </div>
                             <div class="product-price-jarir">
-                                <span class="current-price">{{ number_format($product->price) }} ر.ي</span>
+                                <span class="current-price">${{ number_format($product->price, 2) }}</span>
                             </div>
                             <button class="add-to-cart-jarir" onclick="addToCart({{ $product->id }})">
                                 <i class="bi bi-cart-plus"></i>
@@ -384,7 +402,7 @@
                     <h3>هواتف آيفون</h3>
                     <p>خصم يصل إلى 25%</p>
                 </div>
-                <img src="https://images.pexels.com/photos/699122/pexels-photo-699122.jpeg?auto=compress&cs=tinysrgb&w=200" alt="iPhone">
+                <img src="https://images.unsplash.com/photo-1592286968296-4bb59a7e79a0?w=200&h=150&fit=crop&q=80" alt="iPhone">
             </a>
             <a href="{{ route('products.index', ['category' => 'laptops']) }}" class="promo-banner" style="background: linear-gradient(135deg, #1e3a5f 0%, #2980b9 100%);">
                 <div class="promo-content">
@@ -392,7 +410,7 @@
                     <h3>لابتوبات للدراسة</h3>
                     <p>أسعار مخفضة</p>
                 </div>
-                <img src="https://images.pexels.com/photos/7974/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=200" alt="Laptop">
+                <img src="https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=200&h=150&fit=crop&q=80" alt="Laptop">
             </a>
             <a href="{{ route('products.index', ['category' => 'accessories']) }}" class="promo-banner" style="background: linear-gradient(135deg, #6c3483 0%, #9b59b6 100%);">
                 <div class="promo-content">
@@ -400,7 +418,7 @@
                     <h3>إكسسوارات</h3>
                     <p>جودة عالية</p>
                 </div>
-                <img src="https://images.pexels.com/photos/3394650/pexels-photo-3394650.jpeg?auto=compress&cs=tinysrgb&w=200" alt="Accessories">
+                <img src="https://images.unsplash.com/photo-1625772452859-1c03d5bf1137?w=200&h=150&fit=crop&q=80" alt="Accessories">
             </a>
         </div>
     </div>

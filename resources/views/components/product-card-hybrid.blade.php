@@ -40,7 +40,7 @@
                 <img src="{{ $product->image }}" 
                      alt="{{ $product->name }}" 
                      loading="lazy"
-                     onerror="this.src='/images/placeholder.png'">
+                     onerror="this.src='https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=400&h=400&fit=crop&q=80'">
             </a>
         @else
             <a href="{{ route('products.show', $product) }}">

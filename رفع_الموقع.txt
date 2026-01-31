@@ -17,7 +17,7 @@
    └─ أنشئ ملف .env في المجلد الرئيسي
    └─ انسخ محتوى من .env.production.example
    └─ عدّل:
-      • APP_URL = رابط موقعك
+      • APP_URL = رابط موقعكار
       • DB_DATABASE = اسم قاعدة البيانات
       • DB_USERNAME = اسم مستخدم MySQL
       • DB_PASSWORD = كلمة مرور MySQL

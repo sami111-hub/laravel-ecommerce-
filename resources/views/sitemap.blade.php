@@ -50,7 +50,7 @@
     <!-- التصنيفات -->
     @foreach($categories as $category)
     <url>
-        <loc>{{ route('categories.show', $category) }}</loc>
+        <loc>{{ route('products.category', $category) }}</loc>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
     </url>

@@ -9,6 +9,12 @@
         <div class="col-lg-10">
             <!-- Header -->
             <div class="text-center mb-5">
+                <div class="mb-4 rounded-4 overflow-hidden shadow-lg" style="max-width: 800px; margin: 0 auto;">
+                    <img src="https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?w=1200&h=400&fit=crop&q=80" 
+                         alt="الأسئلة الشائعة - Update Aden" 
+                         class="img-fluid" 
+                         style="width: 100%; height: 250px; object-fit: cover;">
+                </div>
                 <h1 class="display-5 fw-bold text-primary mb-3">
                     <i class="bi bi-question-circle-fill"></i> الأسئلة الشائعة
                 </h1>
