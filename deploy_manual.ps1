@@ -1,33 +1,67 @@
 # Deploy to Server - Manual Interactive Script
-# سكريبت النشر التفاعلي
+# سكريبت النشر التفاعلي - يرفع من GitHub ثم يحدث السيرفر
 
 Write-Host "============================================" -ForegroundColor Cyan
-Write-Host "    تحديث السيرفر - Deploy to Server" -ForegroundColor Yellow
+Write-Host "    تحديث ورفع إلى السيرفر" -ForegroundColor Yellow
 Write-Host "============================================" -ForegroundColor Cyan
 Write-Host ""
 
+# الخطوة 1: رفع إلى GitHub
+Write-Host "📤 الخطوة 1: رفع التعديلات إلى GitHub..." -ForegroundColor Yellow
+$gitStatus = git status --porcelain
+if ($gitStatus) {
+    Write-Host "توجد تعديلات غير محفوظة:" -ForegroundColor Cyan
+    git status -s
+    Write-Host ""
+    $commit = Read-Host "أدخل رسالة الـ commit (أو اضغط Enter للتخطي)"
+    if ($commit) {
+        git add .
+        git commit -m "$commit"
+        git push origin main
+        Write-Host "✅ تم الرفع إلى GitHub" -ForegroundColor Green
+    }
+} else {
+    Write-Host "✅ لا توجد تعديلات جديدة" -ForegroundColor Green
+}
+
+Write-Host ""
+Write-Host "============================================" -ForegroundColor Cyan
+
+# الخطوة 2: تحديث السيرفر
 $server = "smStore@13.37.138.216"
+Write-Host "📡 الخطوة 2: تحديث السيرفر..." -ForegroundColor Yellow
 Write-Host "سيتم الاتصال بـ: $server" -ForegroundColor Green
-Write-Host "Password: aDm1n4StoRuSr2" -ForegroundColor Yellow
 Write-Host ""
-Write-Host "بعد إدخال كلمة المرور، سيتم تنفيذ الأوامر التالية:" -ForegroundColor Cyan
+
+# نسخ الملفات مباشرة عبر SCP (أسرع من Git)
+Write-Host "📁 نسخ الملفات المحدثة..." -ForegroundColor Cyan
+$filesToCopy = @(
+    "app",
+    "config", 
+    "database",
+    "resources",
+    "routes",
+    "public"
+)
+
+foreach ($item in $filesToCopy) {
+    if (Test-Path $item) {
+        Write-Host "  → $item" -ForegroundColor Gray
+        scp -r $item "${server}:~/laravel_ecommerce_starte/" 2>$null
+    }
+}
+
 Write-Host ""
+Write-Host "🔧 تنفيذ أوامر التحديث..." -ForegroundColor Cyan
 
 $commands = @"
-cd laravel_ecommerce_starte && git remote set-url origin https://github.com/YassenAlmaqtary/laravel_ecommerce_starte.git && git fetch origin && git reset --hard origin/main && php artisan migrate --force && php artisan cache:clear && php artisan view:clear && php artisan config:clear && php artisan optimize && chmod -R 775 storage bootstrap/cache
+cd laravel_ecommerce_starte && php artisan migrate --force && php artisan cache:clear && php artisan view:clear && php artisan config:clear && php artisan optimize
 "@
 
-Write-Host $commands -ForegroundColor White
-Write-Host ""
-Write-Host "============================================" -ForegroundColor Cyan
-Write-Host "اضغط Enter للاتصال بالسيرفر..." -ForegroundColor Yellow
-Read-Host
-
-# فتح SSH مع الأوامر
-$commands | ssh $server
+ssh $server $commands
 
 Write-Host ""
 Write-Host "============================================" -ForegroundColor Cyan
-Write-Host "✅ تم تنفيذ الأوامر!" -ForegroundColor Green
-Write-Host "تحقق من الموقع: https://store.update-aden.com/" -ForegroundColor Yellow
+Write-Host "✅ تم التحديث بنجاح!" -ForegroundColor Green
+Write-Host "🌐 الموقع: https://store.update-aden.com/" -ForegroundColor Yellow
 Write-Host "============================================" -ForegroundColor Cyan
