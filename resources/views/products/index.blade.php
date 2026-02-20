@@ -90,7 +90,7 @@
                     <div class="product-info">
                         <h6 class="product-name">{{ Str::limit($product->name, 30) }}</h6>
                         <div class="price">
-                            <span class="price-new">${{ number_format($product->price, 2) }}</span>
+                            <x-multi-currency-price :price="$product->price" size="small" />
                         </div>
                         <a href="{{ route('products.show', $product) }}" class="btn-primary w-100 mt-2">عرض</a>
                         @auth
@@ -172,8 +172,7 @@
             <h5 class="product-name">{{ $product->name }}</h5>
             <p class="text-muted small mb-2">{{ Str::limit($product->description, 60) }}</p>
             <div class="price-tag mb-3">
-                <i class="bi bi-tag-fill"></i>
-                ${{ number_format($product->price, 2) }}
+                <x-multi-currency-price :price="$product->price" size="small" />
             </div>
             <div class="mt-auto">
                 <a href="{{ route('products.show', $product) }}" class="btn btn-outline-primary btn-sm w-100 mb-2">

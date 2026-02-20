@@ -23,7 +23,9 @@
                     </div>
                     <div style="flex:1;">
                         <div class="cart-item-name">{{ $cart->product->name }}</div>
-                        <div class="cart-price">${{ number_format($cart->product->price, 2) }}</div>
+                        <div class="cart-price">
+                            <x-multi-currency-price :price="$cart->product->price" size="small" />
+                        </div>
                     </div>
                     <div style="flex:0 0 160px; text-align:right;">
                         <form action="{{ route('cart.update', $cart) }}" method="POST" class="d-inline-block me-2" id="form-qty-{{ $cart->id }}">
@@ -52,7 +54,9 @@
             <hr>
             <div class="d-flex justify-content-between mb-3">
                 <span><strong>المجموع:</strong></span>
-                <span class="order-total">${{ number_format($subtotal, 2) }}</span>
+                <span class="order-total">
+                    <x-multi-currency-price :price="$subtotal" size="normal" />
+                </span>
             </div>
             <div class="d-flex flex-column align-items-center gap-2">
                 <a href="{{ route('orders.create') }}" class="btn btn-checkout">إتمام الطلب</a>

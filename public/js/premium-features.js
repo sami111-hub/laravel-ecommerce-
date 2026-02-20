@@ -37,10 +37,10 @@ function initWhatsAppButton() {
     whatsappBtn.className = 'whatsapp-float';
     whatsappBtn.innerHTML = `
         <i class="bi bi-whatsapp"></i>
-        <span class="tooltip-text">تواصل معنا 0777 116 668</span>
+        <span class="tooltip-text">تواصل معنا 0780 800 007</span>
     `;
     whatsappBtn.onclick = () => {
-        window.open('https://wa.me/967777116668?text=مرحباً، أريد الاستفسار عن منتجاتكم', '_blank');
+        window.open('https://wa.me/967780800007?text=مرحباً، أريد الاستفسار عن منتجاتكم', '_blank');
     };
     document.body.appendChild(whatsappBtn);
 }

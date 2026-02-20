@@ -121,7 +121,7 @@
                             <div class="timeline-marker bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">1</div>
                             <div class="timeline-content ms-3">
                                 <h5>تواصل معنا</h5>
-                                <p>اتصل بنا عبر الواتساب <a href="https://wa.me/967777116668">0777 116 668</a> أو الهاتف</p>
+                                <p>اتصل بنا عبر الواتساب <a href="https://wa.me/967780800007">0780 800 007</a> أو الهاتف</p>
                             </div>
                         </div>
                         <div class="timeline-item mb-4">
@@ -228,8 +228,8 @@
                     <h4 class="mb-3">هل لديك استفسار حول سياسة الإرجاع؟</h4>
                     <p class="mb-3">فريقنا جاهز لمساعدتك ويسعدنا الإجابة على أسئلتك</p>
                     <div class="d-flex gap-2 justify-content-center">
-                        <a href="https://wa.me/967777116668" class="btn btn-light">
-                            <i class="bi bi-whatsapp"></i> واتساب: 0777 116 668
+                        <a href="https://wa.me/967780800007" class="btn btn-light">
+                            <i class="bi bi-whatsapp"></i> واتساب: 0780 800 007
                         </a>
                         <a href="{{ route('faq') }}" class="btn btn-outline-light">
                             <i class="bi bi-question-circle"></i> الأسئلة الشائعة

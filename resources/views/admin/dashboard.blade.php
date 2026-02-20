@@ -222,10 +222,10 @@
                         </td>
                         <td>
                             <strong style="color: #FF6B00;">
-                                ${{ number_format($order->total ?? 0, 2) }}
+                                <x-multi-currency-price :price="$order->total ?? 0" size="small" />
                             </strong>
                             @if(isset($order->discount) && $order->discount > 0)
-                            <br><small class="text-success">خصم: ${{ number_format($order->discount, 2) }}</small>
+                            <br><small class="text-success">خصم: <x-multi-currency-price :price="$order->discount" size="small" :showAll="false" /></small>
                             @endif
                         </td>
                         <td>
@@ -312,7 +312,7 @@
             </div>
             <div class="stat-body">
                 <h6>إجمالي الإيرادات</h6>
-                <div class="stat-value">${{ number_format($stats['total_revenue'] ?? 0, 2) }}</div>
+                <div class="stat-value"><x-multi-currency-price :price="$stats['total_revenue'] ?? 0" size="normal" /></div>
             </div>
         </div>
     </div>

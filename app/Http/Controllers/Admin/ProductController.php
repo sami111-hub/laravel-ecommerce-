@@ -62,6 +62,12 @@ class ProductController extends Controller
             'sku' => 'nullable|string|max:255|unique:products,sku',
             'categories' => 'nullable|array',
             'categories.*' => 'exists:categories,id',
+            'specifications' => 'nullable|array',
+            'specifications.*' => 'nullable|string|max:500',
+            'custom_spec_keys' => 'nullable|array',
+            'custom_spec_keys.*' => 'nullable|string|max:255',
+            'custom_spec_values' => 'nullable|array',
+            'custom_spec_values.*' => 'nullable|string|max:500',
         ]);
 
         // معالجة الصورة
@@ -99,10 +105,14 @@ class ProductController extends Controller
             $validated['sku'] = $sku;
         }
 
+        // تجميع المواصفات
+        $specifications = $this->buildSpecifications($request);
+
         // إنشاء المنتج
         $product = Product::create([
             'name' => $validated['name'],
             'description' => $validated['description'] ?? null,
+            'specifications' => $specifications,
             'price' => $validated['price'],
             'stock' => $validated['stock'],
             'image' => $imagePath,
@@ -148,6 +158,12 @@ class ProductController extends Controller
             'sku' => 'nullable|string|max:255|unique:products,sku,' . $product->id,
             'categories' => 'nullable|array',
             'categories.*' => 'exists:categories,id',
+            'specifications' => 'nullable|array',
+            'specifications.*' => 'nullable|string|max:500',
+            'custom_spec_keys' => 'nullable|array',
+            'custom_spec_keys.*' => 'nullable|string|max:255',
+            'custom_spec_values' => 'nullable|array',
+            'custom_spec_values.*' => 'nullable|string|max:500',
         ]);
 
         // معالجة الصورة
@@ -183,9 +199,13 @@ class ProductController extends Controller
             }
         }
 
+        // تجميع المواصفات
+        $specifications = $this->buildSpecifications($request);
+
         $product->update([
             'name' => $validated['name'],
             'description' => $validated['description'] ?? null,
+            'specifications' => $specifications,
             'price' => $validated['price'],
             'stock' => $validated['stock'],
             'image' => $imagePath,
@@ -208,5 +228,38 @@ class ProductController extends Controller
         $product->categories()->detach();
         $product->delete();
         return redirect()->route('admin.products.index')->with('success', 'تم حذف المنتج بنجاح');
+    }
+
+    /**
+     * تجميع المواصفات من حقول النموذج (الحقول المحددة + المخصصة)
+     */
+    private function buildSpecifications(Request $request): ?array
+    {
+        $specifications = [];
+
+        // المواصفات من حقول التصنيف
+        if ($request->has('specifications') && is_array($request->specifications)) {
+            foreach ($request->specifications as $key => $value) {
+                if (!empty(trim($value))) {
+                    $specifications[$key] = trim($value);
+                }
+            }
+        }
+
+        // المواصفات المخصصة
+        $customKeys = $request->input('custom_spec_keys', []);
+        $customValues = $request->input('custom_spec_values', []);
+
+        if (is_array($customKeys) && is_array($customValues)) {
+            foreach ($customKeys as $index => $key) {
+                $key = trim($key ?? '');
+                $value = trim($customValues[$index] ?? '');
+                if (!empty($key) && !empty($value)) {
+                    $specifications[$key] = $value;
+                }
+            }
+        }
+
+        return !empty($specifications) ? $specifications : null;
     }
 }

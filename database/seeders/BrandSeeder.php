@@ -74,6 +74,10 @@ class BrandSeeder extends Seeder
             ['name' => 'كيو سيرا', 'slug' => 'qsera', 'description' => 'منتجات كيو سيرا', 'is_active' => true],
             
             ['name' => 'Other', 'slug' => 'other', 'description' => 'علامات تجارية أخرى', 'is_active' => true],
+
+            // علامات مضافة حديثاً
+            ['name' => 'Anker SoundCore', 'slug' => 'anker-soundcore', 'description' => 'سماعات وإكسسوارات صوتية Anker SoundCore الأصلية', 'is_active' => true],
+            ['name' => 'ZTE Redmagic', 'slug' => 'zte-redmagic', 'description' => 'هواتف الألعاب ZTE Redmagic بأداء خارق', 'is_active' => true],
         ];
 
         foreach ($brands as $brand) {

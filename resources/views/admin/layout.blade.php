@@ -585,9 +585,24 @@
 
             <div class="nav-section-title">إعدادات</div>
             
-            <a href="{{ route('admin.settings.promo-bar') }}" class="sidebar-nav-link {{ request()->routeIs('admin.settings.*') ? 'active' : '' }}">
+            <a href="{{ route('admin.settings.promo-bar') }}" class="sidebar-nav-link {{ request()->routeIs('admin.settings.promo-bar*') ? 'active' : '' }}">
                 <i class="bi bi-megaphone-fill"></i>
                 <span>الشريط الترويجي</span>
+            </a>
+            
+            <a href="{{ route('admin.settings.exchange-rates') }}" class="sidebar-nav-link {{ request()->routeIs('admin.settings.exchange-rates*') ? 'active' : '' }}">
+                <i class="bi bi-currency-exchange"></i>
+                <span>أسعار الصرف</span>
+            </a>
+            
+            <a href="{{ route('admin.settings.hero-slider') }}" class="sidebar-nav-link {{ request()->routeIs('admin.settings.hero-slider*') ? 'active' : '' }}">
+                <i class="bi bi-images"></i>
+                <span>السلايدر الرئيسي</span>
+            </a>
+            
+            <a href="{{ route('admin.flash-deals.index') }}" class="sidebar-nav-link {{ request()->routeIs('admin.flash-deals*') ? 'active' : '' }}">
+                <i class="bi bi-lightning-charge-fill"></i>
+                <span>عروض اليوم</span>
             </a>
             
             <a href="{{ route('home') }}" class="sidebar-nav-link">

@@ -29,6 +29,33 @@
                 </div>
             @endif
 
+            @if(session('error'))
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <i class="bi bi-exclamation-circle me-2"></i>
+                    {{ session('error') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            @endif
+
+            @if($errors->any())
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <i class="bi bi-exclamation-circle me-2"></i>
+                    <ul class="mb-0">
+                        @foreach($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            @endif
+
+            <!-- الحالة الحالية -->
+            <div class="alert {{ $promoEnabled == '1' ? 'alert-success' : 'alert-warning' }} mb-4">
+                <i class="bi {{ $promoEnabled == '1' ? 'bi-check-circle' : 'bi-pause-circle' }} me-2"></i>
+                <strong>الحالة الحالية:</strong> 
+                {{ $promoEnabled == '1' ? 'الشريط الترويجي مفعل ويظهر للزوار' : 'الشريط الترويجي معطل ولا يظهر للزوار' }}
+            </div>
+
             <!-- معاينة الشريط -->
             <div class="card mb-4 shadow-sm">
                 <div class="card-header bg-light">
@@ -56,8 +83,9 @@
                         <!-- تفعيل/تعطيل الشريط -->
                         <div class="mb-4">
                             <div class="form-check form-switch">
+                                <input type="hidden" name="promo_bar_enabled" value="0">
                                 <input class="form-check-input" type="checkbox" name="promo_bar_enabled" 
-                                       id="promo_bar_enabled" {{ $promoEnabled == '1' ? 'checked' : '' }}>
+                                       id="promo_bar_enabled" value="1" {{ $promoEnabled == '1' ? 'checked' : '' }}>
                                 <label class="form-check-label fw-bold" for="promo_bar_enabled">
                                     تفعيل الشريط الترويجي
                                 </label>
@@ -173,5 +201,41 @@ function resetPreview() {
         updatePreview(originalText);
     }, 10);
 }
+
+// تأثير بصري عند تغيير حالة التفعيل
+document.addEventListener('DOMContentLoaded', function() {
+    const enableSwitch = document.getElementById('promo_bar_enabled');
+    const previewBar = document.getElementById('promo-preview');
+    
+    if (enableSwitch && previewBar) {
+        enableSwitch.addEventListener('change', function() {
+            if (this.checked) {
+                previewBar.style.opacity = '1';
+                previewBar.style.filter = 'none';
+            } else {
+                previewBar.style.opacity = '0.5';
+                previewBar.style.filter = 'grayscale(100%)';
+            }
+        });
+        
+        // تطبيق الحالة الأولية
+        if (!enableSwitch.checked) {
+            previewBar.style.opacity = '0.5';
+            previewBar.style.filter = 'grayscale(100%)';
+        }
+    }
+    
+    // إظهار تأكيد عند الحفظ
+    const form = document.querySelector('form');
+    if (form) {
+        form.addEventListener('submit', function(e) {
+            const btn = form.querySelector('button[type="submit"]');
+            if (btn) {
+                btn.innerHTML = '<i class="bi bi-hourglass-split me-2"></i>جاري الحفظ...';
+                btn.disabled = true;
+            }
+        });
+    }
+});
 </script>
 @endsection

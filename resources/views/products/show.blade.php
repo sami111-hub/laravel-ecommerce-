@@ -16,8 +16,14 @@
     </div>
     <div class="col-md-6">
         <h1>{{ $product->name }}</h1>
-        <p class="text-muted lead">{{ $product->description }}</p>
-        <h3 class="text-primary mb-3">${{ number_format($product->price, 2) }}</h3>
+        @if($product->description)
+        <div class="product-description mb-3">
+            {!! nl2br(e($product->description)) !!}
+        </div>
+        @endif
+        <div class="mb-3">
+            <x-multi-currency-price :price="$product->price" size="large" />
+        </div>
         
         <div class="mb-3">
             <strong>المخزون:</strong> {{ $product->stock }}
@@ -81,6 +87,98 @@
             </div>
             @endauth
         </div>
+
+        {{-- المواصفات التقنية --}}
+        @if($product->specifications && count($product->specifications) > 0)
+        <div class="card mt-3 mb-3 specs-card">
+            <div class="card-header bg-dark text-white">
+                <h5 class="mb-0"><i class="bi bi-cpu"></i> المواصفات التقنية</h5>
+            </div>
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover mb-0">
+                        <tbody>
+                            @php
+                                $specLabels = [
+                                    'screen_size' => ['حجم الشاشة', 'bi-phone'],
+                                    'screen_type' => ['نوع الشاشة', 'bi-display'],
+                                    'resolution' => ['دقة الشاشة', 'bi-aspect-ratio'],
+                                    'processor' => ['المعالج', 'bi-cpu'],
+                                    'ram' => ['الذاكرة العشوائية', 'bi-memory'],
+                                    'storage' => ['سعة التخزين', 'bi-device-hdd'],
+                                    'rear_camera' => ['الكاميرا الخلفية', 'bi-camera'],
+                                    'front_camera' => ['الكاميرا الأمامية', 'bi-camera-video'],
+                                    'battery' => ['سعة البطارية', 'bi-battery-charging'],
+                                    'battery_life' => ['عمر البطارية', 'bi-battery-charging'],
+                                    'charging' => ['سرعة الشحن', 'bi-lightning-charge'],
+                                    'os' => ['نظام التشغيل', 'bi-gear'],
+                                    'sim' => ['نوع الشريحة', 'bi-sim'],
+                                    'network' => ['دعم الشبكات', 'bi-wifi'],
+                                    'water_resistance' => ['مقاومة الماء', 'bi-droplet'],
+                                    'weight' => ['الوزن', 'bi-speedometer'],
+                                    'dimensions' => ['الأبعاد', 'bi-rulers'],
+                                    'colors' => ['الألوان المتاحة', 'bi-palette'],
+                                    'fingerprint' => ['مستشعر البصمة', 'bi-fingerprint'],
+                                    'gpu' => ['كرت الشاشة', 'bi-gpu-card'],
+                                    'ports' => ['المنافذ', 'bi-usb-plug'],
+                                    'keyboard' => ['لوحة المفاتيح', 'bi-keyboard'],
+                                    'wifi' => ['الواي فاي', 'bi-wifi'],
+                                    'bluetooth' => ['البلوتوث', 'bi-bluetooth'],
+                                    'webcam' => ['الكاميرا', 'bi-webcam'],
+                                    'sensors' => ['المستشعرات', 'bi-heart-pulse'],
+                                    'gps' => ['نظام الملاحة', 'bi-geo-alt'],
+                                    'connectivity' => ['الاتصال', 'bi-wifi'],
+                                    'compatibility' => ['التوافق', 'bi-phone'],
+                                    'strap_material' => ['مادة السوار', 'bi-watch'],
+                                    'print_type' => ['نوع الطباعة', 'bi-printer'],
+                                    'print_color' => ['ألوان الطباعة', 'bi-palette'],
+                                    'print_speed' => ['سرعة الطباعة', 'bi-speedometer2'],
+                                    'paper_sizes' => ['أحجام الورق', 'bi-file-earmark'],
+                                    'paper_tray' => ['سعة درج الورق', 'bi-inbox'],
+                                    'duplex' => ['الطباعة على الوجهين', 'bi-arrow-left-right'],
+                                    'scanner' => ['الماسح الضوئي', 'bi-upc-scan'],
+                                    'monthly_duty' => ['الحمولة الشهرية', 'bi-graph-up'],
+                                    'type' => ['النوع', 'bi-box'],
+                                    'driver_size' => ['حجم السماعة', 'bi-speaker'],
+                                    'frequency' => ['نطاق التردد', 'bi-soundwave'],
+                                    'noise_cancellation' => ['إلغاء الضوضاء', 'bi-volume-mute'],
+                                    'microphone' => ['الميكروفون', 'bi-mic'],
+                                    'wattage' => ['القدرة (واط)', 'bi-lightning-charge'],
+                                    'ports_count' => ['عدد المنافذ', 'bi-usb-plug'],
+                                    'cable_type' => ['نوع الكيبل', 'bi-ethernet'],
+                                    'cable_length' => ['طول الكيبل', 'bi-rulers'],
+                                    'fast_charging' => ['الشحن السريع', 'bi-speedometer2'],
+                                    'battery_capacity' => ['سعة البطارية', 'bi-battery-full'],
+                                    'material' => ['المادة', 'bi-shield'],
+                                    'compatible_device' => ['الجهاز المتوافق', 'bi-phone'],
+                                    'protection_level' => ['مستوى الحماية', 'bi-shield-check'],
+                                    'features' => ['المميزات', 'bi-stars'],
+                                    'magsafe' => ['دعم MagSafe', 'bi-magnet'],
+                                    'offer_type' => ['نوع العرض', 'bi-tag'],
+                                    'original_price' => ['السعر الأصلي', 'bi-cash'],
+                                    'discount_percent' => ['نسبة الخصم', 'bi-percent'],
+                                    'offer_end' => ['تاريخ انتهاء العرض', 'bi-calendar-event'],
+                                    'warranty' => ['الضمان', 'bi-shield-check'],
+                                ];
+                            @endphp
+                            @foreach($product->specifications as $key => $value)
+                                <tr>
+                                    <td class="fw-bold text-nowrap" style="width: 40%; background: #f8f9fa;">
+                                        @if(isset($specLabels[$key]))
+                                            <i class="bi {{ $specLabels[$key][1] }} text-primary me-2"></i>{{ $specLabels[$key][0] }}
+                                        @else
+                                            <i class="bi bi-dot text-primary me-2"></i>{{ $key }}
+                                        @endif
+                                    </td>
+                                    <td>{{ $value }}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        @endif
 
         {{-- Rating Summary --}}
         @php
@@ -239,5 +337,46 @@
         </a>
     </div>
 </div>
+
+<style>
+.specs-card .table td {
+    padding: 12px 16px;
+    vertical-align: middle;
+    font-size: 0.95rem;
+}
+.specs-card .table tr:hover {
+    background-color: #e8f0fe !important;
+}
+.specs-card {
+    border: none;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    border-radius: 12px;
+    overflow: hidden;
+}
+.specs-card .card-header {
+    border-radius: 0;
+}
+
+/* Product Description Styling */
+.product-description {
+    color: #555;
+    font-size: 1rem;
+    line-height: 1.8;
+    border-left: 4px solid #2bb673;
+    padding: 12px 16px;
+    background: #f8fff8;
+    border-radius: 0 8px 8px 0;
+    white-space: pre-line;
+    direction: ltr;
+    text-align: left;
+    font-family: 'Segoe UI', Arial, sans-serif;
+}
+/* If description contains Arabic, align right */
+.product-description:lang(ar),
+.product-description[dir="rtl"] {
+    direction: rtl;
+    text-align: right;
+}
+</style>
 @endsection
 

@@ -22,16 +22,20 @@
                             @endif
                             <div>
                                 <strong>{{ $cart->product->name }}</strong>
-                                <div class="text-muted small">الكمية: {{ $cart->quantity }} × ${{ number_format($cart->product->price, 2) }}</div>
+                                <div class="text-muted small">الكمية: {{ $cart->quantity }} × 
+                                    <x-multi-currency-price :price="$cart->product->price" size="small" :showAll="false" />
+                                </div>
                             </div>
                         </div>
-                        <strong class="text-primary">${{ number_format($cart->product->price * $cart->quantity, 2) }}</strong>
+                        <strong class="text-primary">
+                            <x-multi-currency-price :price="$cart->product->price * $cart->quantity" size="small" />
+                        </strong>
                     </div>
                     @endforeach
                     <hr>
                     <div class="d-flex justify-content-between">
                         <strong>المجموع الفرعي:</strong>
-                        <strong>${{ number_format($subtotal, 2) }}</strong>
+                        <strong><x-multi-currency-price :price="$subtotal" size="small" /></strong>
                     </div>
                 </div>
             </div>
@@ -86,7 +90,7 @@
                     <div class="mb-3">
                         <div class="d-flex justify-content-between mb-2">
                             <span>المجموع الفرعي:</span>
-                            <span>${{ number_format($subtotal, 2) }}</span>
+                            <span><x-multi-currency-price :price="$subtotal" size="small" /></span>
                         </div>
                         
                         <div id="couponSection" class="mb-3">
@@ -110,7 +114,7 @@
                         <hr>
                         <div class="d-flex justify-content-between">
                             <strong>المجموع الكلي:</strong>
-                            <strong class="text-success fs-5" id="totalAmount">${{ number_format($subtotal, 2) }}</strong>
+                            <strong class="text-success fs-5" id="totalAmount"><x-multi-currency-price :price="$subtotal" size="small" /></strong>
                         </div>
                     </div>
                     

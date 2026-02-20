@@ -25,15 +25,15 @@
                         <tr>
                             <td>{{ $item->product_name }}</td>
                             <td>{{ $item->quantity }}</td>
-                            <td>${{ number_format($item->product_price, 2) }}</td>
-                            <td>${{ number_format($item->subtotal, 2) }}</td>
+                            <td><x-multi-currency-price :price="$item->product_price" size="small" /></td>
+                            <td><x-multi-currency-price :price="$item->subtotal" size="small" /></td>
                         </tr>
                         @endforeach
                     </tbody>
                     <tfoot>
                         <tr>
                             <th colspan="3">المجموع النهائي:</th>
-                            <th>${{ number_format($order->total, 2) }}</th>
+                            <th><x-multi-currency-price :price="$order->total" size="small" /></th>
                         </tr>
                     </tfoot>
                 </table>

@@ -41,8 +41,42 @@
                     @endif
 
                     <div class="card-body">
-                        <h5 class="card-title text-primary mb-3">{{ $offer->title }}</h5>
-                        <p class="card-text text-muted">{{ $offer->description }}</p>
+                        <h5 class="card-title text-primary mb-2">{{ $offer->title }}</h5>
+
+                        {{-- الأسعار --}}
+                        @if($offer->original_price || $offer->offer_price)
+                        <div class="mb-3">
+                            @if($offer->original_price)
+                                <span class="text-muted text-decoration-line-through me-2">${{ number_format($offer->original_price, 2) }}</span>
+                            @endif
+                            @if($offer->offer_price)
+                                <span class="text-success fw-bold fs-5">${{ number_format($offer->offer_price, 2) }}</span>
+                            @endif
+                            @if($offer->original_price && $offer->offer_price)
+                                <span class="badge bg-warning text-dark ms-2">وفر ${{ number_format($offer->original_price - $offer->offer_price, 2) }}</span>
+                            @endif
+                        </div>
+                        @endif
+
+                        <p class="card-text text-muted small">{{ Str::limit($offer->description, 100) }}</p>
+
+                        {{-- المواصفات --}}
+                        @php $allSpecs = $offer->getAllSpecifications(); @endphp
+                        @if(!empty($allSpecs))
+                        <div class="mt-2 mb-3">
+                            <ul class="list-unstyled small text-muted mb-0">
+                                @foreach(array_slice($allSpecs, 0, 4) as $key => $value)
+                                <li class="mb-1">
+                                    <i class="bi bi-check-circle-fill text-success me-1"></i>
+                                    <strong>{{ $key }}:</strong> {{ $value }}
+                                </li>
+                                @endforeach
+                                @if(count($allSpecs) > 4)
+                                <li class="text-primary"><i class="bi bi-three-dots"></i> +{{ count($allSpecs) - 4 }} مواصفات أخرى</li>
+                                @endif
+                            </ul>
+                        </div>
+                        @endif
                         
                         <div class="mt-3 pt-3 border-top">
                             <div class="d-flex justify-content-between align-items-center text-muted small">

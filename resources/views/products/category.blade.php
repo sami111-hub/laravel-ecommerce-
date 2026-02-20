@@ -60,7 +60,9 @@
             <div class="card-body d-flex flex-column">
                 <h5 class="card-title">{{ $product->name }}</h5>
                 <p class="card-text text-muted">{{ Str::limit($product->description, 100) }}</p>
-                <p class="text-primary fw-bold">${{ number_format($product->price, 2) }}</p>
+                <div class="mb-2">
+                    <x-multi-currency-price :price="$product->price" size="small" />
+                </div>
                 <p class="text-muted mb-2">
                     <strong>المخزون:</strong> {{ $product->stock }}
                 </p>

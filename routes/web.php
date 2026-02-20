@@ -22,6 +22,7 @@ use App\Http\Controllers\CouponController;
 use App\Http\Controllers\CompareController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\PhoneController;
 
 // صفحة auth التجريبية
 Route::get('/auth', function () {
@@ -53,6 +54,15 @@ Route::get('/products/{product}', [ProductController::class, 'show'])->name('pro
 Route::get('/category/{category}', [ProductController::class, 'category'])->name('products.category');
 Route::get('/offers', [OfferController::class, 'index'])->name('offers');
 Route::get('/api/recommendations', [App\Http\Controllers\RecommendationController::class, 'getRecommendedProducts'])->name('api.recommendations');
+
+// Phone Routes
+Route::get('/phones', [PhoneController::class, 'index'])->name('phones.index');
+Route::get('/phones/search', [PhoneController::class, 'search'])->name('phones.search');
+Route::get('/phones/latest', [PhoneController::class, 'latest'])->name('phones.latest');
+Route::get('/phones/popular', [PhoneController::class, 'popular'])->name('phones.popular');
+Route::get('/phones/compare', [PhoneController::class, 'compare'])->name('phones.compare');
+Route::get('/phones/brand/{slug}', [PhoneController::class, 'brand'])->name('phones.brand');
+Route::get('/phones/{slug}', [PhoneController::class, 'show'])->name('phones.show');
 
 // Compare Routes
 Route::post('/compare/add/{product}', [CompareController::class, 'add'])->name('compare.add');
@@ -228,7 +238,21 @@ Route::prefix('admin')->middleware(['auth'])->name('admin.')->group(function () 
     Route::middleware(['permission:view-permissions'])->group(function () {
         Route::get('settings/promo-bar', [SiteSettingsController::class, 'promoBar'])->name('settings.promo-bar');
         Route::put('settings/promo-bar', [SiteSettingsController::class, 'updatePromoBar'])->name('settings.promo-bar.update');
+        Route::get('settings/exchange-rates', [SiteSettingsController::class, 'exchangeRates'])->name('settings.exchange-rates');
+        Route::put('settings/exchange-rates', [SiteSettingsController::class, 'updateExchangeRates'])->name('settings.exchange-rates.update');
+        Route::get('settings/hero-slider', [SiteSettingsController::class, 'heroSlider'])->name('settings.hero-slider');
+        Route::put('settings/hero-slider', [SiteSettingsController::class, 'updateHeroSlider'])->name('settings.hero-slider.update');
+
+        // Flash Deals - عروض اليوم
+        Route::get('flash-deals', [\App\Http\Controllers\Admin\FlashDealController::class, 'index'])->name('flash-deals.index');
+        Route::put('flash-deals/settings', [\App\Http\Controllers\Admin\FlashDealController::class, 'updateSettings'])->name('flash-deals.update-settings');
+        Route::get('flash-deals/search', [\App\Http\Controllers\Admin\FlashDealController::class, 'searchProducts'])->name('flash-deals.search');
+        Route::post('flash-deals/add-product', [\App\Http\Controllers\Admin\FlashDealController::class, 'addProduct'])->name('flash-deals.add-product');
+        Route::put('flash-deals/product/{product}', [\App\Http\Controllers\Admin\FlashDealController::class, 'updateProduct'])->name('flash-deals.update-product');
+        Route::delete('flash-deals/product/{product}', [\App\Http\Controllers\Admin\FlashDealController::class, 'removeProduct'])->name('flash-deals.remove-product');
+
         Route::get('settings', [SiteSettingsController::class, 'index'])->name('settings.index');
         Route::put('settings', [SiteSettingsController::class, 'update'])->name('settings.update');
     });
 });
+

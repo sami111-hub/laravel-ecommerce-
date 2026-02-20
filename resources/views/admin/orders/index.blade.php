@@ -99,7 +99,7 @@
                             <span class="badge bg-danger">ملغى</span>
                         @endif
                     </td>
-                    <td><strong>${{ number_format($order->total, 2) }}</strong></td>
+                    <td><x-multi-currency-price :price="$order->total" size="small" /></td>
                     <td>{{ $order->created_at->format('Y-m-d H:i') }}</td>
                     <td>
                         <a href="{{ route('admin.orders.show', $order) }}" class="btn btn-sm btn-primary">

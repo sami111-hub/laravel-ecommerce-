@@ -33,7 +33,9 @@
                                      class="img-fluid mb-2" style="max-height: 150px;">
                             @endif
                             <h5>{{ $product->name }}</h5>
-                            <div class="text-primary fs-4 mb-2">${{ number_format($product->price, 2) }}</div>
+                            <div class="mb-2">
+                                <x-multi-currency-price :price="$product->price" size="normal" />
+                            </div>
                             @auth
                                 <form action="{{ route('cart.add', $product) }}" method="POST" class="d-inline">
                                     @csrf
@@ -56,7 +58,9 @@
                 <tr>
                     <td><strong>السعر</strong></td>
                     @foreach($products as $product)
-                    <td class="text-center">${{ number_format($product->price, 2) }}</td>
+                    <td class="text-center">
+                        <x-multi-currency-price :price="$product->price" size="small" />
+                    </td>
                     @endforeach
                 </tr>
                 <tr>

@@ -1,0 +1,5 @@
+
+   INFO  Running migrations.  
+
+  2026_02_14_000001_add_flash_deal_columns_to_products_table .... 83.62ms DONE
+

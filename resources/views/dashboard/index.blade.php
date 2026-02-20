@@ -66,7 +66,7 @@
                                         <span class="badge bg-danger">ملغى</span>
                                     @endif
                                 </td>
-                                <td class="text-success fw-bold">${{ number_format($order->total, 2) }}</td>
+                                <td><x-multi-currency-price :price="$order->total" size="small" /></td>
                                 <td>
                                     <a href="{{ route('orders.show', $order) }}" class="btn btn-sm btn-primary">
                                         <i class="bi bi-eye"></i> عرض

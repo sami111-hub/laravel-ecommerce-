@@ -83,12 +83,12 @@
         {{-- السعر --}}
         <div class="product-price-hybrid">
             @if(isset($product->old_price) && $product->old_price > $product->price)
-                <div class="price-group">
-                    <span class="price-new-hybrid">${{ number_format($product->price, 2) }}</span>
-                    <span class="price-old-hybrid">${{ number_format($product->old_price, 2) }}</span>
+                <div class="price-group mb-1">
+                    <span class="price-old-hybrid text-decoration-line-through text-muted">${{ number_format($product->old_price, 2) }}</span>
                 </div>
+                <x-multi-currency-price :price="$product->price" size="small" />
             @else
-                <span class="price-current-hybrid">${{ number_format($product->price, 2) }}</span>
+                <x-multi-currency-price :price="$product->price" size="small" />
             @endif
         </div>
 

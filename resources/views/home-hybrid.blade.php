@@ -80,14 +80,14 @@
     <div class="row g-4">
         @php
             $mainCategories = [
+                ['name' => 'ألعاب الفيديو', 'icon' => 'controller', 'color' => '#c0392b', 'slug' => 'video-games'],
                 ['name' => 'الهواتف الذكية', 'icon' => 'phone', 'color' => '#667eea', 'slug' => 'smartphones'],
-                ['name' => 'اللابتوبات', 'icon' => 'laptop', 'color' => '#764ba2', 'slug' => 'laptops'],
-                ['name' => 'الساعات الذكية', 'icon' => 'smartwatch', 'color' => '#f093fb', 'slug' => 'watches'],
-                ['name' => 'الطابعات', 'icon' => 'printer', 'color' => '#4facfe', 'slug' => 'printers'],
-                ['name' => 'السماعات', 'icon' => 'headphones', 'color' => '#43e97b', 'slug' => 'headphones'],
-                ['name' => 'الشواحن', 'icon' => 'battery-charging', 'color' => '#fa709a', 'slug' => 'chargers'],
-                ['name' => 'الإكسسوارات', 'icon' => 'box-seam', 'color' => '#fee140', 'slug' => 'accessories'],
-                ['name' => 'الكاميرات', 'icon' => 'camera', 'color' => '#30cfd0', 'slug' => 'cameras'],
+                ['name' => 'الكمبيوتر والتابليت', 'icon' => 'laptop', 'color' => '#764ba2', 'slug' => 'computers-tablets'],
+                ['name' => 'الساعات الذكية والأجهزة القابلة للإرتداء', 'icon' => 'smartwatch', 'color' => '#f093fb', 'slug' => 'smartwatches-wearables'],
+                ['name' => 'ملحقات الهواتف الذكية', 'icon' => 'phone-flip', 'color' => '#fee140', 'slug' => 'phone-accessories'],
+                ['name' => 'سماعات ومكبرات الصوت', 'icon' => 'headphones', 'color' => '#43e97b', 'slug' => 'headphones-speakers'],
+                ['name' => 'خزائن الطاقة والشواحن', 'icon' => 'battery-charging', 'color' => '#fa709a', 'slug' => 'power-banks-chargers'],
+                ['name' => 'عروض مميزة', 'icon' => 'tag', 'color' => '#f39c12', 'slug' => 'special-offers'],
             ];
         @endphp
 

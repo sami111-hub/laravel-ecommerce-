@@ -89,7 +89,7 @@
                             <br><small class="text-muted">SKU: {{ $product->sku }}</small>
                         @endif
                     </td>
-                    <td>${{ number_format($product->price, 2) }}</td>
+                    <td>\n                        <x-multi-currency-price :price=\"$product->price\" size=\"small\" />\n                    </td>
                     <td>
                         @if($product->stock > 0)
                             <span class="badge bg-success">{{ $product->stock }}</span>

@@ -1,0 +1,48 @@
+
+Fatal error: Uncaught ReflectionException: Class "files" does not exist in C:\xampp82\htdocs\laravel_ecommerce_starte\vendor\laravel\framework\src\Illuminate\Container\Container.php:1122
+Stack trace:
+#0 C:\xampp82\htdocs\laravel_ecommerce_starte\vendor\laravel\framework\src\Illuminate\Container\Container.php(1122): ReflectionClass->__construct('files')
+#1 C:\xampp82\htdocs\laravel_ecommerce_starte\vendor\laravel\framework\src\Illuminate\Container\Container.php(933): Illuminate\Container\Container->build('files')
+#2 C:\xampp82\htdocs\laravel_ecommerce_starte\vendor\laravel\framework\src\Illuminate\Foundation\Application.php(1078): Illuminate\Container\Container->resolve('files', Array, true)
+#3 C:\xampp82\htdocs\laravel_ecommerce_starte\vendor\laravel\framework\src\Illuminate\Container\Container.php(864): Illuminate\Foundation\Application->resolve('files', Array)
+#4 C:\xampp82\htdocs\laravel_ecommerce_starte\vendor\laravel\framework\src\Illuminate\Foundation\Application.php(1058): Illuminate\Container\Container->make('files', Array)
+#5 C:\xampp82\htdocs\laravel_ecommerce_starte\vendor\laravel\framework\src\Illuminate\Container\Container.php(1801): Illuminate\Foundation\Application->make('files')
+#6 C:\xampp82\htdocs\laravel_ecommerce_starte\vendor\laravel\framework\src\Illuminate\Foundation\Application.php(1358): Illuminate\Container\Container->offsetGet('files')
+#7 C:\xampp82\htdocs\laravel_ecommerce_starte\vendor\laravel\framework\src\Illuminate\Foundation\Support\Providers\EventServiceProvider.php(107): Illuminate\Foundation\Application->eventsAreCached()
+#8 C:\xampp82\htdocs\laravel_ecommerce_starte\vendor\laravel\framework\src\Illuminate\Foundation\Support\Providers\EventServiceProvider.php(58): Illuminate\Foundation\Support\Providers\EventServiceProvider->getEvents()
+#9 C:\xampp82\htdocs\laravel_ecommerce_starte\vendor\laravel\framework\src\Illuminate\Container\BoundMethod.php(36): Illuminate\Foundation\Support\Providers\EventServiceProvider->Illuminate\Foundation\Support\Providers\{closure}()
+#10 C:\xampp82\htdocs\laravel_ecommerce_starte\vendor\laravel\framework\src\Illuminate\Container\Util.php(43): Illuminate\Container\BoundMethod::Illuminate\Container\{closure}()
+#11 C:\xampp82\htdocs\laravel_ecommerce_starte\vendor\laravel\framework\src\Illuminate\Container\BoundMethod.php(84): Illuminate\Container\Util::unwrapIfClosure(Object(Closure))
+#12 C:\xampp82\htdocs\laravel_ecommerce_starte\vendor\laravel\framework\src\Illuminate\Container\BoundMethod.php(35): Illuminate\Container\BoundMethod::callBoundMethod(Object(Illuminate\Foundation\Application), Object(Closure), Object(Closure))
+#13 C:\xampp82\htdocs\laravel_ecommerce_starte\vendor\laravel\framework\src\Illuminate\Container\Container.php(799): Illuminate\Container\BoundMethod::call(Object(Illuminate\Foundation\Application), Object(Closure), Array, NULL)
+#14 C:\xampp82\htdocs\laravel_ecommerce_starte\vendor\laravel\framework\src\Illuminate\Support\ServiceProvider.php(134): Illuminate\Container\Container->call(Object(Closure))
+#15 C:\xampp82\htdocs\laravel_ecommerce_starte\vendor\laravel\framework\src\Illuminate\Foundation\Application.php(1148): Illuminate\Support\ServiceProvider->callBootingCallbacks()
+#16 C:\xampp82\htdocs\laravel_ecommerce_starte\vendor\laravel\framework\src\Illuminate\Foundation\Application.php(1132): Illuminate\Foundation\Application->bootProvider(Object(Illuminate\Foundation\Support\Providers\EventServiceProvider))
+#17 [internal function]: Illuminate\Foundation\Application->Illuminate\Foundation\{closure}(Object(Illuminate\Foundation\Support\Providers\EventServiceProvider), 'Illuminate\\Foun...')
+#18 C:\xampp82\htdocs\laravel_ecommerce_starte\vendor\laravel\framework\src\Illuminate\Foundation\Application.php(1131): array_walk(Array, Object(Closure))
+#19 C:\xampp82\htdocs\laravel_ecommerce_starte\test_search.php(5): Illuminate\Foundation\Application->boot()
+#20 {main}
+
+Next Illuminate\Contracts\Container\BindingResolutionException: Target class [files] does not exist. in C:\xampp82\htdocs\laravel_ecommerce_starte\vendor\laravel\framework\src\Illuminate\Container\Container.php:1124
+Stack trace:
+#0 C:\xampp82\htdocs\laravel_ecommerce_starte\vendor\laravel\framework\src\Illuminate\Container\Container.php(933): Illuminate\Container\Container->build('files')
+#1 C:\xampp82\htdocs\laravel_ecommerce_starte\vendor\laravel\framework\src\Illuminate\Foundation\Application.php(1078): Illuminate\Container\Container->resolve('files', Array, true)
+#2 C:\xampp82\htdocs\laravel_ecommerce_starte\vendor\laravel\framework\src\Illuminate\Container\Container.php(864): Illuminate\Foundation\Application->resolve('files', Array)
+#3 C:\xampp82\htdocs\laravel_ecommerce_starte\vendor\laravel\framework\src\Illuminate\Foundation\Application.php(1058): Illuminate\Container\Container->make('files', Array)
+#4 C:\xampp82\htdocs\laravel_ecommerce_starte\vendor\laravel\framework\src\Illuminate\Container\Container.php(1801): Illuminate\Foundation\Application->make('files')
+#5 C:\xampp82\htdocs\laravel_ecommerce_starte\vendor\laravel\framework\src\Illuminate\Foundation\Application.php(1358): Illuminate\Container\Container->offsetGet('files')
+#6 C:\xampp82\htdocs\laravel_ecommerce_starte\vendor\laravel\framework\src\Illuminate\Foundation\Support\Providers\EventServiceProvider.php(107): Illuminate\Foundation\Application->eventsAreCached()
+#7 C:\xampp82\htdocs\laravel_ecommerce_starte\vendor\laravel\framework\src\Illuminate\Foundation\Support\Providers\EventServiceProvider.php(58): Illuminate\Foundation\Support\Providers\EventServiceProvider->getEvents()
+#8 C:\xampp82\htdocs\laravel_ecommerce_starte\vendor\laravel\framework\src\Illuminate\Container\BoundMethod.php(36): Illuminate\Foundation\Support\Providers\EventServiceProvider->Illuminate\Foundation\Support\Providers\{closure}()
+#9 C:\xampp82\htdocs\laravel_ecommerce_starte\vendor\laravel\framework\src\Illuminate\Container\Util.php(43): Illuminate\Container\BoundMethod::Illuminate\Container\{closure}()
+#10 C:\xampp82\htdocs\laravel_ecommerce_starte\vendor\laravel\framework\src\Illuminate\Container\BoundMethod.php(84): Illuminate\Container\Util::unwrapIfClosure(Object(Closure))
+#11 C:\xampp82\htdocs\laravel_ecommerce_starte\vendor\laravel\framework\src\Illuminate\Container\BoundMethod.php(35): Illuminate\Container\BoundMethod::callBoundMethod(Object(Illuminate\Foundation\Application), Object(Closure), Object(Closure))
+#12 C:\xampp82\htdocs\laravel_ecommerce_starte\vendor\laravel\framework\src\Illuminate\Container\Container.php(799): Illuminate\Container\BoundMethod::call(Object(Illuminate\Foundation\Application), Object(Closure), Array, NULL)
+#13 C:\xampp82\htdocs\laravel_ecommerce_starte\vendor\laravel\framework\src\Illuminate\Support\ServiceProvider.php(134): Illuminate\Container\Container->call(Object(Closure))
+#14 C:\xampp82\htdocs\laravel_ecommerce_starte\vendor\laravel\framework\src\Illuminate\Foundation\Application.php(1148): Illuminate\Support\ServiceProvider->callBootingCallbacks()
+#15 C:\xampp82\htdocs\laravel_ecommerce_starte\vendor\laravel\framework\src\Illuminate\Foundation\Application.php(1132): Illuminate\Foundation\Application->bootProvider(Object(Illuminate\Foundation\Support\Providers\EventServiceProvider))
+#16 [internal function]: Illuminate\Foundation\Application->Illuminate\Foundation\{closure}(Object(Illuminate\Foundation\Support\Providers\EventServiceProvider), 'Illuminate\\Foun...')
+#17 C:\xampp82\htdocs\laravel_ecommerce_starte\vendor\laravel\framework\src\Illuminate\Foundation\Application.php(1131): array_walk(Array, Object(Closure))
+#18 C:\xampp82\htdocs\laravel_ecommerce_starte\test_search.php(5): Illuminate\Foundation\Application->boot()
+#19 {main}
+  thrown in C:\xampp82\htdocs\laravel_ecommerce_starte\vendor\laravel\framework\src\Illuminate\Container\Container.php on line 1124

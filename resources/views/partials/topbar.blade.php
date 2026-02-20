@@ -5,7 +5,7 @@
             <span>التوصيل إلى جميع أنحاء عدن</span>
         </div>
         @php
-            $rawPhoneTop = env('SUPPORT_PHONE', '0777 116 668');
+            $rawPhoneTop = env('SUPPORT_PHONE', '0780 800 007');
             $digitsTop = preg_replace('/\D+/', '', $rawPhoneTop);
             $intlTop = str_starts_with($digitsTop, '967') ? $digitsTop : ('967' . $digitsTop);
         @endphp

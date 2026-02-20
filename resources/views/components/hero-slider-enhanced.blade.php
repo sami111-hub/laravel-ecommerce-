@@ -143,10 +143,10 @@
                             <span class="hero-highlight">احترافية</span>
                         </h1>
                         <p class="hero-description">
-                            أقوى أجهزة اللابتوب من Dell, HP, Lenovo, MacBook لجميع الاستخدامات
+                            لابتوبات آبل ماك، آيباد، سامسونج، هونر، شاومي وغيرها
                         </p>
                         <div class="hero-actions">
-                            <a href="{{ route('products.index', ['category' => 'laptops']) }}" class="hero-btn hero-btn-primary">
+                            <a href="{{ route('products.index', ['category' => 'computers-tablets']) }}" class="hero-btn hero-btn-primary">
                                 <span>تسوق الآن</span>
                                 <i class="bi bi-arrow-left"></i>
                             </a>

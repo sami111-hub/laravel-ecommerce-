@@ -223,7 +223,7 @@
                             <div class="border rounded p-3">
                                 <i class="bi bi-whatsapp text-success fs-4"></i>
                                 <strong class="d-block mt-2">واتساب</strong>
-                                <a href="https://wa.me/967777116668">0777 116 668</a>
+                                <a href="https://wa.me/967780800007">0780 800 007</a>
                             </div>
                         </div>
                         <div class="col-md-6">

@@ -64,16 +64,16 @@
         {{-- السعر --}}
         <div class="product-price-wrapper">
             @if(isset($product->old_price) && $product->old_price > $product->price)
-            <div class="price-comparison">
-                <span class="price-old">${{ number_format($product->old_price, 2) }}</span>
-                <span class="price-new">${{ number_format($product->price, 2) }}</span>
+            <div class="price-comparison mb-1">
+                <span class="price-old text-decoration-line-through text-muted">${{ number_format($product->old_price, 2) }}</span>
             </div>
-            <div class="price-save">
+            <x-multi-currency-price :price="$product->price" size="small" />
+            <div class="price-save mt-1">
                 <i class="bi bi-piggy-bank-fill"></i>
                 وفر ${{ number_format($product->old_price - $product->price, 2) }}
             </div>
             @else
-            <span class="price-current">${{ number_format($product->price, 2) }}</span>
+            <x-multi-currency-price :price="$product->price" size="small" />
             @endif
         </div>
 

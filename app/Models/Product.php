@@ -9,7 +9,29 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Product extends Model
 {
-    protected $fillable = ['name', 'description', 'price', 'stock', 'image', 'brand_id', 'sku', 'slug'];
+    protected $fillable = ['name', 'description', 'specifications', 'price', 'discount_price', 'stock', 'is_active', 'image', 'brand_id', 'sku', 'slug', 'is_flash_deal', 'flash_deal_discount', 'flash_deal_price', 'flash_deal_ends_at'];
+
+    protected $casts = [
+        'specifications' => 'array',
+        'price' => 'decimal:2',
+        'discount_price' => 'decimal:2',
+        'flash_deal_price' => 'decimal:2',
+        'is_active' => 'boolean',
+        'is_flash_deal' => 'boolean',
+        'flash_deal_ends_at' => 'datetime',
+    ];
+
+    /**
+     * Scope: منتجات عروض اليوم النشطة
+     */
+    public function scopeActiveFlashDeals($query)
+    {
+        return $query->where('is_flash_deal', true)
+                     ->where(function ($q) {
+                         $q->whereNull('flash_deal_ends_at')
+                           ->orWhere('flash_deal_ends_at', '>', now());
+                     });
+    }
 
     public function brand(): BelongsTo
     {

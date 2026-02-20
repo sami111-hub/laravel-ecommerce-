@@ -1,0 +1,23 @@
+=== Checking products table columns ===
+Columns: id, name, description, specifications, price, discount_price, stock, is_active, is_flash_deal, flash_deal_discount, flash_deal_price, flash_deal_ends_at, created_at, updated_at, image, brand_id, sku, slug
+
+is_flash_deal exists: YES
+
+=== Total products ===
+Total: 31
+
+=== Non-flash-deal products (first 5) ===
+  [1] iPhone مستخدم - $100.00
+  [2] Samsung Galaxy مستخدم - $800.00
+  [3] تلفون مترو - $200.00
+  [4] Samsung Galaxy A80 - $400.00
+  [5] Redmi Note 12 12GB+256GB - $320.00
+Count: 31
+
+=== Search test for 'a' ===
+Results: 5
+  [2] Samsung Galaxy مستخدم - $800.00
+  [4] Samsung Galaxy A80 - $400.00
+  [8] Xiaomi Mi 11 - $550.00
+  [10] Apple Watch Ultra 2 - $850.00
+  [11] Xiaomi Smart Band 7 - $45.00

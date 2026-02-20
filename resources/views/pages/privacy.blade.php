@@ -86,7 +86,7 @@
                     <p>إذا كان لديك أي استفسارات حول سياسة الخصوصية:</p>
                     <ul class="list-unstyled">
                         <li><i class="bi bi-envelope text-primary"></i> info@update-aden.com</li>
-                        <li><i class="bi bi-telephone text-primary"></i> {{ env('SUPPORT_PHONE', '0777 116 668') }}</li>
+                        <li><i class="bi bi-telephone text-primary"></i> {{ env('SUPPORT_PHONE', '0780 800 007') }}</li>
                         <li><i class="bi bi-geo-alt text-primary"></i> عدن، اليمن</li>
                     </ul>
                 </section>

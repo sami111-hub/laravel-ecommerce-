@@ -18,16 +18,14 @@
                     <ul class="categories-list">
                         @php
                             $sidebarCategories = [
+                                ['name' => 'ألعاب الفيديو', 'icon' => 'controller', 'slug' => 'video-games', 'color' => '#c0392b'],
                                 ['name' => 'الهواتف الذكية', 'icon' => 'phone', 'slug' => 'smartphones', 'color' => '#e74c3c'],
-                                ['name' => 'اللابتوبات', 'icon' => 'laptop', 'slug' => 'laptops', 'color' => '#3498db'],
-                                ['name' => 'الأجهزة اللوحية', 'icon' => 'tablet', 'slug' => 'tablets', 'color' => '#9b59b6'],
-                                ['name' => 'الساعات الذكية', 'icon' => 'smartwatch', 'slug' => 'watches', 'color' => '#e67e22'],
-                                ['name' => 'السماعات', 'icon' => 'headphones', 'slug' => 'headphones', 'color' => '#1abc9c'],
-                                ['name' => 'الطابعات', 'icon' => 'printer', 'slug' => 'printers', 'color' => '#34495e'],
-                                ['name' => 'الكاميرات', 'icon' => 'camera', 'slug' => 'cameras', 'color' => '#f39c12'],
-                                ['name' => 'الشواحن والكابلات', 'icon' => 'battery-charging', 'slug' => 'chargers', 'color' => '#27ae60'],
-                                ['name' => 'الإكسسوارات', 'icon' => 'box-seam', 'slug' => 'accessories', 'color' => '#8e44ad'],
-                                ['name' => 'ألعاب الفيديو', 'icon' => 'controller', 'slug' => 'gaming', 'color' => '#c0392b'],
+                                ['name' => 'الكمبيوتر والتابليت', 'icon' => 'laptop', 'slug' => 'computers-tablets', 'color' => '#3498db'],
+                                ['name' => 'الساعات الذكية والأجهزة القابلة للإرتداء', 'icon' => 'smartwatch', 'slug' => 'smartwatches-wearables', 'color' => '#e67e22'],
+                                ['name' => 'ملحقات الهواتف الذكية', 'icon' => 'phone-flip', 'slug' => 'phone-accessories', 'color' => '#9b59b6'],
+                                ['name' => 'سماعات ومكبرات الصوت', 'icon' => 'headphones', 'slug' => 'headphones-speakers', 'color' => '#1abc9c'],
+                                ['name' => 'خزائن الطاقة والشواحن', 'icon' => 'battery-charging', 'slug' => 'power-banks-chargers', 'color' => '#27ae60'],
+                                ['name' => 'عروض مميزة', 'icon' => 'tag', 'slug' => 'special-offers', 'color' => '#f39c12'],
                             ];
                         @endphp
                         @foreach($sidebarCategories as $cat)
@@ -57,45 +55,61 @@
                             <button type="button" data-bs-target="#jarirCarousel" data-bs-slide-to="2"></button>
                         </div>
                         <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                <div class="slide-content" style="background: linear-gradient(135deg, #1a5f2a 0%, #2d8a3e 100%);">
+                            @php
+                                $slideDefaults = [
+                                    1 => [
+                                        'badge' => 'عروض حصرية',
+                                        'title' => 'أحدث الهواتف الذكية',
+                                        'description' => 'خصومات تصل إلى 30% على جميع الهواتف',
+                                        'button_text' => 'تسوق الآن',
+                                        'button_link' => route('products.index', ['category' => 'smartphones']),
+                                        'image_url' => 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400&h=350&fit=crop&q=80',
+                                        'bg_gradient' => 'linear-gradient(135deg, #1a265f 0%, #2d398a 100%)',
+                                    ],
+                                    2 => [
+                                        'badge' => 'جديد',
+                                        'title' => 'كمبيوتر وتابليت بأداء خارق',
+                                        'description' => 'أحدث المعالجات وأفضل الأسعار',
+                                        'button_text' => 'اكتشف المزيد',
+                                        'button_link' => route('products.index', ['category' => 'computers-tablets']),
+                                        'image_url' => 'https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=400&h=350&fit=crop&q=80',
+                                        'bg_gradient' => 'linear-gradient(135deg, #1e3a5f 0%, #2980b9 100%)',
+                                    ],
+                                    3 => [
+                                        'badge' => 'الأكثر مبيعاً',
+                                        'title' => 'ساعات ذكية متطورة',
+                                        'description' => 'تتبع صحتك ونشاطك اليومي',
+                                        'button_text' => 'تسوق الآن',
+                                        'button_link' => route('products.index', ['category' => 'smartwatches-wearables']),
+                                        'image_url' => 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&h=350&fit=crop&q=80',
+                                        'bg_gradient' => 'linear-gradient(135deg, #6c3483 0%, #9b59b6 100%)',
+                                    ],
+                                ];
+                            @endphp
+                            @foreach([1, 2, 3] as $i)
+                            @php
+                                $badge = \App\Models\SiteSetting::get("slide{$i}_badge", $slideDefaults[$i]['badge']);
+                                $title = \App\Models\SiteSetting::get("slide{$i}_title", $slideDefaults[$i]['title']);
+                                $description = \App\Models\SiteSetting::get("slide{$i}_description", $slideDefaults[$i]['description']);
+                                $buttonText = \App\Models\SiteSetting::get("slide{$i}_button_text", $slideDefaults[$i]['button_text']);
+                                $buttonLink = \App\Models\SiteSetting::get("slide{$i}_button_link", $slideDefaults[$i]['button_link']);
+                                $imageUrl = \App\Models\SiteSetting::get("slide{$i}_image_url", $slideDefaults[$i]['image_url']);
+                                $bgGradient = \App\Models\SiteSetting::get("slide{$i}_bg_gradient", $slideDefaults[$i]['bg_gradient']);
+                            @endphp
+                            <div class="carousel-item {{ $i === 1 ? 'active' : '' }}">
+                                <div class="slide-content" style="background: {{ $bgGradient }};">
                                     <div class="slide-text">
-                                        <span class="slide-badge">عروض حصرية</span>
-                                        <h2>أحدث الهواتف الذكية</h2>
-                                        <p>خصومات تصل إلى 30% على جميع الهواتف</p>
-                                        <a href="{{ route('products.index', ['category' => 'smartphones']) }}" class="slide-btn">تسوق الآن</a>
+                                        <span class="slide-badge">{{ $badge }}</span>
+                                        <h2>{{ $title }}</h2>
+                                        <p>{{ $description }}</p>
+                                        <a href="{{ $buttonLink }}" class="slide-btn">{{ $buttonText }}</a>
                                     </div>
                                     <div class="slide-image">
-                                        <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400&h=350&fit=crop&q=80" alt="هواتف ذكية">
+                                        <img src="{{ $imageUrl }}" alt="{{ $title }}">
                                     </div>
                                 </div>
                             </div>
-                            <div class="carousel-item">
-                                <div class="slide-content" style="background: linear-gradient(135deg, #1e3a5f 0%, #2980b9 100%);">
-                                    <div class="slide-text">
-                                        <span class="slide-badge">جديد</span>
-                                        <h2>لابتوبات بأداء خارق</h2>
-                                        <p>أحدث المعالجات وأفضل الأسعار</p>
-                                        <a href="{{ route('products.index', ['category' => 'laptops']) }}" class="slide-btn">اكتشف المزيد</a>
-                                    </div>
-                                    <div class="slide-image">
-                                        <img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=400&h=350&fit=crop&q=80" alt="لابتوبات">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="carousel-item">
-                                <div class="slide-content" style="background: linear-gradient(135deg, #6c3483 0%, #9b59b6 100%);">
-                                    <div class="slide-text">
-                                        <span class="slide-badge">الأكثر مبيعاً</span>
-                                        <h2>ساعات ذكية متطورة</h2>
-                                        <p>تتبع صحتك ونشاطك اليومي</p>
-                                        <a href="{{ route('products.index', ['category' => 'watches']) }}" class="slide-btn">تسوق الآن</a>
-                                    </div>
-                                    <div class="slide-image">
-                                        <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&h=350&fit=crop&q=80" alt="ساعات ذكية">
-                                    </div>
-                                </div>
-                            </div>
+                            @endforeach
                         </div>
                         <button class="carousel-control-prev" type="button" data-bs-target="#jarirCarousel" data-bs-slide="prev">
                             <span class="carousel-control-prev-icon"></span>
@@ -159,18 +173,35 @@
     </div>
 
     {{-- Flash Deals Section --}}
+    @php
+        $flashDealsActive = \App\Models\SiteSetting::get('flash_deals_active', '1');
+        $flashDealsTitle = \App\Models\SiteSetting::get('flash_deals_title', 'عروض اليوم');
+        $flashDealsEndDate = \App\Models\SiteSetting::get('flash_deals_end_date', now()->endOfDay()->format('Y-m-d'));
+        $flashDealsEndTime = \App\Models\SiteSetting::get('flash_deals_end_time', '23:59');
+        $flashDealsMax = (int) \App\Models\SiteSetting::get('flash_deals_max_products', '6');
+        $flashDealsEndTimestamp = strtotime($flashDealsEndDate . ' ' . $flashDealsEndTime . ':00');
+
+        $flashDeals = $flashDealsActive == '1'
+            ? \App\Models\Product::with(['category', 'brand'])
+                ->activeFlashDeals()
+                ->take($flashDealsMax)
+                ->get()
+            : collect();
+    @endphp
+
+    @if($flashDealsActive == '1' && $flashDeals->isNotEmpty())
     <div class="container-fluid px-3 px-lg-5 mt-4">
         <div class="section-jarir">
             <div class="section-header-jarir">
                 <div class="section-title-jarir">
                     <i class="bi bi-lightning-charge-fill text-warning"></i>
-                    <h2>عروض اليوم</h2>
+                    <h2>{{ $flashDealsTitle }}</h2>
                     <div class="countdown-timer">
                         <span class="timer-label">ينتهي خلال:</span>
                         <div class="timer-boxes">
-                            <div class="timer-box"><span id="hours">12</span><small>ساعة</small></div>
-                            <div class="timer-box"><span id="minutes">45</span><small>دقيقة</small></div>
-                            <div class="timer-box"><span id="seconds">30</span><small>ثانية</small></div>
+                            <div class="timer-box"><span id="hours">00</span><small>ساعة</small></div>
+                            <div class="timer-box"><span id="minutes">00</span><small>دقيقة</small></div>
+                            <div class="timer-box"><span id="seconds">00</span><small>ثانية</small></div>
                         </div>
                     </div>
                 </div>
@@ -180,23 +211,16 @@
             </div>
             
             <div class="products-grid-jarir">
-                @php
-                    $flashDeals = \App\Models\Product::with(['category', 'brand'])
-                        ->inRandomOrder()
-                        ->take(6)
-                        ->get()
-                        ->map(function($product) {
-                            $product->discount = rand(15, 40);
-                            $product->old_price = round($product->price * (1 + $product->discount / 100));
-                            return $product;
-                        });
-                @endphp
-                
                 @foreach($flashDeals as $product)
+                    @php
+                        $originalPrice = $product->price;
+                        $discount = $product->flash_deal_discount ?? 0;
+                        $dealPrice = $product->flash_deal_price ?? round($originalPrice * (1 - $discount / 100), 2);
+                    @endphp
                     <div class="product-card-jarir">
                         <div class="product-badges">
-                            @if($product->discount)
-                                <span class="badge-discount">-{{ $product->discount }}%</span>
+                            @if($discount > 0)
+                                <span class="badge-discount">-{{ $discount }}%</span>
                             @endif
                         </div>
                         <a href="{{ route('products.show', $product) }}" class="product-image-jarir">
@@ -207,16 +231,15 @@
                                 {{ Str::limit($product->name, 50) }}
                             </a>
                             <div class="product-rating-jarir">
-                                @for($i = 1; $i <= 5; $i++)
-                                    <i class="bi bi-star-fill {{ $i <= 4 ? 'text-warning' : 'text-muted' }}"></i>
+                                @php $avgRating = $product->average_rating ?: 4; @endphp
+                                @for($s = 1; $s <= 5; $s++)
+                                    <i class="bi bi-star-fill {{ $s <= $avgRating ? 'text-warning' : 'text-muted' }}"></i>
                                 @endfor
-                                <span>({{ rand(10, 200) }})</span>
+                                <span>({{ $product->reviews_count ?? $product->reviews()->count() }})</span>
                             </div>
                             <div class="product-price-jarir">
-                                <span class="current-price">${{ number_format($product->price, 2) }}</span>
-                                @if($product->old_price)
-                                    <span class="old-price">${{ number_format($product->old_price, 2) }}</span>
-                                @endif
+                                <x-multi-currency-price :price="$dealPrice" size="small" />
+                                <span class="old-price">${{ number_format($originalPrice, 2) }}</span>
                             </div>
                             <button class="add-to-cart-jarir" onclick="addToCart({{ $product->id }})">
                                 <i class="bi bi-cart-plus"></i>
@@ -228,6 +251,7 @@
             </div>
         </div>
     </div>
+    @endif
 
 
     {{-- Shop by Category Section --}}
@@ -253,14 +277,14 @@
                         ->get();
                     
                     $categoryBgs = [
+                        'video-games' => ['bg' => '#fef5f5', 'color' => '#c0392b'],
                         'smartphones' => ['bg' => '#fff5f5', 'color' => '#e74c3c'],
-                        'laptops' => ['bg' => '#f0f7ff', 'color' => '#3498db'],
-                        'watches' => ['bg' => '#fff8f0', 'color' => '#e67e22'],
-                        'headphones' => ['bg' => '#f0fff4', 'color' => '#27ae60'],
-                        'tablets' => ['bg' => '#f5f0ff', 'color' => '#9b59b6'],
-                        'accessories' => ['bg' => '#f0f0f0', 'color' => '#34495e'],
-                        'printers' => ['bg' => '#fff0f5', 'color' => '#8e44ad'],
-                        'mobiles' => ['bg' => '#fffaf0', 'color' => '#d35400'],
+                        'computers-tablets' => ['bg' => '#f0f7ff', 'color' => '#3498db'],
+                        'smartwatches-wearables' => ['bg' => '#fff8f0', 'color' => '#e67e22'],
+                        'phone-accessories' => ['bg' => '#f5f0ff', 'color' => '#9b59b6'],
+                        'headphones-speakers' => ['bg' => '#f0fff4', 'color' => '#1abc9c'],
+                        'power-banks-chargers' => ['bg' => '#f0fff4', 'color' => '#27ae60'],
+                        'special-offers' => ['bg' => '#fffcf0', 'color' => '#f39c12'],
                     ];
                 @endphp
                 
@@ -327,7 +351,7 @@
                                 <span>({{ rand(50, 300) }})</span>
                             </div>
                             <div class="product-price-jarir">
-                                <span class="current-price">${{ number_format($product->price, 2) }}</span>
+                                <x-multi-currency-price :price="$product->price" size="small" />
                             </div>
                             <button class="add-to-cart-jarir" onclick="addToCart({{ $product->id }})">
                                 <i class="bi bi-cart-plus"></i>
@@ -380,7 +404,7 @@
                                 <span>({{ rand(5, 50) }})</span>
                             </div>
                             <div class="product-price-jarir">
-                                <span class="current-price">${{ number_format($product->price, 2) }}</span>
+                                <x-multi-currency-price :price="$product->price" size="small" />
                             </div>
                             <button class="add-to-cart-jarir" onclick="addToCart({{ $product->id }})">
                                 <i class="bi bi-cart-plus"></i>
@@ -399,27 +423,20 @@
             <a href="{{ route('products.index', ['category' => 'smartphones']) }}" class="promo-banner" style="background: linear-gradient(135deg, #1a5f2a 0%, #2d8a3e 100%);">
                 <div class="promo-content">
                     <span class="promo-label">عرض خاص</span>
-                    <h3>هواتف آيفون</h3>
+                    <h3>الهواتف الذكية</h3>
                     <p>خصم يصل إلى 25%</p>
                 </div>
-                <img src="https://images.unsplash.com/photo-1592286968296-4bb59a7e79a0?w=200&h=150&fit=crop&q=80" alt="iPhone">
+                <img src="https://images.unsplash.com/photo-1592286968296-4bb59a7e79a0?w=200&h=150&fit=crop&q=80" alt="الهواتف الذكية">
             </a>
-            <a href="{{ route('products.index', ['category' => 'laptops']) }}" class="promo-banner" style="background: linear-gradient(135deg, #1e3a5f 0%, #2980b9 100%);">
+            <a href="{{ route('products.index', ['category' => 'computers-tablets']) }}" class="promo-banner" style="background: linear-gradient(135deg, #1e3a5f 0%, #2980b9 100%);">
                 <div class="promo-content">
                     <span class="promo-label">للطلاب</span>
-                    <h3>لابتوبات للدراسة</h3>
+                    <h3>الكمبيوتر والتابليت</h3>
                     <p>أسعار مخفضة</p>
                 </div>
-                <img src="https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=200&h=150&fit=crop&q=80" alt="Laptop">
+                <img src="https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=200&h=150&fit=crop&q=80" alt="الكمبيوتر والتابليت">
             </a>
-            <a href="{{ route('products.index', ['category' => 'accessories']) }}" class="promo-banner" style="background: linear-gradient(135deg, #6c3483 0%, #9b59b6 100%);">
-                <div class="promo-content">
-                    <span class="promo-label">تشكيلة واسعة</span>
-                    <h3>إكسسوارات</h3>
-                    <p>جودة عالية</p>
-                </div>
-                <img src="https://images.unsplash.com/photo-1625772452859-1c03d5bf1137?w=200&h=150&fit=crop&q=80" alt="Accessories">
-            </a>
+
         </div>
     </div>
 </div>
@@ -427,21 +444,23 @@
 
 @section('scripts')
 <script>
-// Countdown Timer
+// Countdown Timer - يقرأ من إعدادات عروض اليوم
 function updateCountdown() {
-    const now = new Date();
-    const endOfDay = new Date();
-    endOfDay.setHours(23, 59, 59, 999);
-    
-    const diff = endOfDay - now;
-    
-    const hours = Math.floor(diff / (1000 * 60 * 60));
-    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-    
-    document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
-    document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
-    document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+    const endTimestamp = {{ $flashDealsEndTimestamp ?? 'Math.floor(new Date().setHours(23,59,59,999) / 1000)' }};
+    const now = Math.floor(Date.now() / 1000);
+    let diff = endTimestamp - now;
+    if (diff < 0) diff = 0;
+
+    const hours = Math.floor(diff / 3600);
+    const minutes = Math.floor((diff % 3600) / 60);
+    const seconds = diff % 60;
+
+    const h = document.getElementById('hours');
+    const m = document.getElementById('minutes');
+    const s = document.getElementById('seconds');
+    if (h) h.textContent = hours.toString().padStart(2, '0');
+    if (m) m.textContent = minutes.toString().padStart(2, '0');
+    if (s) s.textContent = seconds.toString().padStart(2, '0');
 }
 
 setInterval(updateCountdown, 1000);

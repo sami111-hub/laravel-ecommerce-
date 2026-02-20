@@ -213,6 +213,8 @@
                                 <span class="badge bg-light text-dark border px-3 py-2">Asus</span>
                                 <span class="badge bg-light text-dark border px-3 py-2">Sony</span>
                                 <span class="badge bg-light text-dark border px-3 py-2">JBL</span>
+                                <span class="badge bg-success text-white border px-3 py-2">Anker SoundCore</span>
+                                <span class="badge bg-danger text-white border px-3 py-2">ZTE Redmagic</span>
                             </div>
                         </div>
                     </div>
@@ -280,11 +282,11 @@
                             </p>
                             <p class="text-muted mb-3">
                                 <i class="bi bi-telephone text-primary"></i> 
-                                <strong>الهاتف:</strong> <a href="tel:+967777116668">0777 116 668</a>
+                                <strong>الهاتف:</strong> <a href="tel:+967780800007">0780 800 007</a>
                             </p>
                             <p class="text-muted mb-3">
                                 <i class="bi bi-whatsapp text-primary"></i> 
-                                <strong>واتساب:</strong> <a href="https://wa.me/967777116668">0777 116 668</a>
+                                <strong>واتساب:</strong> <a href="https://wa.me/967780800007">0780 800 007</a>
                             </p>
                             <p class="text-muted mb-4">
                                 <i class="bi bi-envelope-fill text-primary"></i> 
@@ -309,11 +311,11 @@
                             </h3>
                             <p class="text-muted mb-4">لأي استفسارات أو اقتراحات، نحن هنا لخدمتك</p>
                             <div class="d-grid gap-2">
-                                <a href="https://wa.me/967777116668" class="btn btn-success btn-lg">
-                                    <i class="bi bi-whatsapp"></i> راسلنا على واتساب: 0777 116 668
+                                <a href="https://wa.me/967780800007" class="btn btn-success btn-lg">
+                                    <i class="bi bi-whatsapp"></i> راسلنا على واتساب: 0780 800 007
                                 </a>
-                                <a href="tel:+967777116668" class="btn btn-outline-primary btn-lg">
-                                    <i class="bi bi-telephone"></i> اتصل بنا: 0777 116 668
+                                <a href="tel:+967780800007" class="btn btn-outline-primary btn-lg">
+                                    <i class="bi bi-telephone"></i> اتصل بنا: 0780 800 007
                                 </a>
                             </div>
                         </div>

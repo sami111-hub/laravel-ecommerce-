@@ -124,7 +124,7 @@
                             <p>يمكنك تتبع طلبك بسهولة:</p>
                             <ul>
                                 <li><strong>من حسابك:</strong> سجل دخول واذهب إلى "طلباتي"</li>
-                                <li><strong>عبر الواتساب:</strong> أرسل رقم الطلب على <a href="https://wa.me/967777116668" class="text-primary">0777 116 668</a></li>
+                                <li><strong>عبر الواتساب:</strong> أرسل رقم الطلب على <a href="https://wa.me/967780800007" class="text-primary">0780 800 007</a></li>
                                 <li><strong>الإشعارات:</strong> ستصلك رسائل تحديث عند كل مرحلة</li>
                             </ul>
                             <p class="mb-0"><strong>مراحل الطلب:</strong> قيد المعالجة → تم التحضير → قيد التوصيل → تم التسليم ✅</p>
@@ -193,8 +193,8 @@
                                     <div class="border rounded p-3 text-center">
                                         <i class="bi bi-whatsapp fs-1 text-success"></i>
                                         <h6 class="mt-2">واتساب</h6>
-                                        <a href="https://wa.me/967777116668" class="btn btn-sm btn-success">
-                                            0777 116 668
+                                        <a href="https://wa.me/967780800007" class="btn btn-sm btn-success">
+                                            0780 800 007
                                         </a>
                                     </div>
                                 </div>
@@ -202,8 +202,8 @@
                                     <div class="border rounded p-3 text-center">
                                         <i class="bi bi-telephone fs-1 text-primary"></i>
                                         <h6 class="mt-2">الهاتف</h6>
-                                        <a href="tel:+967777116668" class="btn btn-sm btn-primary">
-                                            0777 116 668
+                                        <a href="tel:+967780800007" class="btn btn-sm btn-primary">
+                                            0780 800 007
                                         </a>
                                     </div>
                                 </div>
@@ -221,11 +221,11 @@
                     <h4 class="mb-3">لم تجد إجابة لسؤالك؟</h4>
                     <p class="mb-3">فريق الدعم الفني جاهز لمساعدتك على مدار الساعة</p>
                     <div class="d-flex flex-column gap-2 align-items-center">
-                        <a href="https://wa.me/967777116668" class="btn btn-light btn-lg" target="_blank">
-                            <i class="bi bi-whatsapp"></i> تواصل واتساب: 0777 116 668
+                        <a href="https://wa.me/967780800007" class="btn btn-light btn-lg" target="_blank">
+                            <i class="bi bi-whatsapp"></i> تواصل واتساب: 0780 800 007
                         </a>
-                        <a href="tel:+967777116668" class="btn btn-outline-light btn-lg">
-                            <i class="bi bi-telephone-fill"></i> اتصل بنا: 0777 116 668
+                        <a href="tel:+967780800007" class="btn btn-outline-light btn-lg">
+                            <i class="bi bi-telephone-fill"></i> اتصل بنا: 0780 800 007
                         </a>
                     </div>
                 </div>

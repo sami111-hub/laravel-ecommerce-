@@ -25,7 +25,7 @@
                             <p class="text-muted">الكمية: {{ $item->quantity }}</p>
                         </div>
                         <div class="col-md-3 text-end">
-                            <p class="fw-bold">${{ number_format($item->subtotal, 2) }}</p>
+                            <div class="fw-bold"><x-multi-currency-price :price="$item->subtotal" size="small" /></div>
                         </div>
                     </div>
                 </div>
@@ -35,7 +35,7 @@
                     @if($order->subtotal)
                         <div class="d-flex justify-content-between mb-2">
                             <span>المجموع الفرعي:</span>
-                            <span>${{ number_format($order->subtotal, 2) }}</span>
+                            <span><x-multi-currency-price :price="$order->subtotal" size="small" /></span>
                         </div>
                     @endif
                     @if($order->discount > 0)
@@ -45,13 +45,13 @@
                                     ({{ $order->coupon_code }})
                                 @endif:
                             </span>
-                            <span>-${{ number_format($order->discount, 2) }}</span>
+                            <span>-<x-multi-currency-price :price="$order->discount" size="small" /></span>
                         </div>
                     @endif
                     <hr>
                     <div class="d-flex justify-content-between">
                         <strong>المجموع النهائي:</strong>
-                        <strong class="text-success fs-5">${{ number_format($order->total, 2) }}</strong>
+                        <strong class="text-success fs-5"><x-multi-currency-price :price="$order->total" size="normal" /></strong>
                     </div>
                 </div>
             </div>

@@ -1,0 +1,20 @@
+<?php
+
+namespace App\Http\Resources;
+
+use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\JsonResource;
+
+class PhoneSpecResource extends JsonResource
+{
+    public function toArray(Request $request): array
+    {
+        return [
+            'id' => $this->id,
+            'group' => $this->group,
+            'key' => $this->key,
+            'value' => $this->value,
+            'order' => $this->order,
+        ];
+    }
+}

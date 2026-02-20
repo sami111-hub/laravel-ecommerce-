@@ -16,6 +16,20 @@
         </div>
     </div>
 
+    @if(session('success'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="bi bi-check-circle-fill"></i> {{ session('success') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    @endif
+
+    @if(session('error'))
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <i class="bi bi-exclamation-triangle-fill"></i> {{ session('error') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    @endif
+
     <div class="row">
         <div class="col-md-4 mb-4">
             <div class="card shadow-sm">
@@ -56,12 +70,31 @@
                         <p>{{ $offer->description }}</p>
                     </div>
 
+                    @if($offer->category_slug)
+                    <div class="mb-3">
+                        <strong>التصنيف:</strong>
+                        <p><span class="badge bg-info">{{ $offer->category ? $offer->category->name : $offer->category_slug }}</span></p>
+                    </div>
+                    @endif
+
                     <div class="row mb-3">
-                        <div class="col-md-6">
+                        @if($offer->original_price)
+                        <div class="col-md-3">
+                            <strong>السعر الأصلي:</strong>
+                            <p class="text-muted"><del>${{ number_format($offer->original_price, 2) }}</del></p>
+                        </div>
+                        @endif
+                        @if($offer->offer_price)
+                        <div class="col-md-3">
+                            <strong>سعر العرض:</strong>
+                            <p class="text-success fw-bold">${{ number_format($offer->offer_price, 2) }}</p>
+                        </div>
+                        @endif
+                        <div class="col-md-3">
                             <strong>تاريخ البدء:</strong>
                             <p>{{ $offer->start_date->format('Y/m/d') }}</p>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-3">
                             <strong>تاريخ الانتهاء:</strong>
                             <p>{{ $offer->end_date->format('Y/m/d') }}</p>
                         </div>
@@ -85,6 +118,28 @@
                     </div>
                 </div>
             </div>
+
+            {{-- المواصفات --}}
+            @php $allSpecs = $offer->getAllSpecifications(); @endphp
+            @if(!empty($allSpecs))
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-success text-white">
+                    <h5 class="mb-0"><i class="bi bi-list-check"></i> المواصفات</h5>
+                </div>
+                <div class="card-body p-0">
+                    <table class="table table-striped mb-0">
+                        <tbody>
+                            @foreach($allSpecs as $key => $value)
+                            <tr>
+                                <td class="fw-bold text-end" style="width: 35%;">{{ $key }}</td>
+                                <td>{{ $value }}</td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            @endif
 
             <div class="card shadow-sm">
                 <div class="card-header bg-danger text-white">

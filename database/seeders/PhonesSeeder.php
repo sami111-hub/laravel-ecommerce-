@@ -20,6 +20,8 @@ class PhonesSeeder extends Seeder
             ['name' => 'Samsung', 'slug' => 'samsung', 'logo' => 'brands/samsung.png', 'description' => 'أجهزة سامسونج الأصلية من متجر أبديت'],
             ['name' => 'Redmi', 'slug' => 'redmi', 'logo' => 'brands/redmi.png', 'description' => 'أجهزة ريدمي الأصلية من متجر أبديت'],
             ['name' => 'Anker', 'slug' => 'anker', 'logo' => 'brands/anker.png', 'description' => 'منتجات أنكر الأصلية من متجر أبديت'],
+            ['name' => 'Anker SoundCore', 'slug' => 'anker-soundcore', 'logo' => 'brands/anker-soundcore.png', 'description' => 'سماعات Anker SoundCore الأصلية'],
+            ['name' => 'ZTE Redmagic', 'slug' => 'zte-redmagic', 'logo' => 'brands/zte-redmagic.png', 'description' => 'هواتف الألعاب ZTE Redmagic'],
             ['name' => 'LT', 'slug' => 'lt', 'logo' => 'brands/lt.png', 'description' => 'منتجات LT من متجر أبديت'],
         ];
 

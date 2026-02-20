@@ -3,7 +3,7 @@
         <div class="row align-items-center gy-4">
             <div class="col-lg-4">
                 @php
-                    $rawPhone = env('SUPPORT_PHONE', '0777 116 668');
+                    $rawPhone = env('SUPPORT_PHONE', '0780 800 007');
                     $digits = preg_replace('/\D+/', '', $rawPhone);
                     $intl = str_starts_with($digits, '967') ? $digits : ('967' . $digits);
                 @endphp
@@ -15,7 +15,7 @@
             <div class="col-lg-4 d-flex justify-content-lg-center">
                 @php
                     // WhatsApp number with country code, no plus signs or spaces.
-                    $waNumber = env('WHATSAPP_NUMBER', '967777116668');
+                    $waNumber = env('WHATSAPP_NUMBER', '967780800007');
                     $defaultText = rawurlencode('مرحبا، أحتاج مساعدة.');
                     $waFallback = "https://wa.me/{$waNumber}?text={$defaultText}";
                     $waLink = env('WHATSAPP_LINK', $waFallback);
