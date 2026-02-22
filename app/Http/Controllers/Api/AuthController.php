@@ -21,12 +21,14 @@ class AuthController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'phone' => ['nullable', 'string', 'max:20'],
         ]);
 
         $user = User::create([
             'name' => $validated['name'],
             'email' => $validated['email'],
-            'password' => Hash::make($validated['password']),
+            'password' => $validated['password'], // Laravel 11 'hashed' cast يعمل hash تلقائياً
+            'phone' => $validated['phone'] ?? null,
         ]);
 
         $token = $user->createToken('mobile-app')->plainTextToken;
@@ -135,7 +137,7 @@ class AuthController extends Controller
         }
 
         $user->update([
-            'password' => Hash::make($request->password),
+            'password' => $request->password, // Laravel 11 'hashed' cast يعمل hash تلقائياً
         ]);
 
         return response()->json([
