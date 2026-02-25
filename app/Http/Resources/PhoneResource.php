@@ -13,7 +13,7 @@ class PhoneResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'slug' => $this->slug,
-            'thumbnail' => $this->thumbnail ? (str_starts_with($this->thumbnail, 'http') ? $this->thumbnail : asset('storage/' . $this->thumbnail)) : null,
+            'thumbnail' => $this->thumbnail ? (str_starts_with($this->thumbnail, 'http') ? $this->thumbnail : (($p = ltrim(preg_replace('#^/?storage#', '', $this->thumbnail), '/')) ? asset('storage/' . $p) : null)) : null,
             'images' => $this->images_url,
             'chipset' => $this->chipset,
             'ram' => $this->ram,

@@ -24,13 +24,19 @@ class HomeController extends Controller
         // الفئات الرئيسية
         $categories = Category::whereNull('parent_id')
             ->withCount('products')
-            ->orderBy('sort_order')
+            ->orderBy('id')
             ->take(10)
             ->get();
 
-        // المنتجات المميزة
-        $featuredProducts = Product::where('is_featured', true)
-            ->where('is_active', true)
+        // المنتجات المميزة - آمن من الأعمدة المفقودة
+        $featuredProducts = Product::when(
+                \Illuminate\Support\Facades\Schema::hasColumn('products', 'is_featured'),
+                fn($q) => $q->where('is_featured', true)
+            )
+            ->when(
+                \Illuminate\Support\Facades\Schema::hasColumn('products', 'is_active'),
+                fn($q) => $q->where('is_active', true)
+            )
             ->with(['category', 'brand'])
             ->take(8)
             ->get();
@@ -100,6 +106,46 @@ class HomeController extends Controller
         return response()->json([
             'success' => true,
             'data' => $settings,
+        ]);
+    }
+
+    /**
+     * أسعار الصرف للعملات
+     * GET /api/v1/currencies
+     */
+    public function currencies()
+    {
+        $sarRate = floatval(SiteSetting::get('exchange_rate_sar', '3.75'));
+        $yerRate = floatval(SiteSetting::get('exchange_rate_yer', '535'));
+
+        return response()->json([
+            'success' => true,
+            'data' => [
+                'base_currency' => 'USD',
+                'currencies' => [
+                    [
+                        'code' => 'USD',
+                        'name' => 'دولار أمريكي',
+                        'name_en' => 'US Dollar',
+                        'symbol' => '$',
+                        'rate' => 1.0,
+                    ],
+                    [
+                        'code' => 'SAR',
+                        'name' => 'ريال سعودي',
+                        'name_en' => 'Saudi Riyal',
+                        'symbol' => 'ر.س',
+                        'rate' => $sarRate,
+                    ],
+                    [
+                        'code' => 'YER',
+                        'name' => 'ريال يمني',
+                        'name_en' => 'Yemeni Rial',
+                        'symbol' => 'ر.ي',
+                        'rate' => $yerRate,
+                    ],
+                ],
+            ],
         ]);
     }
 }

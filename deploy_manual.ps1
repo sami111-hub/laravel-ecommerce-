@@ -55,13 +55,38 @@ Write-Host ""
 Write-Host "🔧 تنفيذ أوامر التحديث..." -ForegroundColor Cyan
 
 $commands = @"
-cd laravel_ecommerce_starte && php artisan migrate --force && php artisan cache:clear && php artisan view:clear && php artisan config:clear && php artisan optimize
+cd laravel_ecommerce_starte && echo '--- Fixing permissions ---' && chmod 755 /home/smStore && chmod -R 755 /home/smStore/laravel_ecommerce_starte && chmod -R 775 /home/smStore/laravel_ecommerce_starte/storage /home/smStore/laravel_ecommerce_starte/bootstrap/cache && echo '--- Running migrations ---' && php artisan migrate --force && echo '--- Clearing all caches ---' && php artisan cache:clear && php artisan config:clear && php artisan route:clear && php artisan view:clear && echo '--- Optimizing ---' && php artisan optimize && echo '--- DONE ---'
 "@
 
 ssh $server $commands
 
 Write-Host ""
+
+# اختبار الموقع
+Write-Host "🌐 اختبار الموقع..." -ForegroundColor Blue
+try {
+    $response = Invoke-WebRequest -Uri "https://store.update-aden.com" -UseBasicParsing -TimeoutSec 15
+    Write-Host "  ✅ الموقع يعمل! ($($response.StatusCode))" -ForegroundColor Green
+} catch {
+    Write-Host "  ⚠️ $($_.Exception.Message)" -ForegroundColor Yellow
+}
+
+# اختبار API Login
+Write-Host "🔐 اختبار API..." -ForegroundColor Blue
+try {
+    $apiResponse = Invoke-WebRequest -Uri "https://store.update-aden.com/api/v1/cart" -UseBasicParsing -TimeoutSec 10 -Headers @{"Accept"="application/json"}
+    Write-Host "  ⚠️ /api/v1/cart بدون Token رجع $($apiResponse.StatusCode) (يجب 401)" -ForegroundColor Yellow
+} catch {
+    if ($_.Exception.Response.StatusCode.value__ -eq 401) {
+        Write-Host "  ✅ /api/v1/cart بدون Token = 401 (محمي!)" -ForegroundColor Green
+    } else {
+        Write-Host "  ⚠️ $($_.Exception.Message)" -ForegroundColor Yellow
+    }
+}
+
+Write-Host ""
 Write-Host "============================================" -ForegroundColor Cyan
-Write-Host "✅ تم التحديث بنجاح!" -ForegroundColor Green
+Write-Host "✅ تم التحديث والتأمين بنجاح!" -ForegroundColor Green
 Write-Host "🌐 الموقع: https://store.update-aden.com/" -ForegroundColor Yellow
+Write-Host "🔐 API: https://store.update-aden.com/api/v1/" -ForegroundColor Yellow
 Write-Host "============================================" -ForegroundColor Cyan

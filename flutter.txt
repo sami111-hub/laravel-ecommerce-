@@ -1,0 +1,721 @@
+
+╔══════════════════════════════════════════════════════════════════════════════════╗
+║          خطة تطوير تطبيق Flutter الاحترافية الكاملة                            ║
+║          المتجر الإلكتروني - store.update-aden.com                              ║
+║          التاريخ: فبراير 2026                                                   ║
+╚══════════════════════════════════════════════════════════════════════════════════╝
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+                         API الجاهزة على السيرفر
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Base URL: https://store.update-aden.com/api/v1
+
+[عام - بدون توكن]
+POST   /register
+POST   /login
+GET    /home
+GET    /settings
+GET    /products
+GET    /products/featured
+GET    /products/latest
+GET    /products/flash-deals
+GET    /products/search?q=...
+GET    /products/{id}
+GET    /products/{id}/reviews
+GET    /categories
+GET    /categories/{id}/products
+GET    /phones
+GET    /phones/latest
+GET    /phones/popular
+GET    /phones/search
+GET    /phones/brands
+GET    /phones/brands/{brand}
+GET    /phones/{id}
+GET    /offers
+
+[محمي - يحتاج Bearer Token]
+GET    /test-auth
+GET    /user
+PUT    /user/profile
+PUT    /user/password
+POST   /logout
+GET    /cart
+GET    /cart/count
+POST   /cart
+PUT    /cart/{id}
+DELETE /cart/{id}
+GET    /orders
+POST   /orders
+GET    /orders/{id}
+PUT    /orders/{id}/cancel
+GET    /wishlist
+POST   /wishlist/toggle
+POST   /products/{id}/reviews
+PUT    /reviews/{id}
+DELETE /reviews/{id}
+GET    /addresses
+POST   /addresses
+PUT    /addresses/{id}
+DELETE /addresses/{id}
+PUT    /addresses/{id}/default
+POST   /coupons/validate
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+                    المراحل الأربع (نمشي بالترتيب)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+┌─────────────────────────────────────────────────────┐
+│  المرحلة 1: إنشاء المشروع + الهيكل + الحزم         │
+│  المرحلة 2: الاتصال بـ API                          │
+│  المرحلة 3: الشاشات الكاملة                         │
+│  المرحلة 4: الرفع والنشر                            │
+└─────────────────────────────────────────────────────┘
+
+
+╔══════════════════════════════════════════════════════════════════════════════════╗
+║                   المرحلة 1: إنشاء المشروع                                     ║
+╚══════════════════════════════════════════════════════════════════════════════════╝
+
+[1.1] إنشاء المشروع
+━━━━━━━━━━━━━━━━━━━
+  flutter create --org com.updateaden --project-name store_app .
+  cd store_app
+
+[1.2] هيكل المجلدات (مهم جداً - لا تتخطاه)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+lib/
+├── main.dart                         ← نقطة الدخول
+├── app.dart                          ← MaterialApp
+│
+├── core/                             ← أساسيات المشروع
+│   ├── constants/
+│   │   ├── app_colors.dart           ← الألوان
+│   │   ├── app_text_styles.dart      ← الخطوط
+│   │   └── api_constants.dart        ← الروابط والثوابت
+│   ├── network/
+│   │   ├── api_client.dart           ← Dio + Interceptors
+│   │   └── api_exception.dart        ← معالجة الأخطاء
+│   ├── storage/
+│   │   └── storage_service.dart      ← SharedPreferences
+│   └── utils/
+│       ├── validators.dart           ← فحص المدخلات
+│       └── helpers.dart              ← دوال مساعدة
+│
+├── models/                           ← نماذج البيانات
+│   ├── user_model.dart
+│   ├── product_model.dart
+│   ├── category_model.dart
+│   ├── cart_model.dart
+│   ├── order_model.dart
+│   ├── address_model.dart
+│   ├── review_model.dart
+│   ├── wishlist_model.dart
+│   └── phone_model.dart
+│
+├── services/                         ← التواصل مع API
+│   ├── auth_service.dart
+│   ├── product_service.dart
+│   ├── cart_service.dart
+│   ├── order_service.dart
+│   ├── address_service.dart
+│   ├── wishlist_service.dart
+│   └── review_service.dart
+│
+├── providers/                        ← إدارة الحالة (Riverpod/Provider)
+│   ├── auth_provider.dart
+│   ├── cart_provider.dart
+│   ├── wishlist_provider.dart
+│   ├── product_provider.dart
+│   └── order_provider.dart
+│
+├── screens/                          ← الشاشات
+│   ├── splash/
+│   │   └── splash_screen.dart
+│   ├── onboarding/
+│   │   └── onboarding_screen.dart
+│   ├── auth/
+│   │   ├── login_screen.dart
+│   │   └── register_screen.dart
+│   ├── home/
+│   │   └── home_screen.dart
+│   ├── products/
+│   │   ├── products_screen.dart
+│   │   └── product_detail_screen.dart
+│   ├── phones/
+│   │   ├── phones_screen.dart
+│   │   └── phone_detail_screen.dart
+│   ├── cart/
+│   │   └── cart_screen.dart
+│   ├── orders/
+│   │   ├── orders_screen.dart
+│   │   └── order_detail_screen.dart
+│   ├── wishlist/
+│   │   └── wishlist_screen.dart
+│   ├── addresses/
+│   │   ├── addresses_screen.dart
+│   │   └── add_address_screen.dart
+│   ├── profile/
+│   │   └── profile_screen.dart
+│   └── main_screen.dart              ← BottomNavigationBar
+│
+└── widgets/                          ← ودجات مشتركة
+    ├── product_card.dart
+    ├── loading_widget.dart
+    ├── error_widget.dart
+    ├── custom_button.dart
+    └── custom_text_field.dart
+
+
+[1.3] الحزم المطلوبة (pubspec.yaml)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # الشبكة
+  dio: ^5.4.0                    ← HTTP requests
+  
+  # إدارة الحالة
+  flutter_riverpod: ^2.5.1       ← الأفضل لهذا المشروع
+  
+  # التخزين المحلي
+  shared_preferences: ^2.2.3     ← حفظ التوكن
+  
+  # التنقل
+  go_router: ^13.2.0             ← الراوتر الاحترافي
+  
+  # الصور
+  cached_network_image: ^3.3.1   ← تخزين الصور
+  
+  # الحالة الفارغة والتحميل
+  shimmer: ^3.0.0                ← تأثير التحميل
+  lottie: ^3.1.0                 ← أنيميشن
+  
+  # UI مساعد
+  flutter_svg: ^2.0.9
+  font_awesome_flutter: ^10.7.0
+  
+  # الإشعارات (للمرحلة المتقدمة)
+  firebase_messaging: ^14.7.0
+  
+  # أخرى
+  intl: ^0.19.0                  ← تنسيق التاريخ والسعر
+  connectivity_plus: ^6.0.3      ← فحص الإنترنت
+
+dev_dependencies:
+  flutter_lints: ^3.0.0
+  json_serializable: ^6.7.1
+  build_runner: ^2.4.8
+
+
+╔══════════════════════════════════════════════════════════════════════════════════╗
+║                   المرحلة 2: الاتصال بـ API                                    ║
+╚══════════════════════════════════════════════════════════════════════════════════╝
+
+[2.1] api_constants.dart
+━━━━━━━━━━━━━━━━━━━━━━━━
+class ApiConstants {
+  static const String baseUrl = 'https://store.update-aden.com/api/v1';
+  
+  // Auth
+  static const String login    = '/login';
+  static const String register = '/register';
+  static const String logout   = '/logout';
+  static const String user     = '/user';
+  
+  // Products
+  static const String products  = '/products';
+  static const String featured  = '/products/featured';
+  static const String latest    = '/products/latest';
+  static const String flashDeal = '/products/flash-deals';
+  
+  // Phones
+  static const String phones    = '/phones';
+  
+  // Categories
+  static const String categories = '/categories';
+  
+  // Cart
+  static const String cart = '/cart';
+  
+  // Orders
+  static const String orders = '/orders';
+  
+  // Wishlist
+  static const String wishlist = '/wishlist';
+  static const String wishlistToggle = '/wishlist/toggle';
+  
+  // Addresses
+  static const String addresses = '/addresses';
+}
+
+
+[2.2] api_client.dart (Dio + Interceptor للتوكن تلقائياً)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+class ApiClient {
+  final Dio _dio = Dio();
+
+  ApiClient() {
+    _dio.options = BaseOptions(
+      baseUrl: ApiConstants.baseUrl,
+      connectTimeout: const Duration(seconds: 30),
+      receiveTimeout: const Duration(seconds: 30),
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+    );
+
+    // Interceptor: يحقن التوكن تلقائياً في كل طلب محمي
+    _dio.interceptors.add(
+      InterceptorsWrapper(
+        onRequest: (options, handler) async {
+          final token = await StorageService.getToken();
+          if (token != null) {
+            options.headers['Authorization'] = 'Bearer $token';
+          }
+          return handler.next(options);
+        },
+        onError: (error, handler) {
+          if (error.response?.statusCode == 401) {
+            // التوكن منتهي → روّح لصفحة تسجيل الدخول
+            StorageService.clearAll();
+            // NavigationService.goToLogin();
+          }
+          return handler.next(error);
+        },
+      ),
+    );
+  }
+
+  Future<Response> get(String path, {Map<String, dynamic>? params}) =>
+      _dio.get(path, queryParameters: params);
+
+  Future<Response> post(String path, {dynamic data}) =>
+      _dio.post(path, data: data);
+
+  Future<Response> put(String path, {dynamic data}) =>
+      _dio.put(path, data: data);
+
+  Future<Response> delete(String path) =>
+      _dio.delete(path);
+}
+
+
+[2.3] storage_service.dart (حفظ التوكن)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+class StorageService {
+  static const _tokenKey = 'auth_token';
+  static const _userKey  = 'user_data';
+
+  static Future<void> saveToken(String token) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString(_tokenKey, token);
+  }
+
+  static Future<String?> getToken() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getString(_tokenKey);
+  }
+
+  static Future<bool> isLoggedIn() async {
+    final token = await getToken();
+    return token != null && token.isNotEmpty;
+  }
+
+  static Future<void> clearAll() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.clear();
+  }
+}
+
+
+[2.4] تسلسل ترتيب كتابة الكود
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+الترتيب الصحيح دائماً:
+
+1. Model  (الداتا)
+2. Service (الاتصال بـ API)
+3. Provider (إدارة الحالة)
+4. Screen  (الواجهة)
+
+مثال كامل على Cart:
+
+→ cart_model.dart
+  class CartItem {
+    final int id;
+    final int productId;
+    final String productName;
+    final double price;
+    final int quantity;
+    final String image;
+    ...
+    factory CartItem.fromJson(Map<String, dynamic> json) => ...
+  }
+
+→ cart_service.dart
+  class CartService {
+    final ApiClient _client = ApiClient();
+    
+    Future<List<CartItem>> getCart() async {
+      final res = await _client.get(ApiConstants.cart);
+      return (res.data['cart'] as List)
+          .map((e) => CartItem.fromJson(e))
+          .toList();
+    }
+    
+    Future<void> addToCart(int productId, int qty) async {
+      await _client.post(ApiConstants.cart, data: {
+        'product_id': productId,
+        'quantity': qty,
+      });
+    }
+    
+    Future<void> updateCart(int cartId, int qty) async {
+      await _client.put('${ApiConstants.cart}/$cartId', data: {'quantity': qty});
+    }
+    
+    Future<void> removeFromCart(int cartId) async {
+      await _client.delete('${ApiConstants.cart}/$cartId');
+    }
+  }
+
+→ cart_provider.dart (Riverpod)
+  final cartProvider = AsyncNotifierProvider<CartNotifier, List<CartItem>>(
+    CartNotifier.new,
+  );
+  
+  class CartNotifier extends AsyncNotifier<List<CartItem>> {
+    final _service = CartService();
+    
+    @override
+    Future<List<CartItem>> build() => _service.getCart();
+    
+    Future<void> add(int productId, int qty) async {
+      await _service.addToCart(productId, qty);
+      ref.invalidateSelf(); // يحدث الشاشة
+    }
+    
+    Future<void> remove(int cartId) async {
+      await _service.removeFromCart(cartId);
+      ref.invalidateSelf();
+    }
+  }
+
+
+╔══════════════════════════════════════════════════════════════════════════════════╗
+║                   المرحلة 3: الشاشات (ترتيب التطوير)                          ║
+╚══════════════════════════════════════════════════════════════════════════════════╝
+
+ابدأ بهذا الترتيب بالضبط:
+
+─────────────────────────────
+الأسبوع 1: الأساسيات
+─────────────────────────────
+
+[شاشة 1] SplashScreen
+  - تحقق: هل يوجد توكن محفوظ؟
+  - نعم → اذهب للـ HomeScreen
+  - لا  → اذهب للـ OnboardingScreen
+
+[شاشة 2] OnboardingScreen
+  - 3 صفحات تعريفية بالتطبيق
+  - PageView + dots
+  - زر "ابدأ" يذهب لـ LoginScreen
+
+[شاشة 3] LoginScreen
+  - حقل email
+  - حقل password (مع إظهار/إخفاء)
+  - زر تسجيل الدخول → POST /api/v1/login
+  - عند النجاح: احفظ التوكن + اذهب للـ HomeScreen
+  - زر "ليس لديك حساب؟" → RegisterScreen
+
+[شاشة 4] RegisterScreen
+  - حقل الاسم
+  - حقل email
+  - حقل password
+  - حقل تأكيد password
+  - حقل رقم الهاتف (اختياري)
+  - زر تسجيل → POST /api/v1/register
+
+─────────────────────────────
+الأسبوع 2: الشاشة الرئيسية
+─────────────────────────────
+
+[شاشة 5] MainScreen (مع BottomNavigationBar)
+  الـ tabs الخمس:
+  0 → HomeTab
+  1 → CategoriesTab
+  2 → CartTab (مع Badge عدد العناصر)
+  3 → WishlistTab
+  4 → ProfileTab
+
+[شاشة 6] HomeTab
+  - Banner Slider (صور العروض) - GET /api/v1/home
+  - قسم "فئات المنتجات" - GET /api/v1/categories
+  - قسم "منتجات مميزة" - GET /api/v1/products/featured
+  - قسم "وصل حديثاً" - GET /api/v1/products/latest
+  - قسم "عروض Flash" - GET /api/v1/products/flash-deals
+  - قسم "أحدث الهواتف" - GET /api/v1/phones/latest
+
+[شاشة 7] ProductsScreen
+  - قائمة المنتجات مع فلترة
+  - GET /api/v1/products
+  - فلتر حسب الفئة
+  - شريط بحث - GET /api/v1/products/search?q=...
+  - عند النقر → ProductDetailScreen
+
+─────────────────────────────
+الأسبوع 3: المنتج + السلة
+─────────────────────────────
+
+[شاشة 8] ProductDetailScreen
+  - صور المنتج (الصورة الرئيسية + Thumbnails)
+  - الاسم والسعر والوصف
+  - زر إضافة للمفضلة (قلب)
+  - اختيار الكمية
+  - زر "أضف للسلة" → POST /api/v1/cart
+  - التقييمات - GET /api/v1/products/{id}/reviews
+  - نموذج إضافة تقييم (إذا مسجل دخول)
+
+[شاشة 9] CartScreen
+  - قائمة عناصر السلة - GET /api/v1/cart
+  - تغيير الكمية - PUT /api/v1/cart/{id}
+  - حذف عنصر - DELETE /api/v1/cart/{id}
+  - المجموع الكلي
+  - حقل كوبون خصم - POST /api/v1/coupons/validate
+  - زر "إتمام الطلب" → CheckoutScreen
+
+[شاشة 10] CheckoutScreen
+  - اختيار العنوان - GET /api/v1/addresses
+  - رقم الهاتف
+  - ملاحظات
+  - ملخص الطلب والمجموع
+  - زر "تأكيد الطلب" → POST /api/v1/orders
+  - بعد النجاح → OrderSuccessScreen
+
+─────────────────────────────
+الأسبوع 4: الطلبات + الحساب
+─────────────────────────────
+
+[شاشة 11] OrdersScreen
+  - قائمة طلباتي - GET /api/v1/orders
+  - كل طلب: رقم، تاريخ، حالة، المجموع
+  - عند النقر → OrderDetailScreen
+
+[شاشة 12] OrderDetailScreen
+  - تفاصيل الطلب - GET /api/v1/orders/{id}
+  - قائمة المنتجات في الطلب
+  - حالة الطلب (pending/processing/shipped/delivered)
+  - زر إلغاء (إذا pending) - PUT /api/v1/orders/{id}/cancel
+
+[شاشة 13] WishlistScreen
+  - المنتجات المفضلة - GET /api/v1/wishlist
+  - إزالة من المفضلة - POST /api/v1/wishlist/toggle
+
+[شاشة 14] ProfileScreen
+  - بيانات المستخدم - GET /api/v1/user
+  - تعديل الملف الشخصي - PUT /api/v1/user/profile
+  - تغيير كلمة المرور - PUT /api/v1/user/password
+  - إدارة العناوين → AddressesScreen
+  - طلباتي → OrdersScreen
+  - تسجيل الخروج - POST /api/v1/logout
+
+[شاشة 15] AddressesScreen
+  - قائمة العناوين - GET /api/v1/addresses
+  - إضافة عنوان جديد - POST /api/v1/addresses
+  - تعديل عنوان - PUT /api/v1/addresses/{id}
+  - حذف عنوان - DELETE /api/v1/addresses/{id}
+  - تعيين كافتراضي - PUT /api/v1/addresses/{id}/default
+
+─────────────────────────────
+الأسبوع 5: الهواتف + تحسينات
+─────────────────────────────
+
+[شاشة 16] PhonesScreen
+  - قائمة الهواتف - GET /api/v1/phones
+  - فلتر حسب الماركة - GET /api/v1/phones/brands
+  - بحث - GET /api/v1/phones/search
+  - مقارنة هاتفين - GET /api/v1/phones/compare
+
+[شاشة 17] PhoneDetailScreen
+  - تفاصيل الهاتف
+  - المواصفات الكاملة
+  - زر "قارن مع هاتف آخر"
+
+
+╔══════════════════════════════════════════════════════════════════════════════════╗
+║                   تفاصيل تقنية مهمة (لا تتجاهلها)                              ║
+╚══════════════════════════════════════════════════════════════════════════════════╝
+
+[أ] معالجة الأخطاء بشكل موحد
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+class ApiException {
+  final String message;
+  final int? statusCode;
+  
+  ApiException(this.message, {this.statusCode});
+  
+  factory ApiException.fromDioError(DioException e) {
+    switch (e.response?.statusCode) {
+      case 401: return ApiException('يجب تسجيل الدخول أولاً', statusCode: 401);
+      case 403: return ApiException('غير مصرح لك بهذه العملية', statusCode: 403);
+      case 404: return ApiException('لم يتم العثور على البيانات', statusCode: 404);
+      case 422: 
+        final errors = e.response?.data['errors'];
+        if (errors != null) {
+          final firstKey = errors.keys.first;
+          return ApiException(errors[firstKey][0], statusCode: 422);
+        }
+        return ApiException('بيانات غير صحيحة', statusCode: 422);
+      case 500: return ApiException('خطأ في الخادم، حاول لاحقاً', statusCode: 500);
+      default:  return ApiException('حدث خطأ غير متوقع');
+    }
+  }
+}
+
+
+[ب] حالة التحميل (Loading States)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+كل شاشة لها 3 حالات:
+  1. loading → اعرض Shimmer Effect
+  2. data    → اعرض البيانات
+  3. error   → اعرض رسالة خطأ + زر إعادة المحاولة
+
+مثال مع Riverpod:
+  ref.watch(productsProvider).when(
+    loading: () => ProductShimmer(),
+    error: (e, s) => ErrorWidget(e.toString(), onRetry: () => ref.invalidate(productsProvider)),
+    data: (products) => ProductsList(products),
+  );
+
+
+[ج] تنسيق السعر
+━━━━━━━━━━━━━━━━
+String formatPrice(double price) {
+  return NumberFormat('#,###.##').format(price) + ' ر.ي';
+}
+
+
+[د] فحص الإنترنت قبل كل طلب
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+استخدم connectivity_plus:
+  final result = await Connectivity().checkConnectivity();
+  if (result == ConnectivityResult.none) {
+    throw ApiException('لا يوجد اتصال بالإنترنت');
+  }
+
+
+[هـ] الـ Headers الضرورية لكل طلب API
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer {token}    ← للطلبات المحمية فقط
+
+
+[و] الـ go_router (التنقل الاحترافي)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+final router = GoRouter(
+  initialLocation: '/splash',
+  redirect: (context, state) async {
+    final isLoggedIn = await StorageService.isLoggedIn();
+    final isAuthRoute = state.uri.path.startsWith('/auth');
+    
+    if (!isLoggedIn && !isAuthRoute && state.uri.path != '/splash') {
+      return '/auth/login';
+    }
+    return null;
+  },
+  routes: [
+    GoRoute(path: '/splash',    builder: (c, s) => SplashScreen()),
+    GoRoute(path: '/auth/login',    builder: (c, s) => LoginScreen()),
+    GoRoute(path: '/auth/register', builder: (c, s) => RegisterScreen()),
+    GoRoute(
+      path: '/home',
+      builder: (c, s) => MainScreen(),
+      routes: [
+        GoRoute(path: 'product/:id', builder: (c, s) => ProductDetailScreen(id: s.pathParameters['id']!)),
+        GoRoute(path: 'order/:id',   builder: (c, s) => OrderDetailScreen(id: s.pathParameters['id']!)),
+      ],
+    ),
+  ],
+);
+
+
+╔══════════════════════════════════════════════════════════════════════════════════╗
+║                   المرحلة 4: الرفع والنشر                                      ║
+╚══════════════════════════════════════════════════════════════════════════════════╝
+
+[4.1] قبل الرفع (Checklist)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  □ baseUrl في api_constants.dart يشير للـ production
+  □ APP_DEBUG = false في .env السيرفر
+  □ flutter clean && flutter pub get
+  □ اختبر كل الشاشات على Android و iOS
+
+[4.2] رفع Android (Google Play)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  # توليد keystore (مرة واحدة فقط)
+  keytool -genkey -v -keystore ~/key.jks -keyalias key -keyalg RSA -keysize 2048 -validity 10000
+
+  # بناء APK للإنتاج
+  flutter build apk --release
+
+  # بناء App Bundle (الأفضل للـ Play Store)
+  flutter build appbundle --release
+
+[4.3] رفع iOS (App Store)
+━━━━━━━━━━━━━━━━━━━━━━━━━
+  # يحتاج macOS + Xcode
+  flutter build ipa --release
+
+[4.4] رفع APK مباشر للمستخدمين (بدون Store)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  flutter build apk --split-per-abi --release
+  # ارفع ملف arm64-v8a للهواتف الحديثة
+
+
+╔══════════════════════════════════════════════════════════════════════════════════╗
+║                   خارطة الطريق الزمنية                                         ║
+╚══════════════════════════════════════════════════════════════════════════════════╝
+
+الأسبوع 1:  إنشاء المشروع + الهيكل + الحزم + api_client + auth (login/register)
+الأسبوع 2:  HomeScreen + ProductsScreen + ProductDetailScreen
+الأسبوع 3:  CartScreen + CheckoutScreen + OrdersScreen
+الأسبوع 4:  WishlistScreen + ProfileScreen + AddressesScreen
+الأسبوع 5:  PhonesScreen + تحسينات UI/UX + اختبار شامل
+الأسبوع 6:  إصلاح الأخطاء + رفع للـ Google Play
+
+
+╔══════════════════════════════════════════════════════════════════════════════════╗
+║                   أول 3 ملفات ستكتبها غداً (ابدأ بها)                         ║
+╚══════════════════════════════════════════════════════════════════════════════════╝
+
+1. lib/core/constants/api_constants.dart       ← الروابط
+2. lib/core/network/api_client.dart            ← Dio
+3. lib/core/storage/storage_service.dart       ← SharedPreferences
+
+بعدها مباشرة:
+4. lib/models/user_model.dart
+5. lib/services/auth_service.dart
+6. lib/providers/auth_provider.dart
+7. lib/screens/auth/login_screen.dart
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+                      ملاحظات ذهبية من الخبرة
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✔ اختبر كل API في Postman أولاً قبل ما تكتب الكود
+✔ ابدأ بـ real device مبكراً لا تعتمد على المحاكي فقط
+✔ لا تبدأ بالـ UI الجميل، ابدأ بالاتصال بـ API وتشغيل البيانات
+✔ استخدم const في الـ widgets قدر الإمكان للأداء
+✔ لا تضع business logic داخل الـ Screen مباشرة
+✔ احفظ نسخة من الـ .apk قبل كل تحديث
+✔ استخدم flutter analyze قبل كل commit
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+                   السيرفر جاهز ✅  الـ API جاهزة ✅  ابدأ التطبيق 🚀
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

@@ -13,7 +13,7 @@ class OfferResource extends JsonResource
             'id' => $this->id,
             'title' => $this->title,
             'description' => $this->description,
-            'image' => $this->image ? (str_starts_with($this->image, 'http') ? $this->image : asset('storage/' . $this->image)) : null,
+            'image' => $this->image ? (str_starts_with($this->image, 'http') ? $this->image : (($p = ltrim(preg_replace('#^/?storage#', '', $this->image), '/')) ? asset('storage/' . $p) : null)) : null,
             'discount_percentage' => $this->discount_percentage,
             'original_price' => $this->original_price ? (float) $this->original_price : null,
             'offer_price' => $this->offer_price ? (float) $this->offer_price : null,

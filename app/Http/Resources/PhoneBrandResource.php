@@ -13,7 +13,7 @@ class PhoneBrandResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'slug' => $this->slug,
-            'logo' => $this->logo ? (str_starts_with($this->logo, 'http') ? $this->logo : asset('storage/' . $this->logo)) : null,
+            'logo' => $this->logo ? (str_starts_with($this->logo, 'http') ? $this->logo : (($p = ltrim(preg_replace('#^/?storage#', '', $this->logo), '/')) ? asset('storage/' . $p) : null)) : null,
             'description' => $this->description,
             'phones_count' => $this->when(isset($this->phones_count), $this->phones_count),
         ];

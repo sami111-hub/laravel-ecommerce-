@@ -31,10 +31,14 @@ class WishlistController extends Controller
     /**
      * إضافة/إزالة من المفضلة
      */
-    public function toggle(Request $request, Product $product)
+    public function toggle(Request $request)
     {
+        $request->validate([
+            'product_id' => ['required', 'exists:products,id'],
+        ]);
+
         $wishlist = Wishlist::where('user_id', $request->user()->id)
-            ->where('product_id', $product->id)
+            ->where('product_id', $request->product_id)
             ->first();
 
         if ($wishlist) {
@@ -48,7 +52,7 @@ class WishlistController extends Controller
 
         Wishlist::create([
             'user_id' => $request->user()->id,
-            'product_id' => $product->id,
+            'product_id' => $request->product_id,
         ]);
 
         return response()->json([

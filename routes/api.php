@@ -35,6 +35,7 @@ Route::prefix('v1')->group(function () {
     // --- الصفحة الرئيسية ---
     Route::get('/home', [HomeController::class, 'index']);
     Route::get('/settings', [HomeController::class, 'settings']);
+    Route::get('/currencies', [HomeController::class, 'currencies']);
 
     // --- المنتجات ---
     Route::get('/products', [ProductController::class, 'index']);
@@ -69,6 +70,15 @@ Route::prefix('v1')->group(function () {
     // ============================================================
 
     Route::middleware('auth:sanctum')->group(function () {
+
+        // --- اختبار التوكن ---
+        Route::get('/test-auth', function () {
+            return response()->json([
+                'success' => true,
+                'message' => 'التوكن صحيح ✅',
+                'user' => auth()->user(),
+            ]);
+        });
 
         // --- الحساب ---
         Route::get('/user', [AuthController::class, 'user']);

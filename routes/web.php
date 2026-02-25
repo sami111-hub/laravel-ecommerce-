@@ -53,7 +53,8 @@ Route::get('/products/search', [ProductController::class, 'search'])->name('prod
 Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.show');
 Route::get('/category/{category}', [ProductController::class, 'category'])->name('products.category');
 Route::get('/offers', [OfferController::class, 'index'])->name('offers');
-Route::get('/api/recommendations', [App\Http\Controllers\RecommendationController::class, 'getRecommendedProducts'])->name('api.recommendations');
+// ملاحظة: تم نقل هذا الرابط إلى routes/api.php لأنه يبدأ بـ /api
+// Route::get('/api/recommendations', ...) => الآن في api.php تحت v1/recommendations
 
 // Phone Routes
 Route::get('/phones', [PhoneController::class, 'index'])->name('phones.index');

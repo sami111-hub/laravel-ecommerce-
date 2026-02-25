@@ -54,9 +54,11 @@ class AuthController extends Controller
         $user = User::where('email', $request->email)->first();
 
         if (!$user || !Hash::check($request->password, $user->password)) {
-            throw ValidationException::withMessages([
-                'email' => ['بيانات الدخول غير صحيحة'],
-            ]);
+            return response()->json([
+                'success' => false,
+                'message' => 'بيانات الدخول غير صحيحة',
+                'errors' => ['email' => ['بيانات الدخول غير صحيحة']],
+            ], 401);
         }
 
         // حذف التوكنات القديمة للجهاز
