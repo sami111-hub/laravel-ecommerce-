@@ -210,6 +210,39 @@
                 </div>
             </div>
 
+            {{-- صور إضافية --}}
+            <div class="section-title mb-3 mt-4">
+                <h5 class="text-primary"><i class="bi bi-images"></i> صور إضافية (اختياري)</h5>
+                <hr>
+                <small class="text-muted"><i class="bi bi-info-circle"></i> أضف صور إضافية للمنتج (حتى 10 صور) لعرض المنتج من زوايا مختلفة</small>
+            </div>
+
+            <div id="additional-images-container">
+                <div id="additional-images-list"></div>
+                <button type="button" class="btn btn-outline-success btn-sm mt-2" onclick="addAdditionalImageUrl()">
+                    <i class="bi bi-plus-lg"></i> إضافة رابط صورة
+                </button>
+                <button type="button" class="btn btn-outline-info btn-sm mt-2" onclick="document.getElementById('additional_files_input').click()">
+                    <i class="bi bi-upload"></i> رفع صور من الجهاز
+                </button>
+                <input type="file" id="additional_files_input" name="additional_images[]" multiple accept="image/*" style="display:none;" onchange="showUploadedFiles(this)">
+                <div id="uploaded-files-info" class="mt-2"></div>
+            </div>
+
+            {{-- الموديلات / الفئات الفرعية --}}
+            <div class="section-title mb-3 mt-4" id="variants-section">
+                <h5 class="text-primary"><i class="bi bi-phone"></i> الموديلات المتوفرة (للإكسسوارات)</h5>
+                <hr>
+                <small class="text-muted"><i class="bi bi-info-circle"></i> أضف الموديلات المختلفة للمنتج مع كمية كل موديل (مثال: iPhone 15, iPhone 14, Samsung S24)</small>
+            </div>
+
+            <div id="variants-container">
+                <div id="variants-list"></div>
+                <button type="button" class="btn btn-outline-primary btn-sm mt-2" onclick="addVariant()">
+                    <i class="bi bi-plus-lg"></i> إضافة موديل
+                </button>
+            </div>
+
             {{-- أزرار الحفظ --}}
             <div class="d-flex gap-2 mt-4 pt-3 border-top">
                 <button type="submit" class="btn btn-primary px-4">
@@ -541,6 +574,58 @@ document.getElementById('name').addEventListener('input', function() {
         skuField.placeholder = sku || 'PRD-AUTO';
     }
 });
+
+// ===== صور إضافية =====
+let additionalImageCount = 0;
+function addAdditionalImageUrl(value = '') {
+    additionalImageCount++;
+    const container = document.getElementById('additional-images-list');
+    const div = document.createElement('div');
+    div.className = 'input-group mb-2 additional-img-row';
+    div.innerHTML = `
+        <span class="input-group-text"><i class="bi bi-link-45deg"></i></span>
+        <input type="url" class="form-control" name="additional_image_urls[]" value="${value}" placeholder="https://example.com/image.jpg">
+        <button type="button" class="btn btn-outline-danger" onclick="this.closest('.additional-img-row').remove()">
+            <i class="bi bi-trash"></i>
+        </button>
+    `;
+    container.appendChild(div);
+}
+
+function showUploadedFiles(input) {
+    const info = document.getElementById('uploaded-files-info');
+    if (input.files.length > 0) {
+        info.innerHTML = '<small class="text-success"><i class="bi bi-check-circle"></i> تم اختيار ' + input.files.length + ' صورة</small>';
+    } else {
+        info.innerHTML = '';
+    }
+}
+
+// ===== الموديلات =====
+let variantCount = 0;
+function addVariant(name = '', stock = '', price = '') {
+    variantCount++;
+    const container = document.getElementById('variants-list');
+    const div = document.createElement('div');
+    div.className = 'row mb-2 variant-row';
+    div.innerHTML = `
+        <div class="col-5">
+            <input type="text" class="form-control" name="variant_names[]" value="${name}" placeholder="اسم الموديل (مثال: iPhone 15 Pro Max)">
+        </div>
+        <div class="col-3">
+            <input type="number" class="form-control" name="variant_stocks[]" value="${stock}" placeholder="الكمية" min="0">
+        </div>
+        <div class="col-2">
+            <input type="number" class="form-control" name="variant_prices[]" value="${price}" placeholder="فرق السعر" step="0.01">
+        </div>
+        <div class="col-2">
+            <button type="button" class="btn btn-outline-danger btn-sm w-100" onclick="this.closest('.variant-row').remove()">
+                <i class="bi bi-trash"></i> حذف
+            </button>
+        </div>
+    `;
+    container.appendChild(div);
+}
 </script>
 
 <style>

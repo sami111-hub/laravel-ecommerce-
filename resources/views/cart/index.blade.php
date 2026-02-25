@@ -23,17 +23,23 @@
                     </div>
                     <div style="flex:1;">
                         <div class="cart-item-name">{{ $cart->product->name }}</div>
+                        @if($cart->variant)
+                            <div class="small"><span class="badge bg-primary-subtle text-primary">{{ $cart->variant->model_name }}</span></div>
+                        @endif
                         <div class="cart-price">
                             <x-multi-currency-price :price="$cart->product->price" size="small" />
                         </div>
                     </div>
                     <div style="flex:0 0 160px; text-align:right;">
+                        @php
+                            $maxStock = $cart->variant ? $cart->variant->stock : $cart->product->stock;
+                        @endphp
                         <form action="{{ route('cart.update', $cart) }}" method="POST" class="d-inline-block me-2" id="form-qty-{{ $cart->id }}">
                             @csrf
                             @method('PUT')
                             <div class="qty-controls">
                                 <button type="button" class="btn-decrease" data-target="#qty-{{ $cart->id }}">-</button>
-                                <input type="number" id="qty-{{ $cart->id }}" name="quantity" value="{{ $cart->quantity }}" min="1" max="{{ $cart->product->stock }}" style="width:60px; text-align:center;" />
+                                <input type="number" id="qty-{{ $cart->id }}" name="quantity" value="{{ $cart->quantity }}" min="1" max="{{ $maxStock }}" style="width:60px; text-align:center;" />
                                 <button type="button" class="btn-increase" data-target="#qty-{{ $cart->id }}">+</button>
                             </div>
                         </form>

@@ -62,21 +62,32 @@ class ProductController extends Controller
 
     public function show(Product $product)
     {
-        $product->load(['brand', 'categories', 'reviews' => function($query) {
+        $product->load(['brand', 'categories', 'images', 'variants' => function($query) {
+            $query->where('is_active', true)->orderBy('model_name');
+        }, 'reviews' => function($query) {
             $query->where('is_approved', true)
                   ->with('user')
                   ->latest()
                   ->take(10);
         }]);
         
-        // منتجات مشابهة
-        $relatedProducts = Product::whereHas('categories', function($q) use ($product) {
-                $q->whereIn('categories.id', $product->categories->pluck('id'));
+        // منتجات مشابهة محسّنة (حسب التصنيف + الماركة + سعر قريب)
+        $categoryIds = $product->categories->pluck('id');
+        
+        $relatedProducts = Product::where('id', '!=', $product->id)
+            ->where(function($q) use ($product, $categoryIds) {
+                // نفس التصنيف
+                $q->whereHas('categories', function($sub) use ($categoryIds) {
+                    $sub->whereIn('categories.id', $categoryIds);
+                });
+                // أو نفس الماركة
+                if ($product->brand_id) {
+                    $q->orWhere('brand_id', $product->brand_id);
+                }
             })
-            ->where('id', '!=', $product->id)
-            ->with('brand')
+            ->with(['brand', 'images'])
             ->inRandomOrder()
-            ->take(4)
+            ->take(8)
             ->get();
         
         return view('products.show', compact('product', 'relatedProducts'));
@@ -84,9 +95,39 @@ class ProductController extends Controller
 
     public function category(Category $category)
     {
-        $products = $category->products()->with('brand')->paginate(12);
+        $query = $category->products()->with(['brand', 'images']);
+        
+        // Filter by brand within category
+        if (request('brand')) {
+            $query->where('brand_id', request('brand'));
+        }
+        
+        // Sort
+        if (request('sort')) {
+            switch(request('sort')) {
+                case 'price_asc':
+                    $query->orderBy('price', 'asc');
+                    break;
+                case 'price_desc':
+                    $query->orderBy('price', 'desc');
+                    break;
+                case 'latest':
+                    $query->orderBy('products.created_at', 'desc');
+                    break;
+                default:
+                    $query->orderBy('products.id', 'desc');
+            }
+        } else {
+            $query->orderBy('products.id', 'desc');
+        }
+        
+        $products = $query->paginate(12);
+        
+        // الماركات الموجودة في هذا القسم فقط
+        $brandIds = $category->products()->pluck('brand_id')->unique()->filter();
+        $brands = Brand::whereIn('id', $brandIds)->where('is_active', true)->get();
+        
         $categories = Category::where('is_active', true)->orderBy('order')->get();
-        $brands = Brand::where('is_active', true)->get();
 
         return view('products.category', compact('category', 'products', 'categories', 'brands'));
     }

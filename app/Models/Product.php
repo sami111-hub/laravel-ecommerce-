@@ -53,6 +53,65 @@ class Product extends Model
         return $this->hasMany(Review::class);
     }
 
+    /**
+     * صور المنتج المتعددة
+     */
+    public function images(): HasMany
+    {
+        return $this->hasMany(ProductImage::class)->orderBy('sort_order');
+    }
+
+    /**
+     * موديلات المنتج (للإكسسوارات)
+     */
+    public function variants(): HasMany
+    {
+        return $this->hasMany(ProductVariant::class);
+    }
+
+    /**
+     * الموديلات المتوفرة فقط
+     */
+    public function availableVariants(): HasMany
+    {
+        return $this->hasMany(ProductVariant::class)
+                     ->where('is_active', true)
+                     ->where('stock', '>', 0);
+    }
+
+    /**
+     * جميع صور المنتج (الصورة الرئيسية + الصور الإضافية)
+     */
+    public function getAllImagesAttribute(): array
+    {
+        $images = $this->images->pluck('image_path')->toArray();
+        
+        // إذا كانت هناك صورة رئيسية قديمة ولم تكن ضمن الصور المتعددة
+        if ($this->image && !in_array($this->image, $images)) {
+            array_unshift($images, $this->image);
+        }
+        
+        return $images;
+    }
+
+    /**
+     * هل المنتج من فئة الإكسسوارات؟
+     */
+    public function getIsAccessoryAttribute(): bool
+    {
+        $accessorySlugs = ['phone-accessories', 'cases-covers', 'accessories'];
+        return $this->categories()->whereIn('slug', $accessorySlugs)->exists();
+    }
+
+    /**
+     * هل المنتج من فئة الهواتف الذكية؟
+     */
+    public function getIsSmartphoneAttribute(): bool
+    {
+        $phoneSlugs = ['smartphones', 'mobiles'];
+        return $this->categories()->whereIn('slug', $phoneSlugs)->exists();
+    }
+
     public function getAverageRatingAttribute()
     {
         return $this->reviews()->where('is_approved', true)->avg('rating') ?? 0;

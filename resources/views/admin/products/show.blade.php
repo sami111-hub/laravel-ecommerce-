@@ -18,10 +18,25 @@
                 <h5 class="mb-0"><i class="bi bi-info-circle"></i> {{ $product->name }}</h5>
             </div>
             <div class="card-body">
-                @if($product->image)
+                @php
+                    $allImages = [];
+                    if ($product->image) $allImages[] = $product->image;
+                    foreach ($product->images ?? [] as $img) {
+                        if (!in_array($img->image_path, $allImages)) $allImages[] = $img->image_path;
+                    }
+                @endphp
+                @if(count($allImages) > 0)
                     <div class="text-center mb-4">
-                        <img src="{{ $product->image }}" alt="{{ $product->name }}" class="img-fluid rounded shadow-sm" style="max-height: 350px;">
+                        <img src="{{ $allImages[0] }}" alt="{{ $product->name }}" class="img-fluid rounded shadow-sm" style="max-height: 350px;">
                     </div>
+                    @if(count($allImages) > 1)
+                    <div class="d-flex gap-2 justify-content-center mb-3 flex-wrap">
+                        @foreach($allImages as $i => $imgPath)
+                        <img src="{{ $imgPath }}" alt="صورة {{ $i + 1 }}" class="rounded" style="width: 60px; height: 60px; object-fit: cover; border: 2px solid {{ $i === 0 ? '#0d6efd' : '#dee2e6' }};">
+                        @endforeach
+                    </div>
+                    <small class="text-muted"><i class="bi bi-images"></i> {{ count($allImages) }} صورة</small>
+                    @endif
                 @endif
                 
                 <div class="mb-3">
@@ -243,7 +258,28 @@
                         <span>عدد التقييمات</span>
                         <span class="badge bg-info">{{ $product->reviews->count() }}</span>
                     </li>
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span>عدد الصور</span>
+                        <span class="badge bg-secondary">{{ ($product->images ? $product->images->count() : 0) + ($product->image ? 1 : 0) }}</span>
+                    </li>
+                    @if($product->variants && $product->variants->count() > 0)
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span>عدد الموديلات</span>
+                        <span class="badge bg-dark">{{ $product->variants->count() }}</span>
+                    </li>
+                    @endif
                 </ul>
+
+                @if($product->variants && $product->variants->count() > 0)
+                <hr>
+                <h6 class="mb-3"><i class="bi bi-phone"></i> الموديلات</h6>
+                @foreach($product->variants as $variant)
+                <div class="d-flex justify-content-between align-items-center mb-2 p-2 rounded {{ $variant->stock > 0 ? 'bg-success-subtle' : 'bg-danger-subtle' }}">
+                    <span>{{ $variant->model_name }}</span>
+                    <span class="badge {{ $variant->stock > 0 ? 'bg-success' : 'bg-danger' }}">{{ $variant->stock }} قطعة</span>
+                </div>
+                @endforeach
+                @endif
             </div>
         </div>
     </div>

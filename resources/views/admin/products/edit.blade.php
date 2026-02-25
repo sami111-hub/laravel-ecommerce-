@@ -186,6 +186,95 @@
                 </div>
             </div>
 
+            {{-- الصور الإضافية الحالية --}}
+            @if($product->images && $product->images->count() > 0)
+            <div class="section-title mb-3 mt-4">
+                <h5 class="text-primary"><i class="bi bi-images"></i> الصور الإضافية الحالية</h5>
+                <hr>
+            </div>
+            <div class="row g-3 mb-3">
+                @foreach($product->images as $img)
+                <div class="col-md-3 col-6">
+                    <div class="card">
+                        <img src="{{ $img->image_path }}" class="card-img-top" alt="صورة إضافية" style="height: 150px; object-fit: cover;">
+                        <div class="card-body p-2 text-center">
+                            <label class="form-check">
+                                <input type="checkbox" name="delete_images[]" value="{{ $img->id }}" class="form-check-input">
+                                <span class="text-danger small">حذف</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+            @endif
+
+            {{-- إضافة صور جديدة --}}
+            <div class="section-title mb-3 mt-4">
+                <h5 class="text-primary"><i class="bi bi-plus-circle"></i> إضافة صور جديدة (اختياري)</h5>
+                <hr>
+            </div>
+            <div id="additional-images-container">
+                <div id="additional-images-list"></div>
+                <button type="button" class="btn btn-outline-success btn-sm mt-2" onclick="addAdditionalImageUrl()">
+                    <i class="bi bi-plus-lg"></i> إضافة رابط صورة
+                </button>
+                <button type="button" class="btn btn-outline-info btn-sm mt-2" onclick="document.getElementById('additional_files_input').click()">
+                    <i class="bi bi-upload"></i> رفع صور من الجهاز
+                </button>
+                <input type="file" id="additional_files_input" name="additional_images[]" multiple accept="image/*" style="display:none;" onchange="showUploadedFiles(this)">
+                <div id="uploaded-files-info" class="mt-2"></div>
+            </div>
+
+            {{-- الموديلات الحالية --}}
+            <div class="section-title mb-3 mt-4">
+                <h5 class="text-primary"><i class="bi bi-phone"></i> الموديلات المتوفرة</h5>
+                <hr>
+            </div>
+
+            @if($product->variants && $product->variants->count() > 0)
+            <div class="mb-3">
+                <label class="form-label fw-bold">الموديلات الحالية</label>
+                <table class="table table-sm table-bordered">
+                    <thead class="table-light">
+                        <tr><th>الموديل</th><th>الكمية</th><th>فرق السعر</th><th>الحالة</th><th>حذف</th></tr>
+                    </thead>
+                    <tbody>
+                        @foreach($product->variants as $variant)
+                        <tr>
+                            <td>
+                                <input type="hidden" name="existing_variant_ids[]" value="{{ $variant->id }}">
+                                <input type="text" class="form-control form-control-sm" name="existing_variant_names[]" value="{{ $variant->model_name }}">
+                            </td>
+                            <td><input type="number" class="form-control form-control-sm" name="existing_variant_stocks[]" value="{{ $variant->stock }}" min="0"></td>
+                            <td><input type="number" class="form-control form-control-sm" name="existing_variant_prices[]" value="{{ $variant->price_adjustment }}" step="0.01"></td>
+                            <td>
+                                <select class="form-select form-select-sm" name="existing_variant_active[]">
+                                    <option value="1" {{ $variant->is_active ? 'selected' : '' }}>فعال</option>
+                                    <option value="0" {{ !$variant->is_active ? 'selected' : '' }}>معطل</option>
+                                </select>
+                            </td>
+                            <td>
+                                <label class="form-check">
+                                    <input type="checkbox" name="delete_variants[]" value="{{ $variant->id }}" class="form-check-input">
+                                    <span class="text-danger small">حذف</span>
+                                </label>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+            @endif
+
+            <div id="variants-container">
+                <label class="form-label fw-bold">إضافة موديلات جديدة</label>
+                <div id="variants-list"></div>
+                <button type="button" class="btn btn-outline-primary btn-sm mt-2" onclick="addVariant()">
+                    <i class="bi bi-plus-lg"></i> إضافة موديل جديد
+                </button>
+            </div>
+
             {{-- أزرار الحفظ --}}
             <div class="d-flex gap-2 mt-4 pt-3 border-top">
                 <button type="submit" class="btn btn-primary px-4">
@@ -508,6 +597,58 @@ fileInput.addEventListener('change', function() {
         preview.style.display = 'none';
     }
 });
+
+// ===== صور إضافية =====
+let additionalImageCount = 0;
+function addAdditionalImageUrl(value = '') {
+    additionalImageCount++;
+    const container = document.getElementById('additional-images-list');
+    const div = document.createElement('div');
+    div.className = 'input-group mb-2 additional-img-row';
+    div.innerHTML = `
+        <span class="input-group-text"><i class="bi bi-link-45deg"></i></span>
+        <input type="url" class="form-control" name="additional_image_urls[]" value="${value}" placeholder="https://example.com/image.jpg">
+        <button type="button" class="btn btn-outline-danger" onclick="this.closest('.additional-img-row').remove()">
+            <i class="bi bi-trash"></i>
+        </button>
+    `;
+    container.appendChild(div);
+}
+
+function showUploadedFiles(input) {
+    const info = document.getElementById('uploaded-files-info');
+    if (input.files.length > 0) {
+        info.innerHTML = '<small class="text-success"><i class="bi bi-check-circle"></i> تم اختيار ' + input.files.length + ' صورة</small>';
+    } else {
+        info.innerHTML = '';
+    }
+}
+
+// ===== الموديلات =====
+let variantCount = 0;
+function addVariant(name = '', stock = '', price = '') {
+    variantCount++;
+    const container = document.getElementById('variants-list');
+    const div = document.createElement('div');
+    div.className = 'row mb-2 variant-row';
+    div.innerHTML = `
+        <div class="col-5">
+            <input type="text" class="form-control" name="variant_names[]" value="${name}" placeholder="اسم الموديل (مثال: iPhone 15 Pro Max)">
+        </div>
+        <div class="col-3">
+            <input type="number" class="form-control" name="variant_stocks[]" value="${stock}" placeholder="الكمية" min="0">
+        </div>
+        <div class="col-2">
+            <input type="number" class="form-control" name="variant_prices[]" value="${price}" placeholder="فرق السعر" step="0.01">
+        </div>
+        <div class="col-2">
+            <button type="button" class="btn btn-outline-danger btn-sm w-100" onclick="this.closest('.variant-row').remove()">
+                <i class="bi bi-trash"></i> حذف
+            </button>
+        </div>
+    `;
+    container.appendChild(div);
+}
 </script>
 
 <style>

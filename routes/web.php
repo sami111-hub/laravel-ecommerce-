@@ -16,6 +16,7 @@ use App\Http\Controllers\Admin\OrderController as AdminOrderController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\OfferController as AdminOfferController;
 use App\Http\Controllers\Admin\SiteSettingsController;
+use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\OfferController;
 use App\Http\Controllers\Auth\GoogleController;
 use App\Http\Controllers\CouponController;
@@ -169,6 +170,16 @@ Route::prefix('admin')->middleware(['auth'])->name('admin.')->group(function () 
     
     Route::middleware(['permission:delete-categories'])->group(function () {
         Route::delete('categories/{category}', [CategoryController::class, 'destroy'])->name('categories.destroy');
+    });
+    
+    // Brands Management - إدارة الماركات (مدير النظام فقط)
+    Route::middleware(['permission:manage-brands'])->group(function () {
+        Route::get('brands', [BrandController::class, 'index'])->name('brands.index');
+        Route::get('brands/create', [BrandController::class, 'create'])->name('brands.create');
+        Route::post('brands', [BrandController::class, 'store'])->name('brands.store');
+        Route::get('brands/{brand}/edit', [BrandController::class, 'edit'])->name('brands.edit');
+        Route::put('brands/{brand}', [BrandController::class, 'update'])->name('brands.update');
+        Route::delete('brands/{brand}', [BrandController::class, 'destroy'])->name('brands.destroy');
     });
     
     // Offers Management - requires product permissions

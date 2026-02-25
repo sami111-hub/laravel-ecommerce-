@@ -53,6 +53,9 @@ class RolePermissionSeeder extends Seeder
             
             // Settings
             ['name' => 'إعدادات النظام', 'slug' => 'manage-settings', 'group' => 'settings'],
+            
+            // Brands - إدارة الماركات (مدير النظام فقط)
+            ['name' => 'إدارة الماركات', 'slug' => 'manage-brands', 'group' => 'brands'],
         ];
 
         foreach ($permissions as $perm) {

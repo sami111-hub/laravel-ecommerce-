@@ -551,6 +551,11 @@
                 <span>التصنيفات</span>
             </a>
             
+            <a href="{{ route('admin.brands.index') }}" class="sidebar-nav-link {{ request()->routeIs('admin.brands.*') ? 'active' : '' }}">
+                <i class="bi bi-award"></i>
+                <span>الماركات</span>
+            </a>
+            
             <a href="{{ route('admin.offers.index') }}" class="sidebar-nav-link {{ request()->routeIs('admin.offers.*') ? 'active' : '' }}">
                 <i class="bi bi-percent"></i>
                 <span>العروض</span>
