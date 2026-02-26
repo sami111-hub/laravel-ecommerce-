@@ -24,11 +24,17 @@
     $isCharger = count(array_intersect($categorySlugs, ['power-banks-chargers', 'chargers-cables', 'chargers'])) > 0;
     
     // ترتيب المواصفات حسب التصنيف
+    // ترتيب الهواتف الذكية
     $smartphoneOrder = ['network', 'sim', 'dimensions', 'weight', 'screen_type', 'resolution', 'screen_size', 'os', 'processor', 'storage', 'ram', 'rear_camera', 'front_camera', 'battery', 'charging', 'water_resistance', 'fingerprint', 'colors'];
-    $laptopOrder = ['device_type', 'screen_size', 'screen_type', 'resolution', 'processor', 'ram', 'storage', 'gpu', 'os', 'battery_life', 'ports', 'connectivity', 'keyboard', 'stylus', 'webcam', 'weight', 'colors'];
-    $watchOrder = ['screen_size', 'screen_type', 'processor', 'storage', 'battery_life', 'water_resistance', 'sensors', 'gps', 'connectivity', 'compatibility', 'strap_material', 'weight', 'colors'];
-    $headphoneOrder = ['type', 'connectivity', 'driver_size', 'frequency', 'noise_cancellation', 'battery_life', 'charging', 'microphone', 'water_resistance', 'power_output', 'weight', 'colors'];
-    $chargerOrder = ['type', 'wattage', 'ports_count', 'cable_type', 'cable_length', 'fast_charging', 'battery_capacity', 'compatibility', 'weight'];
+    // ترتيب اللابتوبات والأجهزة اللوحية
+    $laptopOrder = ['processor', 'ram', 'storage', 'gpu', 'screen_size', 'screen_type', 'resolution', 'os', 'battery_life', 'device_type', 'ports', 'connectivity', 'webcam', 'keyboard', 'stylus', 'weight', 'colors'];
+    // ترتيب الساعات الذكية
+    $watchOrder = ['screen_size', 'screen_type', 'battery_life', 'water_resistance', 'sensors', 'gps', 'processor', 'storage', 'connectivity', 'compatibility', 'strap_material', 'weight', 'colors'];
+    // ترتيب السماعات والمكبرات
+    $headphoneOrder = ['type', 'noise_cancellation', 'battery_life', 'connectivity', 'driver_size', 'frequency', 'charging', 'microphone', 'water_resistance', 'power_output', 'weight', 'colors'];
+    // ترتيب الشواحن والباور بانك
+    $chargerOrder = ['type', 'wattage', 'fast_charging', 'battery_capacity', 'ports_count', 'cable_type', 'cable_length', 'compatibility', 'weight'];
+    // ترتيب ملحقات الهواتف
     $accessoryOrder = ['type', 'compatible_device', 'material', 'protection_level', 'features', 'magsafe', 'connectivity', 'weight', 'colors'];
     
     // اختيار الترتيب المناسب
@@ -132,37 +138,57 @@
         {{-- === قسم الصور === --}}
         <div class="col-lg-6 mb-4">
             @if(count($allImages) > 1)
-                {{-- معرض صور تفاعلي --}}
-                <div class="product-gallery">
-                    <div class="main-image-wrapper position-relative mb-3">
-                        <img id="mainProductImage" src="{{ $allImages[0] }}" class="img-fluid rounded shadow-sm w-100" 
-                             alt="{{ $product->name }}" style="max-height: 500px; object-fit: contain; background: #f8f9fa; cursor: zoom-in;"
-                             onclick="openFullscreen(this.src)">
-                        <button class="btn btn-sm btn-light position-absolute top-0 end-0 m-2 shadow-sm" onclick="openFullscreen(document.getElementById('mainProductImage').src)" title="عرض بالحجم الكامل">
+                {{-- معرض صور تفاعلي محسّن --}}
+                <div class="product-gallery-enhanced">
+                    {{-- الصورة الرئيسية --}}
+                    <div class="main-image-container position-relative">
+                        <div class="image-zoom-wrapper" id="zoomWrapper">
+                            <img id="mainProductImage" src="{{ $allImages[0] }}" class="main-product-img" 
+                                 alt="{{ $product->name }}" onclick="openFullscreen(this.src)">
+                        </div>
+                        {{-- عداد الصور --}}
+                        <div class="image-counter">
+                            <span id="currentImgNum">1</span> / {{ count($allImages) }}
+                        </div>
+                        {{-- زر الشاشة الكاملة --}}
+                        <button class="fullscreen-btn" onclick="openFullscreen(document.getElementById('mainProductImage').src)" title="عرض بالحجم الكامل">
                             <i class="bi bi-arrows-fullscreen"></i>
                         </button>
                         {{-- أسهم التنقل --}}
-                        <button class="gallery-nav gallery-prev" onclick="navigateGallery(-1)"><i class="bi bi-chevron-right"></i></button>
-                        <button class="gallery-nav gallery-next" onclick="navigateGallery(1)"><i class="bi bi-chevron-left"></i></button>
+                        <button class="gallery-nav-enhanced gallery-prev-enhanced" onclick="navigateGallery(-1)">
+                            <i class="bi bi-chevron-right"></i>
+                        </button>
+                        <button class="gallery-nav-enhanced gallery-next-enhanced" onclick="navigateGallery(1)">
+                            <i class="bi bi-chevron-left"></i>
+                        </button>
                     </div>
                     {{-- صور مصغرة --}}
-                    <div class="thumbnails-wrapper d-flex gap-2 overflow-auto pb-2">
+                    <div class="thumbnails-strip">
                         @foreach($allImages as $index => $img)
-                        <img src="{{ $img }}" class="thumbnail-img {{ $index === 0 ? 'active' : '' }}" 
-                             alt="صورة {{ $index + 1 }}" loading="lazy"
-                             onclick="changeMainImage('{{ $img }}', this)"
-                             style="width: 80px; height: 80px; object-fit: cover; border-radius: 8px; cursor: pointer; border: 3px solid {{ $index === 0 ? '#0d6efd' : 'transparent' }};">
+                        <div class="thumb-item {{ $index === 0 ? 'active' : '' }}" onclick="changeMainImage('{{ $img }}', this, {{ $index }})">
+                            <img src="{{ $img }}" alt="صورة {{ $index + 1 }}" loading="lazy">
+                        </div>
                         @endforeach
                     </div>
                 </div>
             @elseif(count($allImages) === 1)
-                <div class="position-relative">
-                    <img src="{{ $allImages[0] }}" class="img-fluid rounded shadow-sm w-100" alt="{{ $product->name }}" 
-                         style="max-height: 500px; object-fit: contain; background: #f8f9fa;">
+                <div class="product-gallery-enhanced">
+                    <div class="main-image-container position-relative">
+                        <div class="image-zoom-wrapper" id="zoomWrapper">
+                            <img id="mainProductImage" src="{{ $allImages[0] }}" class="main-product-img" 
+                                 alt="{{ $product->name }}" onclick="openFullscreen(this.src)">
+                        </div>
+                        <button class="fullscreen-btn" onclick="openFullscreen(document.getElementById('mainProductImage').src)">
+                            <i class="bi bi-arrows-fullscreen"></i>
+                        </button>
+                    </div>
                 </div>
             @else
-                <div class="bg-light d-flex align-items-center justify-content-center rounded shadow-sm" style="height: 400px;">
-                    <i class="bi bi-image text-muted" style="font-size: 5rem;"></i>
+                <div class="bg-light d-flex align-items-center justify-content-center rounded-4" style="height: 400px;">
+                    <div class="text-center text-muted">
+                        <i class="bi bi-image" style="font-size: 4rem;"></i>
+                        <p class="mt-2">لا توجد صورة</p>
+                    </div>
                 </div>
             @endif
         </div>
@@ -214,11 +240,11 @@
                 @endif
             </div>
 
-            {{-- === موديلات الإكسسوارات === --}}
+            {{-- === موديلات المنتج === --}}
             @if($hasVariants && $availableVariants->count() > 0)
             <div class="card mb-3 border-primary">
                 <div class="card-header bg-primary text-white py-2">
-                    <h6 class="mb-0"><i class="bi bi-phone"></i> اختر الموديل</h6>
+                    <h6 class="mb-0"><i class="bi bi-boxes"></i> اختر الموديل</h6>
                 </div>
                 <div class="card-body p-3">
                     <div class="d-flex flex-wrap gap-2" id="variants-list">
@@ -228,8 +254,23 @@
                                        data-stock="{{ $variant->stock }}" data-price="{{ $variant->price_adjustment }}"
                                        data-name="{{ $variant->model_name }}">
                                 <span class="variant-badge badge bg-light text-dark border px-3 py-2" style="cursor: pointer; font-size: 0.9rem;">
-                                    <i class="bi bi-phone me-1"></i>{{ $variant->model_name }}
-                                    <small class="text-success d-block">({{ $variant->stock }} قطعة)</small>
+                                    <strong><i class="bi bi-tag me-1"></i>{{ $variant->model_name }}</strong>
+                                    @if($variant->color)
+                                        <small class="d-block text-muted"><i class="bi bi-palette"></i> {{ $variant->color }}</small>
+                                    @endif
+                                    @if($variant->storage_size)
+                                        <small class="d-block text-info"><i class="bi bi-device-ssd"></i> {{ $variant->storage_size }}</small>
+                                    @endif
+                                    @if($variant->ram)
+                                        <small class="d-block text-warning"><i class="bi bi-memory"></i> RAM: {{ $variant->ram }}</small>
+                                    @endif
+                                    @if($variant->processor)
+                                        <small class="d-block text-secondary"><i class="bi bi-cpu"></i> {{ $variant->processor }}</small>
+                                    @endif
+                                    <small class="text-success d-block mt-1">({{ $variant->stock }} قطعة)</small>
+                                    @if($variant->price_adjustment != 0)
+                                        <small class="d-block text-danger fw-bold">{{ $variant->price_adjustment > 0 ? '+' : '' }}{{ number_format($variant->price_adjustment, 2) }} $</small>
+                                    @endif
                                 </span>
                             </label>
                         @endforeach
@@ -517,44 +558,134 @@
 </div>
 
 <style>
-/* معرض الصور */
-.main-image-wrapper {
-    border-radius: 12px;
-    overflow: hidden;
-    background: #f8f9fa;
+/* ===== معرض الصور المحسّن ===== */
+.product-gallery-enhanced {
+    position: sticky;
+    top: 20px;
 }
-.gallery-nav {
+.main-image-container {
+    border-radius: 16px;
+    overflow: hidden;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    margin-bottom: 12px;
+}
+.image-zoom-wrapper {
+    position: relative;
+    overflow: hidden;
+    cursor: zoom-in;
+}
+.main-product-img {
+    width: 100%;
+    max-height: 500px;
+    object-fit: contain;
+    transition: transform 0.4s ease, opacity 0.2s ease;
+    padding: 10px;
+}
+.image-zoom-wrapper:hover .main-product-img {
+    transform: scale(1.05);
+}
+.image-counter {
+    position: absolute;
+    bottom: 12px;
+    left: 12px;
+    background: rgba(0,0,0,0.6);
+    color: #fff;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    backdrop-filter: blur(4px);
+}
+.fullscreen-btn {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: rgba(255,255,255,0.9);
+    border: none;
+    border-radius: 50%;
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    transition: all 0.3s;
+    z-index: 3;
+}
+.fullscreen-btn:hover {
+    background: #fff;
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+}
+.gallery-nav-enhanced {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
     background: rgba(255,255,255,0.9);
     border: none;
     border-radius: 50%;
-    width: 40px;
-    height: 40px;
+    width: 42px;
+    height: 42px;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-    transition: all 0.2s;
-    z-index: 2;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+    transition: all 0.3s;
+    z-index: 3;
+    opacity: 0;
+    font-size: 1.1rem;
 }
-.gallery-nav:hover { background: #fff; box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
-.gallery-prev { right: 10px; }
-.gallery-next { left: 10px; }
-.thumbnail-img {
-    transition: all 0.2s;
-    opacity: 0.6;
-    flex-shrink: 0;
-}
-.thumbnail-img:hover, .thumbnail-img.active {
+.main-image-container:hover .gallery-nav-enhanced {
     opacity: 1;
-    border-color: #0d6efd !important;
-    transform: scale(1.05);
 }
-.thumbnails-wrapper::-webkit-scrollbar { height: 4px; }
-.thumbnails-wrapper::-webkit-scrollbar-thumb { background: #ccc; border-radius: 2px; }
+.gallery-nav-enhanced:hover {
+    background: #0d6efd;
+    color: #fff;
+    transform: translateY(-50%) scale(1.1);
+}
+.gallery-prev-enhanced { right: 12px; }
+.gallery-next-enhanced { left: 12px; }
+
+/* الصور المصغرة */
+.thumbnails-strip {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding: 4px 0 8px;
+    scroll-behavior: smooth;
+}
+.thumbnails-strip::-webkit-scrollbar { height: 3px; }
+.thumbnails-strip::-webkit-scrollbar-thumb { background: #ccc; border-radius: 3px; }
+.thumb-item {
+    flex-shrink: 0;
+    width: 72px;
+    height: 72px;
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+    border: 3px solid transparent;
+    opacity: 0.5;
+    transition: all 0.3s ease;
+    background: #f8f9fa;
+}
+.thumb-item:hover {
+    opacity: 0.8;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+.thumb-item.active {
+    opacity: 1;
+    border-color: #0d6efd;
+    box-shadow: 0 2px 8px rgba(13,110,253,0.4);
+}
+.thumb-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
 
 /* المواصفات */
 .specs-card { border: none; box-shadow: 0 2px 8px rgba(0,0,0,0.08); border-radius: 12px; overflow: hidden; }
@@ -584,32 +715,79 @@
 .hover-shadow { transition: all 0.3s; }
 .hover-shadow:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0,0,0,0.12) !important; }
 
-/* عرض كامل */
+/* عرض الشاشة الكاملة المحسّن */
 .fullscreen-overlay {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.9); z-index: 9999;
+    background: rgba(0,0,0,0.95); z-index: 9999;
     display: flex; align-items: center; justify-content: center;
     cursor: zoom-out;
+    animation: fadeIn 0.3s ease;
 }
-.fullscreen-overlay img { max-width: 95%; max-height: 95%; object-fit: contain; }
+.fullscreen-overlay img {
+    max-width: 95%; max-height: 90%;
+    object-fit: contain;
+    animation: zoomIn 0.3s ease;
+}
+.fullscreen-close {
+    position: absolute; top: 20px; left: 20px;
+    background: rgba(255,255,255,0.2); border: none;
+    color: #fff; font-size: 1.5rem; border-radius: 50%;
+    width: 48px; height: 48px; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.3s;
+}
+.fullscreen-close:hover { background: rgba(255,255,255,0.4); }
+.fullscreen-nav {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    background: rgba(255,255,255,0.2); border: none;
+    color: #fff; font-size: 1.8rem; border-radius: 50%;
+    width: 52px; height: 52px; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.3s;
+}
+.fullscreen-nav:hover { background: rgba(255,255,255,0.4); }
+.fullscreen-prev { right: 20px; }
+.fullscreen-next { left: 20px; }
+.fullscreen-counter {
+    position: absolute; bottom: 20px; left: 50%;
+    transform: translateX(-50%);
+    color: #fff; font-size: 1rem;
+    background: rgba(0,0,0,0.5); padding: 6px 16px;
+    border-radius: 20px;
+}
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes zoomIn { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+@media (max-width: 768px) {
+    .product-gallery-enhanced { position: static; }
+    .main-product-img { max-height: 350px; }
+    .gallery-nav-enhanced { opacity: 1; width: 36px; height: 36px; }
+    .thumb-item { width: 60px; height: 60px; }
+}
 </style>
 
 <script>
-// معرض الصور
+// معرض الصور المحسّن
 let currentImageIndex = 0;
 const galleryImages = @json($allImages);
 
-function changeMainImage(src, thumbnailEl) {
-    document.getElementById('mainProductImage').src = src;
-    document.querySelectorAll('.thumbnail-img').forEach(t => {
-        t.classList.remove('active');
-        t.style.borderColor = 'transparent';
-    });
-    if (thumbnailEl) {
-        thumbnailEl.classList.add('active');
-        thumbnailEl.style.borderColor = '#0d6efd';
+function changeMainImage(src, thumbEl, index) {
+    const mainImg = document.getElementById('mainProductImage');
+    mainImg.style.opacity = '0';
+    setTimeout(() => {
+        mainImg.src = src;
+        mainImg.style.opacity = '1';
+    }, 200);
+    
+    document.querySelectorAll('.thumb-item').forEach(t => t.classList.remove('active'));
+    if (thumbEl) thumbEl.classList.add('active');
+    if (typeof index !== 'undefined') {
+        currentImageIndex = index;
+    } else {
+        currentImageIndex = galleryImages.indexOf(src);
     }
-    currentImageIndex = galleryImages.indexOf(src);
+    updateImageCounter();
 }
 
 function navigateGallery(direction) {
@@ -617,23 +795,88 @@ function navigateGallery(direction) {
     if (currentImageIndex < 0) currentImageIndex = galleryImages.length - 1;
     if (currentImageIndex >= galleryImages.length) currentImageIndex = 0;
     
-    const thumbs = document.querySelectorAll('.thumbnail-img');
-    changeMainImage(galleryImages[currentImageIndex], thumbs[currentImageIndex]);
+    const thumbs = document.querySelectorAll('.thumb-item');
+    changeMainImage(galleryImages[currentImageIndex], thumbs[currentImageIndex], currentImageIndex);
+    
+    // scroll thumbnail into view
+    if (thumbs[currentImageIndex]) {
+        thumbs[currentImageIndex].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    }
+}
+
+function updateImageCounter() {
+    const counter = document.getElementById('currentImgNum');
+    if (counter) counter.textContent = currentImageIndex + 1;
 }
 
 function openFullscreen(src) {
     const overlay = document.createElement('div');
     overlay.className = 'fullscreen-overlay';
-    overlay.innerHTML = '<img src="' + src + '" alt="عرض بالحجم الكامل">';
-    overlay.onclick = () => overlay.remove();
+    overlay.innerHTML = `
+        <button class="fullscreen-close" onclick="this.parentElement.remove()"><i class="bi bi-x-lg"></i></button>
+        <button class="fullscreen-nav fullscreen-prev" onclick="event.stopPropagation(); navigateFullscreen(-1)"><i class="bi bi-chevron-right"></i></button>
+        <img src="${src}" alt="عرض بالحجم الكامل" id="fullscreenImg">
+        <button class="fullscreen-nav fullscreen-next" onclick="event.stopPropagation(); navigateFullscreen(1)"><i class="bi bi-chevron-left"></i></button>
+        <div class="fullscreen-counter"><span id="fsCounter">${currentImageIndex + 1}</span> / ${galleryImages.length}</div>
+    `;
+    overlay.onclick = (e) => { if (e.target === overlay) overlay.remove(); };
     document.body.appendChild(overlay);
+    document.body.style.overflow = 'hidden';
 }
 
-// keyboard navigation
+function navigateFullscreen(direction) {
+    currentImageIndex += direction;
+    if (currentImageIndex < 0) currentImageIndex = galleryImages.length - 1;
+    if (currentImageIndex >= galleryImages.length) currentImageIndex = 0;
+    
+    const fsImg = document.getElementById('fullscreenImg');
+    if (fsImg) {
+        fsImg.style.opacity = '0';
+        setTimeout(() => {
+            fsImg.src = galleryImages[currentImageIndex];
+            fsImg.style.opacity = '1';
+        }, 200);
+    }
+    const fsCounter = document.getElementById('fsCounter');
+    if (fsCounter) fsCounter.textContent = currentImageIndex + 1;
+    
+    // sync thumbnails
+    const thumbs = document.querySelectorAll('.thumb-item');
+    document.querySelectorAll('.thumb-item').forEach(t => t.classList.remove('active'));
+    if (thumbs[currentImageIndex]) thumbs[currentImageIndex].classList.add('active');
+    updateImageCounter();
+}
+
+// Swipe support for mobile
+(function() {
+    const wrapper = document.getElementById('zoomWrapper');
+    if (!wrapper) return;
+    let startX = 0, startY = 0;
+    wrapper.addEventListener('touchstart', (e) => {
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
+    }, { passive: true });
+    wrapper.addEventListener('touchend', (e) => {
+        const diffX = e.changedTouches[0].clientX - startX;
+        const diffY = e.changedTouches[0].clientY - startY;
+        if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 50) {
+            if (diffX > 0) navigateGallery(-1); // swipe right = prev (RTL)
+            else navigateGallery(1); // swipe left = next (RTL)
+        }
+    }, { passive: true });
+})();
+
+// Keyboard navigation
 document.addEventListener('keydown', function(e) {
-    if (e.key === 'ArrowRight') navigateGallery(-1);
-    if (e.key === 'ArrowLeft') navigateGallery(1);
-    if (e.key === 'Escape') document.querySelector('.fullscreen-overlay')?.remove();
+    const overlay = document.querySelector('.fullscreen-overlay');
+    if (e.key === 'ArrowRight') { overlay ? navigateFullscreen(-1) : navigateGallery(-1); }
+    if (e.key === 'ArrowLeft') { overlay ? navigateFullscreen(1) : navigateGallery(1); }
+    if (e.key === 'Escape') {
+        if (overlay) {
+            overlay.remove();
+            document.body.style.overflow = '';
+        }
+    }
 });
 
 // ===== منطق اختيار الموديلات =====

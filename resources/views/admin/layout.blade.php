@@ -695,5 +695,22 @@
     </script>
     
     @yield('scripts')
+
+    {{-- معالجة الصور المفقودة تلقائياً --}}
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('img').forEach(function(img) {
+                img.addEventListener('error', function() {
+                    if (!this.dataset.fallbackApplied) {
+                        this.dataset.fallbackApplied = 'true';
+                        this.src = '/images/no-image.svg';
+                    }
+                });
+                if (img.complete && img.naturalWidth === 0 && img.src && !img.src.endsWith('no-image.svg')) {
+                    img.src = '/images/no-image.svg';
+                }
+            });
+        });
+    </script>
 </body>
 </html>

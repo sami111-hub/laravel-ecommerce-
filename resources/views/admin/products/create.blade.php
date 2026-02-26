@@ -231,9 +231,9 @@
 
             {{-- الموديلات / الفئات الفرعية --}}
             <div class="section-title mb-3 mt-4" id="variants-section">
-                <h5 class="text-primary"><i class="bi bi-phone"></i> الموديلات المتوفرة (للإكسسوارات)</h5>
+                <h5 class="text-primary"><i class="bi bi-boxes"></i> <span id="variants-title">الموديلات المتوفرة</span></h5>
                 <hr>
-                <small class="text-muted"><i class="bi bi-info-circle"></i> أضف الموديلات المختلفة للمنتج مع كمية كل موديل (مثال: iPhone 15, iPhone 14, Samsung S24)</small>
+                <small class="text-muted" id="variants-hint"><i class="bi bi-info-circle"></i> اختر تصنيفاً أعلاه لعرض حقول الموديلات المناسبة</small>
             </div>
 
             <div id="variants-container">
@@ -272,59 +272,59 @@ const categorySpecsMap = {
         { key: 'colors', label: 'الألوان المتاحة', placeholder: 'مثال: أسود, أبيض, أحمر', icon: 'bi-palette' },
     ],
 
-    // الهواتف الذكية
+    // الهواتف الذكية (مرتبة حسب الأهمية)
     'smartphones': [
-        { key: 'screen_size', label: 'حجم الشاشة', placeholder: 'مثال: 6.7 بوصة', icon: 'bi-phone' },
+        { key: 'network', label: 'دعم الشبكات', placeholder: 'مثال: 5G, 4G LTE, WiFi 6E', icon: 'bi-wifi' },
+        { key: 'sim', label: 'نوع الشريحة', placeholder: 'مثال: Nano SIM + eSIM', icon: 'bi-sim' },
+        { key: 'dimensions', label: 'الأبعاد', placeholder: 'مثال: 159.9 x 76.7 x 8.25 مم', icon: 'bi-rulers' },
+        { key: 'weight', label: 'الوزن', placeholder: 'مثال: 221 جرام', icon: 'bi-speedometer' },
         { key: 'screen_type', label: 'نوع الشاشة', placeholder: 'مثال: AMOLED, IPS LCD', icon: 'bi-display' },
         { key: 'resolution', label: 'دقة الشاشة', placeholder: 'مثال: 2796 x 1290 بكسل', icon: 'bi-aspect-ratio' },
+        { key: 'screen_size', label: 'حجم الشاشة', placeholder: 'مثال: 6.7 بوصة', icon: 'bi-phone' },
+        { key: 'os', label: 'نظام التشغيل', placeholder: 'مثال: iOS 17 / Android 14', icon: 'bi-gear' },
         { key: 'processor', label: 'المعالج', placeholder: 'مثال: Apple A17 Pro / Snapdragon 8 Gen 3', icon: 'bi-cpu' },
-        { key: 'ram', label: 'الذاكرة العشوائية (RAM)', placeholder: 'مثال: 8 جيجابايت', icon: 'bi-memory' },
         { key: 'storage', label: 'سعة التخزين', placeholder: 'مثال: 256 جيجابايت', icon: 'bi-device-hdd' },
+        { key: 'ram', label: 'الذاكرة العشوائية (RAM)', placeholder: 'مثال: 8 جيجابايت', icon: 'bi-memory' },
         { key: 'rear_camera', label: 'الكاميرا الخلفية', placeholder: 'مثال: 48 + 12 + 12 ميجابكسل', icon: 'bi-camera' },
         { key: 'front_camera', label: 'الكاميرا الأمامية', placeholder: 'مثال: 12 ميجابكسل', icon: 'bi-camera-video' },
         { key: 'battery', label: 'سعة البطارية', placeholder: 'مثال: 4422 mAh', icon: 'bi-battery-charging' },
         { key: 'charging', label: 'سرعة الشحن', placeholder: 'مثال: شحن سريع 27 واط', icon: 'bi-lightning-charge' },
-        { key: 'os', label: 'نظام التشغيل', placeholder: 'مثال: iOS 17 / Android 14', icon: 'bi-gear' },
-        { key: 'sim', label: 'نوع الشريحة', placeholder: 'مثال: Nano SIM + eSIM', icon: 'bi-sim' },
-        { key: 'network', label: 'دعم الشبكات', placeholder: 'مثال: 5G, 4G LTE, WiFi 6E', icon: 'bi-wifi' },
         { key: 'water_resistance', label: 'مقاومة الماء', placeholder: 'مثال: IP68', icon: 'bi-droplet' },
-        { key: 'weight', label: 'الوزن', placeholder: 'مثال: 221 جرام', icon: 'bi-speedometer' },
-        { key: 'dimensions', label: 'الأبعاد', placeholder: 'مثال: 159.9 x 76.7 x 8.25 مم', icon: 'bi-rulers' },
-        { key: 'colors', label: 'الألوان المتاحة', placeholder: 'مثال: أسود, أبيض, ذهبي', icon: 'bi-palette' },
         { key: 'fingerprint', label: 'مستشعر البصمة', placeholder: 'مثال: بصمة الوجه / بصمة تحت الشاشة', icon: 'bi-fingerprint' },
+        { key: 'colors', label: 'الألوان المتاحة', placeholder: 'مثال: أسود, أبيض, ذهبي', icon: 'bi-palette' },
     ],
 
-    // الكمبيوتر والتابليت
+    // الكمبيوتر والتابليت (مرتبة حسب الأهمية)
     'computers-tablets': [
-        { key: 'device_type', label: 'نوع الجهاز', placeholder: 'مثال: لابتوب / تابليت / آيباد', icon: 'bi-laptop' },
-        { key: 'screen_size', label: 'حجم الشاشة', placeholder: 'مثال: 15.6 بوصة / 11 بوصة', icon: 'bi-display' },
-        { key: 'screen_type', label: 'نوع الشاشة', placeholder: 'مثال: IPS, OLED, Retina, Liquid Retina', icon: 'bi-display' },
-        { key: 'resolution', label: 'دقة الشاشة', placeholder: 'مثال: 1920 x 1080 (Full HD) / 2388 x 1668', icon: 'bi-aspect-ratio' },
         { key: 'processor', label: 'المعالج', placeholder: 'مثال: Intel Core i7 / Apple M3 Pro / Snapdragon 8cx', icon: 'bi-cpu' },
         { key: 'ram', label: 'الذاكرة العشوائية (RAM)', placeholder: 'مثال: 16 جيجابايت DDR5', icon: 'bi-memory' },
         { key: 'storage', label: 'وحدة التخزين', placeholder: 'مثال: 512 جيجابايت SSD NVMe / 256 جيجابايت', icon: 'bi-device-hdd' },
         { key: 'gpu', label: 'كرت الشاشة (GPU)', placeholder: 'مثال: NVIDIA RTX 4060 8GB / مدمج', icon: 'bi-gpu-card' },
-        { key: 'battery_life', label: 'عمر البطارية', placeholder: 'مثال: حتى 10 ساعات', icon: 'bi-battery-charging' },
+        { key: 'screen_size', label: 'حجم الشاشة', placeholder: 'مثال: 15.6 بوصة / 11 بوصة', icon: 'bi-display' },
+        { key: 'screen_type', label: 'نوع الشاشة', placeholder: 'مثال: IPS, OLED, Retina, Liquid Retina', icon: 'bi-display' },
+        { key: 'resolution', label: 'دقة الشاشة', placeholder: 'مثال: 1920 x 1080 (Full HD) / 2388 x 1668', icon: 'bi-aspect-ratio' },
         { key: 'os', label: 'نظام التشغيل', placeholder: 'مثال: Windows 11 / macOS Sonoma / iPadOS 17 / Android 14', icon: 'bi-windows' },
-        { key: 'weight', label: 'الوزن', placeholder: 'مثال: 1.8 كجم / 478 جرام', icon: 'bi-speedometer' },
+        { key: 'battery_life', label: 'عمر البطارية', placeholder: 'مثال: حتى 10 ساعات', icon: 'bi-battery-charging' },
+        { key: 'device_type', label: 'نوع الجهاز', placeholder: 'مثال: لابتوب / تابليت / آيباد', icon: 'bi-laptop' },
         { key: 'ports', label: 'المنافذ', placeholder: 'مثال: USB-C x2, USB-A x1, HDMI, سماعة', icon: 'bi-usb-plug' },
         { key: 'connectivity', label: 'الاتصال', placeholder: 'مثال: WiFi 6E, Bluetooth 5.3, 5G (اختياري)', icon: 'bi-wifi' },
+        { key: 'webcam', label: 'الكاميرا', placeholder: 'مثال: 1080p Full HD / 12 ميجابكسل', icon: 'bi-webcam' },
         { key: 'keyboard', label: 'لوحة المفاتيح', placeholder: 'مثال: إضاءة خلفية / كيبورد Smart Connector', icon: 'bi-keyboard' },
         { key: 'stylus', label: 'دعم القلم', placeholder: 'مثال: Apple Pencil 2 / S Pen / لا يدعم', icon: 'bi-pencil' },
-        { key: 'webcam', label: 'الكاميرا', placeholder: 'مثال: 1080p Full HD / 12 ميجابكسل', icon: 'bi-webcam' },
+        { key: 'weight', label: 'الوزن', placeholder: 'مثال: 1.8 كجم / 478 جرام', icon: 'bi-speedometer' },
         { key: 'colors', label: 'الألوان المتاحة', placeholder: 'مثال: فضي, رمادي غامق, أزرق', icon: 'bi-palette' },
     ],
 
-    // الساعات الذكية والأجهزة القابلة للإرتداء
+    // الساعات الذكية والأجهزة القابلة للإرتداء (مرتبة حسب الأهمية)
     'smartwatches-wearables': [
         { key: 'screen_size', label: 'حجم الشاشة', placeholder: 'مثال: 1.9 بوصة / 45 مم', icon: 'bi-smartwatch' },
         { key: 'screen_type', label: 'نوع الشاشة', placeholder: 'مثال: AMOLED, Retina LTPO', icon: 'bi-display' },
-        { key: 'processor', label: 'المعالج', placeholder: 'مثال: Apple S9 / Exynos W930', icon: 'bi-cpu' },
-        { key: 'storage', label: 'سعة التخزين', placeholder: 'مثال: 32 جيجابايت', icon: 'bi-device-hdd' },
         { key: 'battery_life', label: 'عمر البطارية', placeholder: 'مثال: حتى 36 ساعة', icon: 'bi-battery-charging' },
         { key: 'water_resistance', label: 'مقاومة الماء', placeholder: 'مثال: 50 متر / IP68', icon: 'bi-droplet' },
         { key: 'sensors', label: 'المستشعرات', placeholder: 'مثال: نبض القلب، أكسجين الدم، تخطيط القلب', icon: 'bi-heart-pulse' },
         { key: 'gps', label: 'نظام الملاحة', placeholder: 'مثال: GPS مدمج + GLONASS', icon: 'bi-geo-alt' },
+        { key: 'processor', label: 'المعالج', placeholder: 'مثال: Apple S9 / Exynos W930', icon: 'bi-cpu' },
+        { key: 'storage', label: 'سعة التخزين', placeholder: 'مثال: 32 جيجابايت', icon: 'bi-device-hdd' },
         { key: 'connectivity', label: 'الاتصال', placeholder: 'مثال: Bluetooth 5.3, WiFi, NFC', icon: 'bi-wifi' },
         { key: 'compatibility', label: 'التوافق', placeholder: 'مثال: iOS و Android / iOS فقط', icon: 'bi-phone' },
         { key: 'strap_material', label: 'مادة السوار', placeholder: 'مثال: سيليكون, ستانلس ستيل, جلد', icon: 'bi-watch' },
@@ -344,14 +344,14 @@ const categorySpecsMap = {
         { key: 'colors', label: 'الألوان المتاحة', placeholder: 'مثال: أسود, شفاف, أزرق', icon: 'bi-palette' },
     ],
 
-    // سماعات ومكبرات الصوت
+    // سماعات ومكبرات الصوت (مرتبة حسب الأهمية)
     'headphones-speakers': [
         { key: 'type', label: 'النوع', placeholder: 'مثال: سماعات أذن / سماعات رأس / مكبر صوت', icon: 'bi-headphones' },
+        { key: 'noise_cancellation', label: 'إلغاء الضوضاء', placeholder: 'مثال: ANC نشط / عزل سلبي', icon: 'bi-volume-mute' },
+        { key: 'battery_life', label: 'عمر البطارية', placeholder: 'مثال: 30 ساعة / 6 ساعات + علبة شحن', icon: 'bi-battery-charging' },
         { key: 'connectivity', label: 'طريقة الاتصال', placeholder: 'مثال: بلوتوث 5.3 / سلكية / WiFi', icon: 'bi-bluetooth' },
         { key: 'driver_size', label: 'حجم السماعة', placeholder: 'مثال: 40 مم', icon: 'bi-speaker' },
         { key: 'frequency', label: 'نطاق التردد', placeholder: 'مثال: 20Hz - 20kHz', icon: 'bi-soundwave' },
-        { key: 'noise_cancellation', label: 'إلغاء الضوضاء', placeholder: 'مثال: ANC نشط / عزل سلبي', icon: 'bi-volume-mute' },
-        { key: 'battery_life', label: 'عمر البطارية', placeholder: 'مثال: 30 ساعة / 6 ساعات + علبة شحن', icon: 'bi-battery-charging' },
         { key: 'charging', label: 'نوع الشحن', placeholder: 'مثال: USB-C, شحن لاسلكي', icon: 'bi-lightning-charge' },
         { key: 'microphone', label: 'الميكروفون', placeholder: 'مثال: ميكروفون مدمج مع تقليل الضوضاء', icon: 'bi-mic' },
         { key: 'water_resistance', label: 'مقاومة الماء/العرق', placeholder: 'مثال: IPX4 / IPX7', icon: 'bi-droplet' },
@@ -360,15 +360,15 @@ const categorySpecsMap = {
         { key: 'colors', label: 'الألوان المتاحة', placeholder: 'مثال: أسود, أبيض, أزرق', icon: 'bi-palette' },
     ],
 
-    // خزائن الطاقة والشواحن
+    // خزائن الطاقة والشواحن (مرتبة حسب الأهمية)
     'power-banks-chargers': [
         { key: 'type', label: 'النوع', placeholder: 'مثال: شاحن حائط / كيبل / باور بانك / توصيلة', icon: 'bi-plug' },
         { key: 'wattage', label: 'القدرة (واط)', placeholder: 'مثال: 65 واط', icon: 'bi-lightning-charge' },
+        { key: 'fast_charging', label: 'الشحن السريع', placeholder: 'مثال: PD 3.0, QC 4.0', icon: 'bi-speedometer2' },
+        { key: 'battery_capacity', label: 'سعة البطارية (باور بانك)', placeholder: 'مثال: 20,000 mAh', icon: 'bi-battery-full' },
         { key: 'ports_count', label: 'عدد المنافذ', placeholder: 'مثال: 2 USB-C + 1 USB-A', icon: 'bi-usb-plug' },
         { key: 'cable_type', label: 'نوع الكيبل', placeholder: 'مثال: USB-C to Lightning / USB-C to USB-C', icon: 'bi-ethernet' },
         { key: 'cable_length', label: 'طول الكيبل', placeholder: 'مثال: 1.5 متر', icon: 'bi-rulers' },
-        { key: 'fast_charging', label: 'الشحن السريع', placeholder: 'مثال: PD 3.0, QC 4.0', icon: 'bi-speedometer2' },
-        { key: 'battery_capacity', label: 'سعة البطارية (باور بانك)', placeholder: 'مثال: 20,000 mAh', icon: 'bi-battery-full' },
         { key: 'compatibility', label: 'التوافق', placeholder: 'مثال: iPhone, Samsung, iPad', icon: 'bi-phone' },
         { key: 'weight', label: 'الوزن', placeholder: 'مثال: 120 جرام', icon: 'bi-speedometer' },
     ],
@@ -477,6 +477,9 @@ document.addEventListener('DOMContentLoaded', function() {
         } else {
             renderSpecsFields(null);
         }
+        
+        // تحديث حقول الموديلات حسب التصنيف
+        updateVariantSection();
     }
 
     categoryCheckboxes.forEach(cb => cb.addEventListener('change', onCategoryChange));
@@ -601,29 +604,138 @@ function showUploadedFiles(input) {
     }
 }
 
-// ===== الموديلات =====
+// ===== الموديلات الذكية حسب التصنيف =====
+const variantFieldsMap = {
+    'smartphones': {
+        title: 'موديلات الهواتف الذكية',
+        hint: 'أضف الألوان وأحجام الذاكرة المتوفرة لهذا الهاتف',
+        fields: [
+            { name: 'variant_names[]', label: 'اسم الموديل', placeholder: 'مثال: iPhone 15 Pro Max', col: 'col-md-3', icon: 'bi-phone' },
+            { name: 'variant_colors[]', label: 'اللون', placeholder: 'مثال: أسود, أبيض, ذهبي', col: 'col-md-2', icon: 'bi-palette' },
+            { name: 'variant_storages[]', label: 'حجم الذاكرة', placeholder: 'مثال: 128GB, 256GB', col: 'col-md-2', icon: 'bi-device-ssd' },
+            { name: 'variant_stocks[]', label: 'الكمية', placeholder: '0', col: 'col-md-2', icon: 'bi-box', type: 'number' },
+            { name: 'variant_prices[]', label: 'فرق السعر', placeholder: '0.00', col: 'col-md-2', icon: 'bi-cash', type: 'number', step: '0.01' },
+        ]
+    },
+    'computers-tablets': {
+        title: 'موديلات الكمبيوتر والتابلت',
+        hint: 'أضف المعالج والرام وحجم التخزين المتوفرة',
+        fields: [
+            { name: 'variant_names[]', label: 'اسم الموديل', placeholder: 'مثال: MacBook Pro M3', col: 'col-md-2', icon: 'bi-laptop' },
+            { name: 'variant_processors[]', label: 'المعالج', placeholder: 'مثال: M3 Pro, i7', col: 'col-md-2', icon: 'bi-cpu' },
+            { name: 'variant_rams[]', label: 'الرام', placeholder: 'مثال: 8GB, 16GB', col: 'col-md-2', icon: 'bi-memory' },
+            { name: 'variant_storages[]', label: 'التخزين', placeholder: 'مثال: 512GB SSD', col: 'col-md-2', icon: 'bi-device-ssd' },
+            { name: 'variant_stocks[]', label: 'الكمية', placeholder: '0', col: 'col-md-1', icon: 'bi-box', type: 'number' },
+            { name: 'variant_prices[]', label: 'فرق السعر', placeholder: '0.00', col: 'col-md-2', icon: 'bi-cash', type: 'number', step: '0.01' },
+        ]
+    },
+    'smartwatches-wearables': {
+        title: 'موديلات الساعات الذكية',
+        hint: 'أضف الألوان والأحجام المتوفرة',
+        fields: [
+            { name: 'variant_names[]', label: 'اسم الموديل', placeholder: 'مثال: Apple Watch Ultra', col: 'col-md-3', icon: 'bi-smartwatch' },
+            { name: 'variant_colors[]', label: 'اللون', placeholder: 'مثال: فضي, أسود', col: 'col-md-2', icon: 'bi-palette' },
+            { name: 'variant_storages[]', label: 'الحجم', placeholder: 'مثال: 42mm, 46mm', col: 'col-md-2', icon: 'bi-rulers' },
+            { name: 'variant_stocks[]', label: 'الكمية', placeholder: '0', col: 'col-md-2', icon: 'bi-box', type: 'number' },
+            { name: 'variant_prices[]', label: 'فرق السعر', placeholder: '0.00', col: 'col-md-2', icon: 'bi-cash', type: 'number', step: '0.01' },
+        ]
+    },
+    'headphones-speakers': {
+        title: 'موديلات السماعات',
+        hint: 'أضف الألوان المتوفرة',
+        fields: [
+            { name: 'variant_names[]', label: 'اسم الموديل', placeholder: 'مثال: AirPods Pro 2', col: 'col-md-3', icon: 'bi-headphones' },
+            { name: 'variant_colors[]', label: 'اللون', placeholder: 'مثال: أبيض, أسود', col: 'col-md-3', icon: 'bi-palette' },
+            { name: 'variant_stocks[]', label: 'الكمية', placeholder: '0', col: 'col-md-2', icon: 'bi-box', type: 'number' },
+            { name: 'variant_prices[]', label: 'فرق السعر', placeholder: '0.00', col: 'col-md-2', icon: 'bi-cash', type: 'number', step: '0.01' },
+        ]
+    },
+    'default': {
+        title: 'الموديلات المتوفرة',
+        hint: 'أضف الموديلات المختلفة للمنتج مع كمية كل موديل',
+        fields: [
+            { name: 'variant_names[]', label: 'اسم الموديل', placeholder: 'مثال: iPhone 15 Pro Max', col: 'col-md-4', icon: 'bi-tag' },
+            { name: 'variant_stocks[]', label: 'الكمية', placeholder: '0', col: 'col-md-3', icon: 'bi-box', type: 'number' },
+            { name: 'variant_prices[]', label: 'فرق السعر', placeholder: '0.00', col: 'col-md-3', icon: 'bi-cash', type: 'number', step: '0.01' },
+        ]
+    }
+};
+// أسماء مستعارة للتصنيفات
+variantFieldsMap['phone-accessories'] = variantFieldsMap['default'];
+variantFieldsMap['power-banks-chargers'] = variantFieldsMap['default'];
+variantFieldsMap['chargers-cables'] = variantFieldsMap['default'];
+variantFieldsMap['cases-covers'] = variantFieldsMap['default'];
+variantFieldsMap['accessories'] = variantFieldsMap['default'];
+variantFieldsMap['mobiles'] = variantFieldsMap['smartphones'];
+variantFieldsMap['tablets'] = variantFieldsMap['computers-tablets'];
+variantFieldsMap['printers'] = variantFieldsMap['computers-tablets'];
+variantFieldsMap['headphones'] = variantFieldsMap['headphones-speakers'];
+variantFieldsMap['gaming'] = variantFieldsMap['default'];
+variantFieldsMap['video-games'] = variantFieldsMap['default'];
+variantFieldsMap['special-offers'] = variantFieldsMap['default'];
+variantFieldsMap['offers'] = variantFieldsMap['default'];
+
+let currentVariantSlug = 'default';
+
+function getSelectedVariantSlug() {
+    const categoryCheckboxes = document.querySelectorAll('input[name="categories[]"]');
+    const checkedSlugs = Array.from(categoryCheckboxes)
+        .filter(cb => cb.checked)
+        .map(cb => categorySlugMap[cb.value])
+        .filter(slug => slug);
+    
+    // أولوية: الهواتف > الكمبيوتر > الساعات > السماعات > الافتراضي
+    const priority = ['smartphones', 'mobiles', 'computers-tablets', 'tablets', 'smartwatches-wearables', 'headphones-speakers', 'headphones'];
+    for (const p of priority) {
+        if (checkedSlugs.includes(p)) return p;
+    }
+    return checkedSlugs[0] || 'default';
+}
+
+function updateVariantSection() {
+    const slug = getSelectedVariantSlug();
+    const config = variantFieldsMap[slug] || variantFieldsMap['default'];
+    
+    document.getElementById('variants-title').textContent = config.title;
+    document.getElementById('variants-hint').innerHTML = '<i class="bi bi-info-circle"></i> ' + config.hint;
+    
+    // إذا تغير التصنيف، نحذف الموديلات القديمة ونبدأ من جديد
+    if (slug !== currentVariantSlug) {
+        document.getElementById('variants-list').innerHTML = '';
+        currentVariantSlug = slug;
+    }
+}
+
 let variantCount = 0;
-function addVariant(name = '', stock = '', price = '') {
+function addVariant(values = {}) {
     variantCount++;
+    const slug = getSelectedVariantSlug();
+    const config = variantFieldsMap[slug] || variantFieldsMap['default'];
+    
     const container = document.getElementById('variants-list');
     const div = document.createElement('div');
-    div.className = 'row mb-2 variant-row';
-    div.innerHTML = `
-        <div class="col-5">
-            <input type="text" class="form-control" name="variant_names[]" value="${name}" placeholder="اسم الموديل (مثال: iPhone 15 Pro Max)">
-        </div>
-        <div class="col-3">
-            <input type="number" class="form-control" name="variant_stocks[]" value="${stock}" placeholder="الكمية" min="0">
-        </div>
-        <div class="col-2">
-            <input type="number" class="form-control" name="variant_prices[]" value="${price}" placeholder="فرق السعر" step="0.01">
-        </div>
-        <div class="col-2">
-            <button type="button" class="btn btn-outline-danger btn-sm w-100" onclick="this.closest('.variant-row').remove()">
-                <i class="bi bi-trash"></i> حذف
-            </button>
-        </div>
-    `;
+    div.className = 'variant-row card card-body p-2 mb-2 bg-light';
+    
+    let html = '<div class="row g-2 align-items-end">';
+    config.fields.forEach(field => {
+        const fieldType = field.type || 'text';
+        const stepAttr = field.step ? ` step="${field.step}"` : '';
+        const minAttr = field.type === 'number' ? ' min="0"' : '';
+        const val = values[field.name] || '';
+        html += `
+            <div class="${field.col}">
+                <label class="form-label small mb-1"><i class="bi ${field.icon} text-primary"></i> ${field.label}</label>
+                <input type="${fieldType}" class="form-control form-control-sm" name="${field.name}" value="${val}" placeholder="${field.placeholder}"${stepAttr}${minAttr}>
+            </div>`;
+    });
+    html += `
+            <div class="col-md-1">
+                <button type="button" class="btn btn-outline-danger btn-sm w-100" onclick="this.closest('.variant-row').remove()" title="حذف">
+                    <i class="bi bi-trash"></i>
+                </button>
+            </div>
+        </div>`;
+    div.innerHTML = html;
     container.appendChild(div);
 }
 </script>

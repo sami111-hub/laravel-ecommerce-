@@ -47,6 +47,7 @@
     <link rel="stylesheet" href="{{ asset('css/professional-enhancements.css') }}?v={{ time() }}">
     <link rel="stylesheet" href="{{ asset('css/premium-features.css') }}?v={{ time() }}">
     <link rel="stylesheet" href="{{ asset('css/jarir-design.css') }}?v={{ time() }}">
+    <link rel="stylesheet" href="{{ asset('css/product-carousel.css') }}?v={{ time() }}">
 </head>
 <body>
     @include('partials.top-nav-bar')
@@ -78,6 +79,32 @@
     <script src="{{ asset('js/visual-enhancements.js') }}?v={{ time() }}"></script>
     <script src="{{ asset('js/premium-features.js') }}?v={{ time() }}"></script>
     
+    {{-- سكربت كاروسيل صور المنتجات --}}
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // مزامنة النقاط مع الكاروسيل
+        document.querySelectorAll('.product-carousel').forEach(function(carousel) {
+            var bsCarousel = new bootstrap.Carousel(carousel, { interval: false, touch: true, wrap: true });
+            
+            // نقاط التنقل
+            carousel.querySelectorAll('.carousel-dot').forEach(function(dot) {
+                dot.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    var slideTo = parseInt(this.getAttribute('data-bs-slide-to'));
+                    bsCarousel.to(slideTo);
+                });
+            });
+            
+            // تحديث النقطة النشطة عند تغيير السلايد
+            carousel.addEventListener('slid.bs.carousel', function(e) {
+                var dots = this.querySelectorAll('.carousel-dot');
+                dots.forEach(function(d) { d.classList.remove('active'); });
+                if (dots[e.to]) dots[e.to].classList.add('active');
+            });
+        });
+    });
+    </script>
+    
     {{-- عرض رسائل Flash من Laravel --}}
     @if(session('success'))
     <script>
@@ -96,5 +123,23 @@
     @endif
     
     @include('partials.bottom-nav')
+
+    {{-- معالجة الصور المفقودة تلقائياً --}}
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('img').forEach(function(img) {
+                img.addEventListener('error', function() {
+                    if (!this.dataset.fallbackApplied) {
+                        this.dataset.fallbackApplied = 'true';
+                        this.src = '/images/no-image.svg';
+                    }
+                });
+                // التحقق من الصور التي فشل تحميلها قبل تسجيل الحدث
+                if (img.complete && img.naturalWidth === 0 && img.src && !img.src.endsWith('no-image.svg')) {
+                    img.src = '/images/no-image.svg';
+                }
+            });
+        });
+    </script>
 </body>
 </html>

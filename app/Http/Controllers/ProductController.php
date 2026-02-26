@@ -22,10 +22,15 @@ class ProductController extends Controller
             });
         }
 
-        // Filter by category
-        if ($request->has('category')) {
-            $query->whereHas('categories', function($q) use ($request) {
-                $q->where('categories.id', $request->category);
+        // Filter by category (supports both ID and slug)
+        if ($request->has('category') && $request->category) {
+            $catValue = $request->category;
+            $query->whereHas('categories', function($q) use ($catValue) {
+                if (is_numeric($catValue)) {
+                    $q->where('categories.id', $catValue);
+                } else {
+                    $q->where('categories.slug', $catValue);
+                }
             });
         }
 
@@ -53,7 +58,7 @@ class ProductController extends Controller
             $query->orderBy('id', 'desc');
         }
 
-        $products = $query->with('brand')->paginate(12);
+        $products = $query->with(['brand', 'images'])->paginate(12);
         $categories = Category::where('is_active', true)->orderBy('order')->get();
         $brands = Brand::where('is_active', true)->get();
 
@@ -154,7 +159,7 @@ class ProductController extends Controller
                     'id' => $product->id,
                     'name' => $product->name,
                     'price' => number_format($product->price, 2),
-                    'image_url' => $product->image ? asset('storage/' . $product->image) : null
+                    'image_url' => $product->image
                 ];
             });
 

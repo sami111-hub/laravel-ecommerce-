@@ -64,7 +64,7 @@
 
 {{-- Featured Products Section --}}
 @php
-    try { $featured = \App\Models\Product::latest()->take(12)->get(); } catch (\Throwable $e) { $featured = collect(); }
+    try { $featured = \App\Models\Product::with('images')->latest()->take(12)->get(); } catch (\Throwable $e) { $featured = collect(); }
 @endphp
 @if($featured->count())
 <div class="mb-3 featured-section fade-in-on-scroll">
@@ -78,9 +78,31 @@
     <div class="h-scroll">
         <div class="h-row">
             @foreach($featured as $product)
+                @php $productImages = $product->all_images; @endphp
                 <div class="product-card hover-scale" data-aos="fade-up">
-                    <span class="badge-new position-absolute top-0 start-0 m-2">جديد</span>
-                    @if($product->image)
+                    <span class="badge-new position-absolute top-0 start-0 m-2" style="z-index:2;">جديد</span>
+                    @if(count($productImages) > 1)
+                        <div id="carousel-feat-{{ $product->id }}" class="carousel slide product-carousel" data-bs-ride="false">
+                            <div class="carousel-inner">
+                                @foreach($productImages as $idx => $img)
+                                <div class="carousel-item {{ $idx === 0 ? 'active' : '' }}">
+                                    <img src="{{ $img }}" alt="{{ $product->name }}" loading="lazy">
+                                </div>
+                                @endforeach
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carousel-feat-{{ $product->id }}" data-bs-slide="prev">
+                                <span class="carousel-nav-btn"><i class="bi bi-chevron-right"></i></span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#carousel-feat-{{ $product->id }}" data-bs-slide="next">
+                                <span class="carousel-nav-btn"><i class="bi bi-chevron-left"></i></span>
+                            </button>
+                            <div class="carousel-dots">
+                                @foreach($productImages as $idx => $img)
+                                <span class="carousel-dot {{ $idx === 0 ? 'active' : '' }}" data-bs-target="#carousel-feat-{{ $product->id }}" data-bs-slide-to="{{ $idx }}"></span>
+                                @endforeach
+                            </div>
+                        </div>
+                    @elseif($product->image)
                         <img src="{{ $product->image }}" alt="{{ $product->name }}" loading="lazy">
                     @else
                         <div class="bg-light d-flex align-items-center justify-content-center" style="height: 140px;">
@@ -155,30 +177,91 @@
 {{-- Products Grid --}}
 <div class="products-grid">
     @forelse($products as $product)
-    <div class="product-card hover-scale">
-        @if($loop->index % 3 == 0)
-            <span class="badge-sale position-absolute top-0 start-0 m-2">خصم</span>
-        @elseif($loop->index % 5 == 0)
-            <span class="badge-hot position-absolute top-0 start-0 m-2">الأكثر مبيعاً</span>
+    @php $productImages = $product->all_images; @endphp
+    <div class="product-card hover-scale" style="animation-delay: {{ $loop->index * 0.05 }}s">
+        {{-- Smart Badges --}}
+        @if($product->discount_price && $product->discount_price < $product->price)
+            @php $discountPercent = round((($product->price - $product->discount_price) / $product->price) * 100); @endphp
+            <span class="product-badge badge-discount-pct" style="z-index:2;">-{{ $discountPercent }}%</span>
+        @elseif($product->created_at && $product->created_at->diffInDays(now()) < 14)
+            <span class="product-badge badge-new-arrival" style="z-index:2;">جديد</span>
         @endif
-        @if($product->image)
-            <img src="{{ $product->image }}" alt="{{ $product->name }}">
+        @if($product->stock <= 5 && $product->stock > 0)
+            <span class="product-badge badge-low-stock" style="z-index:2;">آخر {{ $product->stock }}</span>
+        @endif
+
+        @if(count($productImages) > 1)
+            <div id="carousel-grid-{{ $product->id }}" class="carousel slide product-carousel" data-bs-ride="false">
+                <div class="carousel-inner">
+                    @foreach($productImages as $idx => $img)
+                    <div class="carousel-item {{ $idx === 0 ? 'active' : '' }}">
+                        <a href="{{ route('products.show', $product) }}">
+                            <img src="{{ $img }}" alt="{{ $product->name }}" loading="lazy">
+                        </a>
+                    </div>
+                    @endforeach
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carousel-grid-{{ $product->id }}" data-bs-slide="prev">
+                    <span class="carousel-nav-btn"><i class="bi bi-chevron-right"></i></span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carousel-grid-{{ $product->id }}" data-bs-slide="next">
+                    <span class="carousel-nav-btn"><i class="bi bi-chevron-left"></i></span>
+                </button>
+                <div class="carousel-dots">
+                    @foreach($productImages as $idx => $img)
+                    <span class="carousel-dot {{ $idx === 0 ? 'active' : '' }}" data-bs-target="#carousel-grid-{{ $product->id }}" data-bs-slide-to="{{ $idx }}"></span>
+                    @endforeach
+                </div>
+            </div>
+        @elseif($product->image)
+            <a href="{{ route('products.show', $product) }}" class="product-image-link">
+                <img src="{{ $product->image }}" alt="{{ $product->name }}" loading="lazy">
+            </a>
         @else
-            <div class="bg-light d-flex align-items-center justify-content-center" style="height: 200px;">
-                <i class="bi bi-image text-muted" style="font-size: 3rem;"></i>
-            </div>
+            <a href="{{ route('products.show', $product) }}" class="product-image-link">
+                <div class="product-no-image">
+                    <i class="bi bi-image"></i>
+                </div>
+            </a>
         @endif
+
         <div class="product-info">
-            <h5 class="product-name">{{ $product->name }}</h5>
-            <p class="text-muted small mb-2">{{ Str::limit($product->description, 60) }}</p>
-            <div class="price-tag mb-3">
-                <x-multi-currency-price :price="$product->price" size="small" />
+            @if($product->brand)
+                <span class="product-brand-tag">{{ $product->brand->name }}</span>
+            @endif
+
+            <a href="{{ route('products.show', $product) }}" class="product-name-link">
+                <h5 class="product-name">{{ $product->name }}</h5>
+            </a>
+
+            <p class="product-desc">{{ Str::limit($product->description, 60) }}</p>
+
+            <div class="product-price-section mb-1">
+                @if($product->discount_price && $product->discount_price < $product->price)
+                    <span class="product-price-old">{{ number_format($product->price, 0) }} $</span>
+                    <x-multi-currency-price :price="$product->discount_price" size="small" />
+                @else
+                    <x-multi-currency-price :price="$product->price" size="small" />
+                @endif
             </div>
-            <div class="mt-auto">
-                <a href="{{ route('products.show', $product) }}" class="btn btn-outline-primary btn-sm w-100 mb-2">
-                    <i class="bi bi-eye"></i> عرض التفاصيل
+
+            {{-- Stock --}}
+            <div class="stock-indicator mb-2">
+                @if($product->stock > 10)
+                    <span class="stock-badge stock-available"><i class="bi bi-check-circle-fill"></i> متوفر</span>
+                @elseif($product->stock > 0)
+                    <span class="stock-badge stock-low"><i class="bi bi-exclamation-circle-fill"></i> كمية محدودة</span>
+                @else
+                    <span class="stock-badge stock-out"><i class="bi bi-x-circle-fill"></i> غير متوفر</span>
+                @endif
+            </div>
+
+            <div class="product-actions mt-auto">
+                <a href="{{ route('products.show', $product) }}" class="btn-view-details">
+                    <i class="bi bi-eye"></i> التفاصيل
                 </a>
                 @auth
+                @if($product->stock > 0)
                 <form action="{{ route('cart.add', $product) }}" method="POST">
                     @csrf
                     <input type="hidden" name="quantity" value="1">
@@ -187,8 +270,13 @@
                     </button>
                 </form>
                 @else
-                <a href="{{ route('login') }}" class="btn btn-primary btn-sm w-100">
-                    <i class="bi bi-box-arrow-in-right"></i> تسجيل الدخول
+                <button class="btn-add-cart" disabled>
+                    <i class="bi bi-cart-x"></i> غير متوفر
+                </button>
+                @endif
+                @else
+                <a href="{{ route('login') }}" class="btn-add-cart">
+                    <i class="bi bi-box-arrow-in-right"></i> سجل دخول
                 </a>
                 @endauth
             </div>
@@ -196,16 +284,49 @@
     </div>
     @empty
     <div class="col-span-full">
-        <div class="alert alert-info text-center py-5 mb-5">
-            <i class="bi bi-inbox" style="font-size: 3rem;"></i>
-            <h4 class="mt-3">لا توجد منتجات متاحة حالياً</h4>
-            <p class="text-muted">جرب البحث بكلمات أخرى أو تصفح الفئات المختلفة</p>
+        <div class="empty-state">
+            <div class="empty-state-icon"><i class="bi bi-inbox"></i></div>
+            <h4>لا توجد منتجات متاحة حالياً</h4>
+            <p>جرب البحث بكلمات أخرى أو تصفح الفئات المختلفة</p>
         </div>
     </div>
     @endforelse
 </div>
 
-<div class="mt-4">
-    {{ $products->links() }}
+@if($products->hasPages())
+<div class="pagination-wrapper mt-4 mb-3">
+    {{ $products->appends(request()->query())->links() }}
 </div>
+@endif
+
+{{-- Shared Styles --}}
+<style>
+.product-badge { position: absolute; top: 10px; right: 10px; z-index: 3; padding: 4px 10px; border-radius: 8px; font-size: 11px; font-weight: 700; }
+.badge-discount-pct { background: linear-gradient(135deg, #ef4444, #dc2626); color: #fff; }
+.badge-new-arrival { background: linear-gradient(135deg, #10b981, #059669); color: #fff; }
+.badge-low-stock { top: 10px; right: auto; left: 10px; background: linear-gradient(135deg, #f59e0b, #d97706); color: #fff; }
+.product-image-link { display: block; overflow: hidden; }
+.product-image-link img { width: 100%; height: 200px; object-fit: cover; transition: transform 0.4s ease; }
+.product-card:hover .product-image-link img { transform: scale(1.08); }
+.product-no-image { width: 100%; height: 200px; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #f1f5f9, #e2e8f0); color: #94a3b8; font-size: 3rem; }
+.product-brand-tag { display: inline-block; font-size: 11px; font-weight: 600; color: #5D4037; background: rgba(93,64,55,0.08); padding: 2px 10px; border-radius: 6px; margin-bottom: 6px; }
+.product-name-link { text-decoration: none; color: inherit; }
+.product-name-link:hover .product-name { color: #5D4037; }
+.product-desc { font-size: 13px; color: var(--text-muted, #888); line-height: 1.5; margin-bottom: 8px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.product-price-section { display: flex; align-items: center; gap: 8px; }
+.product-price-old { text-decoration: line-through; color: #94a3b8; font-size: 13px; }
+.stock-indicator { display: flex; }
+.stock-badge { display: inline-flex; align-items: center; gap: 4px; font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 6px; }
+.stock-available { color: #059669; background: rgba(16,185,129,0.08); }
+.stock-low { color: #d97706; background: rgba(245,158,11,0.08); }
+.stock-out { color: #dc2626; background: rgba(239,68,68,0.08); }
+.product-actions { display: flex; flex-direction: column; gap: 8px; }
+.btn-view-details { display: flex; align-items: center; justify-content: center; gap: 6px; padding: 10px; border-radius: 10px; font-size: 13px; font-weight: 600; color: #5D4037; background: rgba(93,64,55,0.06); border: 1.5px solid rgba(93,64,55,0.2); text-decoration: none; transition: all 0.25s; }
+.btn-view-details:hover { background: #5D4037; color: #fff; border-color: #5D4037; transform: translateY(-2px); box-shadow: 0 4px 15px rgba(93,64,55,0.3); }
+.empty-state { text-align: center; padding: 60px 20px; background: var(--surface, #fff); border-radius: 16px; box-shadow: 0 2px 12px rgba(0,0,0,0.04); }
+.empty-state-icon { font-size: 4rem; color: #cbd5e1; margin-bottom: 16px; }
+.empty-state h4 { font-weight: 700; margin-bottom: 8px; }
+.empty-state p { color: var(--text-muted, #888); font-size: 15px; }
+.pagination-wrapper { display: flex; justify-content: center; }
+</style>
 @endsection

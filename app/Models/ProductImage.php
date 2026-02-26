@@ -13,6 +13,14 @@ class ProductImage extends Model
         'is_primary' => 'boolean',
     ];
 
+    /**
+     * تصحيح مسار الصورة تلقائياً
+     */
+    public function getImagePathAttribute($value): ?string
+    {
+        return Product::normalizeImageUrl($value);
+    }
+
     public function product(): BelongsTo
     {
         return $this->belongsTo(Product::class);

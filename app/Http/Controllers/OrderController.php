@@ -10,6 +10,7 @@ use App\Models\OrderItem;
 use App\Models\Cart;
 use App\Models\Coupon;
 use App\Models\Product;
+use App\Models\ProductVariant;
 
 class OrderController extends Controller
 {
@@ -146,8 +147,16 @@ class OrderController extends Controller
                     'subtotal' => $cart->product->price * $cart->quantity
                 ]);
 
-                // تقليل المخزون
+                // تقليل المخزون الرئيسي
                 $cart->product->decrement('stock', $cart->quantity);
+
+                // تقليل مخزون الموديل (إن وُجد) - يُحذف تلقائياً عند الوصول لـ 0
+                if ($cart->variant_id) {
+                    $variant = ProductVariant::find($cart->variant_id);
+                    if ($variant) {
+                        $variant->decrementStock($cart->quantity);
+                    }
+                }
             }
 
             Cart::where('user_id', Auth::id())->delete();

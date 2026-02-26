@@ -22,6 +22,51 @@ class Product extends Model
     ];
 
     /**
+     * تصحيح مسار الصورة تلقائياً
+     * يدعم: مسارات storage المحلية، روابط خارجية، مسارات قديمة بدون /storage/
+     */
+    public function getImageAttribute($value): ?string
+    {
+        return self::normalizeImageUrl($value);
+    }
+
+    /**
+     * الحصول على مسار الصورة الخام من قاعدة البيانات (بدون معالجة)
+     */
+    public function getRawImagePath(): ?string
+    {
+        return $this->attributes['image'] ?? null;
+    }
+
+    /**
+     * تصحيح مسار أي صورة
+     */
+    public static function normalizeImageUrl(?string $path): ?string
+    {
+        if (empty($path)) {
+            return asset('images/no-image.svg');
+        }
+
+        // روابط خارجية - إرجاعها كما هي
+        if (str_starts_with($path, 'http://') || str_starts_with($path, 'https://')) {
+            return $path;
+        }
+
+        // مسار يبدأ بـ /storage/ - صحيح
+        if (str_starts_with($path, '/storage/')) {
+            return $path;
+        }
+
+        // مسار يبدأ بـ storage/ بدون / في البداية
+        if (str_starts_with($path, 'storage/')) {
+            return '/' . $path;
+        }
+
+        // مسار قديم مثل products/xxx.jpg - نضيف /storage/
+        return '/storage/' . $path;
+    }
+
+    /**
      * Scope: منتجات عروض اليوم النشطة
      */
     public function scopeActiveFlashDeals($query)
@@ -80,15 +125,17 @@ class Product extends Model
     }
 
     /**
-     * جميع صور المنتج (الصورة الرئيسية + الصور الإضافية)
+     * جميع صور المنتج (الصورة الرئيسية + الصور الإضافية) - مسارات مصححة
      */
     public function getAllImagesAttribute(): array
     {
+        // الصور الإضافية (تمر عبر accessor تلقائياً)
         $images = $this->images->pluck('image_path')->toArray();
         
-        // إذا كانت هناك صورة رئيسية قديمة ولم تكن ضمن الصور المتعددة
-        if ($this->image && !in_array($this->image, $images)) {
-            array_unshift($images, $this->image);
+        // إذا كانت هناك صورة رئيسية ولم تكن ضمن الصور المتعددة
+        $mainImage = $this->image; // يمر عبر accessor تلقائياً
+        if ($mainImage && !in_array($mainImage, $images)) {
+            array_unshift($images, $mainImage);
         }
         
         return $images;

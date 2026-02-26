@@ -75,13 +75,21 @@ class ProductController extends Controller
             'additional_images.*' => 'nullable|image|mimes:jpeg,jpg,png,webp|max:2048',
             'additional_image_urls' => 'nullable|array|max:10',
             'additional_image_urls.*' => 'nullable|url|max:500',
-            // موديلات الإكسسوارات
+            // موديلات المنتج
             'variant_names' => 'nullable|array',
             'variant_names.*' => 'nullable|string|max:255',
             'variant_stocks' => 'nullable|array',
             'variant_stocks.*' => 'nullable|integer|min:0',
             'variant_prices' => 'nullable|array',
             'variant_prices.*' => 'nullable|numeric',
+            'variant_colors' => 'nullable|array',
+            'variant_colors.*' => 'nullable|string|max:255',
+            'variant_storages' => 'nullable|array',
+            'variant_storages.*' => 'nullable|string|max:255',
+            'variant_rams' => 'nullable|array',
+            'variant_rams.*' => 'nullable|string|max:255',
+            'variant_processors' => 'nullable|array',
+            'variant_processors.*' => 'nullable|string|max:255',
         ]);
 
         // معالجة الصورة
@@ -198,6 +206,14 @@ class ProductController extends Controller
             'variant_stocks.*' => 'nullable|integer|min:0',
             'variant_prices' => 'nullable|array',
             'variant_prices.*' => 'nullable|numeric',
+            'variant_colors' => 'nullable|array',
+            'variant_colors.*' => 'nullable|string|max:255',
+            'variant_storages' => 'nullable|array',
+            'variant_storages.*' => 'nullable|string|max:255',
+            'variant_rams' => 'nullable|array',
+            'variant_rams.*' => 'nullable|string|max:255',
+            'variant_processors' => 'nullable|array',
+            'variant_processors.*' => 'nullable|string|max:255',
             'delete_variants' => 'nullable|array',
             'delete_variants.*' => 'integer|exists:product_variants,id',
         ]);
@@ -286,6 +302,10 @@ class ProductController extends Controller
             $stocks = $request->input('existing_variant_stocks', []);
             $prices = $request->input('existing_variant_prices', []);
             $actives = $request->input('existing_variant_active', []);
+            $colors = $request->input('existing_variant_colors', []);
+            $storages = $request->input('existing_variant_storages', []);
+            $rams = $request->input('existing_variant_rams', []);
+            $processors = $request->input('existing_variant_processors', []);
             
             foreach ($ids as $i => $id) {
                 $variant = ProductVariant::where('id', $id)->where('product_id', $product->id)->first();
@@ -295,6 +315,10 @@ class ProductController extends Controller
                         'stock' => intval($stocks[$i] ?? $variant->stock),
                         'price_adjustment' => floatval($prices[$i] ?? $variant->price_adjustment),
                         'is_active' => boolval($actives[$i] ?? true),
+                        'color' => trim($colors[$i] ?? '') ?: null,
+                        'storage_size' => trim($storages[$i] ?? '') ?: null,
+                        'ram' => trim($rams[$i] ?? '') ?: null,
+                        'processor' => trim($processors[$i] ?? '') ?: null,
                     ]);
                 }
             }
@@ -406,6 +430,10 @@ class ProductController extends Controller
         $names = $request->input('variant_names', []);
         $stocks = $request->input('variant_stocks', []);
         $prices = $request->input('variant_prices', []);
+        $colors = $request->input('variant_colors', []);
+        $storages = $request->input('variant_storages', []);
+        $rams = $request->input('variant_rams', []);
+        $processors = $request->input('variant_processors', []);
 
         if (!is_array($names)) return;
 
@@ -415,6 +443,10 @@ class ProductController extends Controller
 
             $stock = intval($stocks[$index] ?? 0);
             $priceAdj = floatval($prices[$index] ?? 0);
+            $color = trim($colors[$index] ?? '') ?: null;
+            $storage = trim($storages[$index] ?? '') ?: null;
+            $ram = trim($rams[$index] ?? '') ?: null;
+            $processor = trim($processors[$index] ?? '') ?: null;
 
             // تحديث أو إنشاء الموديل
             ProductVariant::updateOrCreate(
@@ -425,6 +457,10 @@ class ProductController extends Controller
                 [
                     'stock' => $stock,
                     'price_adjustment' => $priceAdj,
+                    'color' => $color,
+                    'storage_size' => $storage,
+                    'ram' => $ram,
+                    'processor' => $processor,
                     'is_active' => true,
                 ]
             );
